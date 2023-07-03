@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@colors/colors": "^1.5.0",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.37.3",
     "cors": "^2.8.5",
