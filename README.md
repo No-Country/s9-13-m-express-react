@@ -14,7 +14,7 @@ A brief description of what this project does and who it's for
 - [Franco Cantarini]()
 - [Isaac Urdaneta](https://github.com/IducSoft)
 - [Jose Carlos Delgado](https://github.com/jcarlosdf)
-- [Leonardo Pereyra]()
+- [Leonardo Pereyra](https://github.com/leopereyrav)
 - [Llorente Grabriel]()
 - [Matias Paredes](https://github.com/mjParedes)
 - [Michael Liendo]()
