@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames';
 
-export default function CustomButton({
+export default function Button({
   type = 'button',
   customClassNames = '',
   disabled = false,
