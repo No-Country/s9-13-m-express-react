@@ -2,8 +2,8 @@
  * @requires Express
  */
 import { Router } from 'express';
-import { loginUser } from '../controllers/users.controllers';
-import { validatorLogin } from '../middlewares/validators/users';
+import { loginUser, signupUser } from '../controllers/users.controllers';
+import { validatorLogin, validatorSignUp } from '../middlewares/validators/users';
 
 const router = Router();
 
@@ -11,5 +11,8 @@ const router = Router();
 
 /*Login*/
 router.post('/login', validatorLogin, loginUser);
+
+/*Sign up*/
+router.post('/signup', validatorSignUp, signupUser);
 
 export default router;
