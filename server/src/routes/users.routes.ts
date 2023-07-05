@@ -12,5 +12,4 @@ const router = Router();
 /*Login*/
 router.post('/login', validatorLogin, loginUser);
 
-
-export { router }
+export { router };

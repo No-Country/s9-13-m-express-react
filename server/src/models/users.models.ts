@@ -3,14 +3,6 @@ import { model, Schema } from 'mongoose';
 
 
 const userSchema = new Schema<IUser>({
-  firsname: {
-    type: String,
-    minlength: 3
-  },
-  lastname: {
-    type: String,
-    minlength: 3
-  },
   username: {
     type: String,
     required: true,
@@ -29,7 +21,7 @@ const userSchema = new Schema<IUser>({
   },
   role: {
     type: [String],
-    default: [rolType.member]
+    default: [rolType.trainee]
   }
 })
 
