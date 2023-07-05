@@ -1,117 +1,88 @@
-"use client"
+'use client';
 
-
-import React from 'react'
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
-const validationSchema = Yup.object({
-  userName: Yup.string().required('User name is required'),
-  email: Yup.string().email('Invalid email address').required('Email is required'),
-  password: Yup.string()
-    .required('Password is required')
-    .min(8, 'Password must be at least 8 characters'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-    .required('Confirm password is required'),
-});
+import TextField from '@/components/TextField';
+import Button from '@/components/Button';
 
 
 const RegisterFormComponent = ({fetchingDataFunction}) => {
 
+    const validationSchema = Yup.object({
+        username: Yup.string().required('El nombre de usuario es requerido'),
+        email: Yup.string().email('Email invalido').required('El email es requerido'),
+        password: Yup.string()
+            .min(8, 'La contraseña debe de tener 8 caracteres')
+            .required('La contraseña es requerida'),
+        confirmPassword: Yup.string()
+            .oneOf([Yup.ref('password'), null], 'Las contraseñas deben de coincidir')
+            .required('Confirma la contraseña'),
+        });
+
+
     const formik = useFormik({
         initialValues: {
-          userName: '',
+          username: '',
           email: '',
-          password:"",
-          confirmPassword:"",
+          password: '',
+          confirmPassword: '',
         },
         validationSchema: validationSchema,
-        onSubmit: (values, {resetForm}) => {
-          // Lógica para enviar el formulario
+        onSubmit: (values, { resetForm }) => {
+          console.log(values)
           fetchingDataFunction()
-          resetForm()
-          console.log(values);
+          resetForm();
         },
-    });
-
-    return (
-    <form onSubmit={formik.handleSubmit}>
-
-          <div>
-            <label htmlFor="userName">Username</label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.userName}
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-
-            />
-            {formik.touched.userName && formik.errors.userName && (
-                <div>{formik.errors.userName}</div>
-            )}
-          </div>
-
-            <div>
-            <label htmlFor="email">Correo Electronico</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-
-            />
-            {formik.touched.email && formik.errors.email && (
-                <div>{formik.errors.email}</div>
-            )}
-            </div>
-
-            
-
-
-            <div>
-            <label htmlFor="password">contraseña</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-
-            />
-            {formik.touched.password && formik.errors.password && (
-                <div>{formik.errors.password}</div>
-            )}
-            </div>
-
-            <div>
-            <label htmlFor="confirmPassword">Confirmar contraseña</label>
-            <input
-              type="confirmPassword"
-              id="confirmPassword"
-              name="confirmPassword"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.confirmPassword}
-              className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-
-            />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-                <div>{formik.errors.confirmPassword}</div>
-            )}
-            </div>
-        
-        <button type="submit">Submit</button>
-    </form>
-    );
+      });
+    
+      return (
+        <form className='space-y-4' onSubmit={formik.handleSubmit}>
+          <TextField
+            name='username'
+            id='username'
+            label='Usuario'
+            placeholder='Username'
+            onChange={(value) => formik.setFieldValue('username', value)}
+            value={formik.values.username}
+            error={formik.errors.username}
+          />
+    
+          <TextField
+            name='email'
+            id='email'
+            label='Correo electrónico'
+            placeholder='ejemplo@ejemplo.com'
+            value={formik.values.email}
+            onChange={(value) => formik.setFieldValue('email', value)}
+            error={formik.errors.email}
+          />
+    
+          <TextField
+            name='password'
+            id='password'
+            type='password'
+            label='Contraseña'
+            placeholder='* * * * * * * *'
+            onChange={(value) => formik.setFieldValue('password', value)}
+            value={formik.values.password}
+            error={formik.errors.password}
+          />
+    
+          <TextField
+            name='confirmPassword'
+            id='confirmPassword'
+            type='password'
+            label='Confirma la contraseña'
+            placeholder='* * * * * * * *'
+            onChange={(value) => formik.setFieldValue('confirmPassword', value)}
+            value={formik.values.confirmPassword}
+            error={formik.errors.confirmPassword}
+          />
+    
+          <Button type='submit'>Submit</Button>
+        </form>
+      );
 }
 
-export default RegisterFormComponent
+export default RegisterFormComponent;

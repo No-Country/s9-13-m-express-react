@@ -3,14 +3,16 @@
 import React from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import TextField from '../TextField';
+import Button from '../Button';
 
-const validationSchema = Yup.object({
-  email: Yup.string().email('Formato de correo electrónico inválido').required('Campo requerido'),
-  password: Yup.string().required('Campo requerido'),
-});
+
 
 const LoginFormComponent = ({fetchingDataFunction}) => {
-
+  const validationSchema = Yup.object({
+    email: Yup.string().email('Formato de correo electrónico inválido').required('Campo requerido'),
+    password: Yup.string().required('Campo requerido'),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -20,44 +22,38 @@ const LoginFormComponent = ({fetchingDataFunction}) => {
     validationSchema: validationSchema,
     onSubmit: (values, {resetForm}) => {
       // Lógica para enviar el formulario
+      console.log(values);
       fetchingDataFunction()
       resetForm()
-      console.log(values);
+      
     },
   });
   
-  
+
   return(
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">Correo electrónico</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+      <TextField
+        name='email'
+        id='email'
+        label='Correo'
+        placeholder='Ingrese su correo'
+        onChange={(value) => formik.setFieldValue('email', value)}
         value={formik.values.email}
-        className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
+        error={formik.errors.email}
       />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
 
-      <label htmlFor="password">Contraseña</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+      <TextField
+        name='password'
+        id='password'
+        type='password'
+        label='Contraseña'
+        placeholder='* * * * * * * *'
+        onChange={(value) => formik.setFieldValue('password', value)}
         value={formik.values.password}
-        className=' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'
-
+        error={formik.errors.password}
       />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
-      <button type="submit">Enviar</button>
+
+      <Button type='submit'>Iniciar sesión</Button>
     </form>
 
   )

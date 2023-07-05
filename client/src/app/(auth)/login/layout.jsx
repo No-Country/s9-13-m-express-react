@@ -6,7 +6,7 @@ export default function layoutLogin({children}){
 
     return(
         <section>
-            aqui va contenido del layout login
+            aqui va contenido del layout inisiar sesion
             {children}
         </section>
     )
