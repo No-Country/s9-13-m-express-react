@@ -11,19 +11,12 @@ class JWTUtils {
   }
 
   public generateAccessToken = (payload: TokenPayload): string => {
-    return jwt.sign(
-      payload,
-      this.secret,
-      { expiresIn: this.expiresIn },
-    );
-  }
+    return jwt.sign(payload, this.secret, { expiresIn: this.expiresIn });
+  };
 
   public verifyToken = (token: string): any => {
-    return jwt.verify(
-      token,
-      this.secret
-    );
-  }
+    return jwt.verify(token, this.secret);
+  };
 }
 
 export const jwtUtils = new JWTUtils();
