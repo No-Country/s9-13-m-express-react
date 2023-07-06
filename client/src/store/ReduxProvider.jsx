@@ -1,14 +1,12 @@
 'use client';
 
-/* Core */
 import { Provider } from 'react-redux';
+/* Core */
 
 /* Instruments */
-import { reduxStore } from '@/lib/redux';
-
-let hola = ' hola';
+import { store } from './store';
 
 const ReduxProvider = ({ children }) => {
-  return <Provider store={reduxStore}>{children}</Provider>;
+  return <Provider store={store}>{children}</Provider>;
 };
 export default ReduxProvider;
