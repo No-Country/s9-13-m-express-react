@@ -34,7 +34,7 @@ class Server {
       .listen(this.port, () => {
         console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));
       })
-      .on('error', (error: any) => {
+      .on('error', (error) => {
         console.log(colors.bgRed.black(`Error Starting Server -- [${error}]`));
       });
   }
