@@ -1,5 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    auth: authSlice.reducer,
+    loading: LoadingSlice.reducer,
+    conversation: conversation.reducer,
+  },
 });
