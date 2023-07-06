@@ -4,7 +4,6 @@ import cors from 'cors';
 import 'dotenv/config';
 
 import router from './routes';
-import dbConnect from './config/database';
 
 class Server {
   app: Application;
@@ -36,4 +35,3 @@ class Server {
 
 const server = new Server();
 server.start();
-dbConnect();
