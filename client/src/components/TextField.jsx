@@ -14,9 +14,14 @@ export default function TextField({
   customClassNames = '',
   onChange,
 }) {
+  `
+  <div class="w-[414px] h-[58px] 
+  px-[15px] pt-2.5 pb-3 bg-white border border-purple-600 flex-col justify-center items-start inline-flex">
+  <div class="w-[312px] h-[26px] text-zinc-700 text-[16px] font-normal">Nombre de usuario o correo</div>
+</div>`;
   const className = classNames(
     customClassNames,
-    ' bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5',
+    'bg-white py-2.5 border-b-2 border-purple-600 w-full placeholder-zinc-700 text-base px-4',
     {
       'bg-gray-100': error,
       'border-red-500': error,
