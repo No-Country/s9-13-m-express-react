@@ -3,6 +3,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import 'dotenv/config';
 
+import colors from '@colors/colors';
+
 import router from './routes';
 import dbConnect from './config/database';
 
@@ -28,9 +30,13 @@ class Server {
   }
 
   start(): void {
-    this.app.listen(this.port, () => {
-      console.log(`Server running on port ${this.port}`);
-    });
+    this.app
+      .listen(this.port, () => {
+        console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));
+      })
+      .on('error', (error: any) => {
+        console.log(colors.bgRed.black(`Error Starting Server -- [${error}]`));
+      });
   }
 }
 
