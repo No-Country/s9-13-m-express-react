@@ -3,9 +3,10 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+
+import Link from 'next/link';
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import Link from 'next/link';
 
 export default function RegisterFormComponent() {
   const validationSchema = Yup.object({
