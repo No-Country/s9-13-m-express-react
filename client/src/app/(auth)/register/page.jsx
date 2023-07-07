@@ -34,7 +34,7 @@ export default function RegisterFormComponent() {
       resetForm();
     },
   });
-
+  
   return (
     <div className='mx-11 2xl:mt-12'>
       <h1 className='text-center text-4xl font-semibold mb-5 2xl:mb-12'>
@@ -83,7 +83,7 @@ export default function RegisterFormComponent() {
           error={formik.errors.confirmPassword}
         />
 
-        <Button type='submit'>Submit</Button>
+        <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Registrarse</Button>
         <div>
           <span>
             ¿Ya tienes cuenta?{' '}
