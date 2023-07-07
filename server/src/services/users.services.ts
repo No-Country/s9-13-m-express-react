@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import User from '../models/users.models';
 import { comparePassword } from '../utils/handdlePassword';
 import { jwtUtils } from '../utils/jwtUtils';
-import { TokenPayload } from '../interfaces/TokenPayload';
+import { TokenPayload } from '../interfaces/tokenPayload.interface';
 
 const findUserByEmail = async (email: string) => {
   try {
@@ -18,11 +18,12 @@ const fetchLogin = async (password: string, email: string) => {
   const comparedPassword = await comparePassword(user.password, password);
   if (!comparedPassword) throw new Error('invalid email or password');
 
+  const expiresIn = process.env.JWT_EXPIRES_IN;
   const payload: TokenPayload = {
     userId: user.id,
     role: user.role,
   };
-  const token = jwtUtils.generateAccessToken(payload);
+  const token = jwtUtils.generateAccessToken(payload, expiresIn);
 
   const response = {
     user: {
