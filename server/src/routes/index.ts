@@ -5,7 +5,7 @@ import { checkRole } from '../middlewares/auth/role';
 import recoveryPassword from './recoveryPassword.routes';
 const router = Router();
 
-router.get('/health', authenticate, checkRole(['trainee']), (req: Request, res: Response) => {
+router.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ message: 'Ok' });
 });
 router.use('/auth', userRouter);
