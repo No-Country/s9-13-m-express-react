@@ -1,0 +1,41 @@
+paths:
+  /api/v1/auth/login:
+    post:
+      summary: The user login with his data and receives a token
+      tags:
+        - User
+      parameters:
+        - in: body
+          name: body
+          description: The user send his email and password
+          required: true
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: returns an object with token and user info
+          content:
+            application/json:
+              schema:
+                type: array
+                # items:
+                #   $ref: '#/components/schemas/Noticia'
+  /api/v1/auth/signup:
+    post:
+      summary: The user signup with his data and receives a token
+      tags:
+        - User
+      responses:
+        '200':
+          description: un arreglo de noticias
+          content:
+            application/json:
+              schema:
+                type: array
+                # items:
+                #   $ref: '#/components/schemas/Noticia'

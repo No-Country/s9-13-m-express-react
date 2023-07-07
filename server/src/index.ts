@@ -8,6 +8,8 @@ import colors from '@colors/colors';
 import router from './routes';
 import dbConnect from './config/database';
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './utils/swaggerSpec';
 class Server {
   app: Application;
   port: number = Number(process.env.PORT) || 3001;
@@ -26,7 +28,7 @@ class Server {
   }
 
   routes(): void {
-    this.app.use('/api/v1', router);
+    this.app.use('/api/v1', router).use('/api/v1-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
   start(): void {
