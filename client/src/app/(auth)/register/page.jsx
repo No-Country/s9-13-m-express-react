@@ -7,6 +7,9 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
+import CreateUser from '../../../services/auth/createUser';
+
+//const baseUrl = process.env.BACKEND_URL_BASE;
 
 export default function RegisterFormComponent() {
   const validationSchema = Yup.object({
@@ -30,11 +33,15 @@ export default function RegisterFormComponent() {
       confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit:  async (values, { resetForm }) => {
       console.log(values);
+      let response = await CreateUser(values);
+      console.log(response)
       resetForm();
     },
   });
+
+  
   
   return (
     <div className='mx-11 2xl:mt-12'>
