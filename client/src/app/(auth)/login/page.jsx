@@ -6,9 +6,13 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
+import { useSelector } from 'react-redux';
 
 
 export default function LoginFormComponent (){
+
+    const auth = useSelector(state => state.user)
+    console.log(auth)
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Formato de correo electrónico inválido').required('Campo requerido'),
@@ -24,13 +28,13 @@ export default function LoginFormComponent (){
         onSubmit: (values, {resetForm}) => {
           // Lógica para enviar el formulario
           console.log(values);
-          fetchingDataFunction()
+          
           resetForm()
           
         },
     });
       
-    
+   
       return(
         <div className='mx-11 2xl:mt-12'>
           <h1 className='text-center text-4xl font-semibold 2xl:mb-12 mt-[3rem] mb-[3rem]'>
