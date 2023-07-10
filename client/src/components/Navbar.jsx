@@ -1,6 +1,7 @@
 'use client';
-import Link from 'next/link';
 import { React, useState } from 'react';
+import Link from 'next/link';
+import { FaBell } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,9 +44,9 @@ export default function Navbar() {
             Search
           </button>
         </div>
-        <div className='hidden md:block space-x-4 hover:font-semibold'>
-          <Link href={'/login'}>🔔</Link>
-          <Link href={'/login'} className='text-purplePrimary'>PERFIL</Link>
+        <div className='hidden md:flex items-center justify-between space-x-4 '>
+          <Link href={'/login'}> <FaBell/> </Link>
+          <Link href={'/login'} className='text-purplePrimary hover:font-semibold'>PERFIL</Link>
           {/* <Link href={'/login'}>
             <button className='inline-flex shadow-lg items-center py-2.5 px-3 ml-1 text-sm font-normal text-yellowPrimary bg-purpleSecondary  hover:bg-purplePrimary hover:font-bold focus:ring-2 focus:outline-none focus:ring-yellowPrimary rounded'>LOGIN</button>
           </Link> */}
@@ -94,9 +95,9 @@ export default function Navbar() {
       </div>
       {isOpen && (
         <div className='md:hidden flex flex-col' id='mobile-menu'>
-          <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center hover:font-semibold'>
-            <Link href={'/login'} className='text-purplePrimary'>🔔</Link>
-            <Link href={'/login'} className='text-purplePrimary'>PERFIL</Link>
+          <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center'>
+            <Link href={'/login'} className='text-purplePrimary'> <FaBell/> </Link>
+            <Link href={'/login'} className='text-purplePrimary hover:font-semibold'>PERFIL</Link>
           </div>
         </div>
       )}
