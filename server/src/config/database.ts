@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import colors from '@colors/colors';
 
-const DB_URI = <string>process.env.DB_URI;
+const DB_URI = <string>process.env.DB_URI_DEV;
 
 export default async function dbConnect() {
   try {
