@@ -14,7 +14,7 @@ const loginUser = async (req: Request, resp: Response) => {
 
 const signupUser = async (req: Request, resp: Response) => {
   try {
-    const { username, email, password }  = req.body;
+    const { username, email, password } = req.body;
     const data = await fetchSignUp(username, email, password);
     resp.status(201).json({ msg: 'User sign-up succesfull', data });
   } catch (error) {
@@ -23,3 +23,4 @@ const signupUser = async (req: Request, resp: Response) => {
 };
 
 export { loginUser, signupUser };
+
