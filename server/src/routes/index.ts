@@ -7,6 +7,7 @@ const router = Router();
 router.get('/health', (_, res: Response) => {
   res.status(200).json({ message: 'Ok' });
 });
+
 router.use('/auth', userRouter);
 router.use('/', recoveryPassword)
 
