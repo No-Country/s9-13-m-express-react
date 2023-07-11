@@ -9,18 +9,19 @@ import TextField from '@/components/TextField';
 import Button from '@/components/Button';
 import CreateUser from '../../../services/auth/createUser';
 import { useDispatch, useSelector } from 'react-redux';
-import { onCheckingRegister, onDeleteRegister, onRegister } from '@/store/slices/authSlice';
-import { useRouter } from 'next/navigation'
+import {
+  onCheckingRegister,
+  onDeleteRegister,
+  onRegister,
+} from '@/store/slices/authSlice';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 
-//const baseUrl = process.env.BACKEND_URL_BASE;
-
 export default function RegisterFormComponent() {
-
   const dispatch = useDispatch();
-  const currentUser = useSelector(state => state.user);
-  const router = useRouter()
+  const currentUser = useSelector((state) => state.user);
+  const router = useRouter();
 
   const validationSchema = Yup.object({
     username: Yup.string().required('El nombre de usuario es requerido'),
@@ -43,36 +44,35 @@ export default function RegisterFormComponent() {
       confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit:  async (values, { resetForm }) => {
-      
+    onSubmit: async (values, { resetForm }) => {
       dispatch(onCheckingRegister());
+
       let response = await CreateUser(values);
       toast.success(`Register Succesfully`, {
-        position: "top-center",
+        position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light",
+        theme: 'light',
       });
-      dispatch(onRegister(response))
-      console.log(response)
+      dispatch(onRegister(response));
+      console.log(response);
       resetForm();
-      router.push("/login");
-      
+
+      // todo: redireccionar a habilidades
+      router.push('/login');
     },
   });
 
-  useEffect(()=>{
-    if(currentUser.statusRegister==="checking"){
-      dispatch(onDeleteRegister())
+  useEffect(() => {
+    if (currentUser.statusRegister === 'checking') {
+      dispatch(onDeleteRegister());
     }
-  },[])
+  }, []);
 
-  
-  
   return (
     <div className='mx-11 2xl:mt-12'>
       <h1 className='text-center text-4xl font-semibold mb-5 2xl:mb-12'>
@@ -120,29 +120,34 @@ export default function RegisterFormComponent() {
           value={formik.values.confirmPassword}
           error={formik.errors.confirmPassword}
         />
-        {
-          currentUser.statusRegister === "checking" ? (
-
-            <button disabled className='w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold px-3 py-2 flex justify-center items-center'>
-              <Oval
-                height={20}
-                width={20}
-                color="blue"
-                wrapperStyle={{}}
-                wrapperClass=""
-                visible={true}
-                ariaLabel='oval-loading'
-                secondaryColor=""
-                strokeWidth={2}
-                strokeWidthSecondary={2}
-
-              />
-            </button>
-          ) :(
-            <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Registrarse</Button>
-
-          )
-        }
+        {currentUser.statusRegister === 'checking' ? (
+          <button
+            disabled
+            className='w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold px-3 py-2 flex justify-center items-center'
+          >
+            <Oval
+              height={20}
+              width={20}
+              color='blue'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor=''
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </button>
+        ) : (
+          <Button
+            customClassNames={
+              'w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold'
+            }
+            type='submit'
+          >
+            Registrarse
+          </Button>
+        )}
         <div>
           <span>
             ¿Ya tienes cuenta?{' '}

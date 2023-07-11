@@ -41,8 +41,24 @@ export default function LoginFormComponent() {
 
       try {
         let response = await loginUser(values);
-        if (!response.ok) throw new Error('Login failed');
+        if (!response.ok) throw new Error(response);
+
+        toast.success(`Login Succesfully`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+
+        dispatch(onLogin(response));
+        resetForm();
+        router.push('/home');
       } catch (error) {
+        console.log(error);
         toast.error('Login failed', {
           position: 'top-center',
           autoClose: 5000,
@@ -56,21 +72,6 @@ export default function LoginFormComponent() {
         dispatch(onLoginError(error));
         resetForm();
       }
-
-      toast.success(`Login Succesfully`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
-      });
-      console.log(response);
-      dispatch(onLogin(response));
-      resetForm();
-      router.push('/home');
     },
   });
 
