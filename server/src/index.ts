@@ -3,9 +3,13 @@ import morgan from 'morgan';
 import cors from 'cors';
 import 'dotenv/config';
 
+import colors from '@colors/colors';
+
 import router from './routes';
 import dbConnect from './config/database';
 
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from './utils/swaggerSpec';
 class Server {
   app: Application;
   port: number = Number(process.env.PORT) || 3001;
@@ -24,13 +28,17 @@ class Server {
   }
 
   routes(): void {
-    this.app.use('/api/v1', router);
+    this.app.use('/api/v1', router).use('/api/v1-doc', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   }
 
   start(): void {
-    this.app.listen(this.port, () => {
-      console.log(`Server running on port ${this.port}`);
-    });
+    this.app
+      .listen(this.port, () => {
+        console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));
+      })
+      .on('error', (error) => {
+        console.log(colors.bgRed.black(`Error Starting Server -- [${error}]`));
+      });
   }
 }
 

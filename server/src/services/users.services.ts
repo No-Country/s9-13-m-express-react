@@ -1,7 +1,8 @@
+import bcrypt from 'bcryptjs';
 import User from '../models/users.models';
 import { comparePassword } from '../utils/handdlePassword';
 import { jwtUtils } from '../utils/jwtUtils';
-import { TokenPayload } from '../interfaces/TokenPayload';
+import { TokenPayload } from '../interfaces/tokenPayload.interface';
 
 const findUserByEmail = async (email: string) => {
   try {
@@ -17,11 +18,14 @@ const fetchLogin = async (password: string, email: string) => {
   const comparedPassword = await comparePassword(user.password, password);
   if (!comparedPassword) throw new Error('invalid email or password');
 
+  const expiresIn = process.env.JWT_EXPIRES_IN;
+  
   const payload: TokenPayload = {
     userId: user.id,
     role: user.role,
   };
-  const token = jwtUtils.generateAccessToken(payload);
+
+  const token = jwtUtils.generateAccessToken(payload, expiresIn);
 
   const response = {
     user: {
@@ -34,4 +38,19 @@ const fetchLogin = async (password: string, email: string) => {
   return response;
 };
 
-export { fetchLogin };
+const fetchSignUp = async (username: string, email: string, password: string) => {
+  const user = await findUserByEmail(email);
+  if (user) throw new Error('Email already exists!');
+  const hash = await bcrypt.hash(password, 10);
+  const data = await User.create({ username, email, password: hash });
+  // NOTA: devolvemos solo estos campos?
+  const response = {
+    id: data.id,
+    email: data.email,
+    username: data.username,
+  };
+  return response;
+};
+
+export { fetchLogin, fetchSignUp };
+
