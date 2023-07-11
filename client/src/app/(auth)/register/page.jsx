@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -8,10 +8,20 @@ import Link from 'next/link';
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
 import CreateUser from '../../../services/auth/createUser';
+import { useDispatch, useSelector } from 'react-redux';
+import { onCheckingRegister, onDeleteRegister, onRegister } from '@/store/slices/authSlice';
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify';
+import { Oval } from 'react-loader-spinner';
 
 //const baseUrl = process.env.BACKEND_URL_BASE;
 
 export default function RegisterFormComponent() {
+
+  const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.user);
+  const router = useRouter()
+
   const validationSchema = Yup.object({
     username: Yup.string().required('El nombre de usuario es requerido'),
     email: Yup.string()
@@ -34,12 +44,32 @@ export default function RegisterFormComponent() {
     },
     validationSchema: validationSchema,
     onSubmit:  async (values, { resetForm }) => {
-      console.log(values);
+      
+      dispatch(onCheckingRegister());
       let response = await CreateUser(values);
+      toast.success(`Register Succesfully`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      dispatch(onRegister(response))
       console.log(response)
       resetForm();
+      router.push("/login");
+      
     },
   });
+
+  useEffect(()=>{
+    if(currentUser.statusRegister==="checking"){
+      dispatch(onDeleteRegister())
+    }
+  },[])
 
   
   
@@ -90,8 +120,29 @@ export default function RegisterFormComponent() {
           value={formik.values.confirmPassword}
           error={formik.errors.confirmPassword}
         />
+        {
+          currentUser.statusRegister === "checking" ? (
 
-        <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Registrarse</Button>
+            <button disabled className='w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold px-3 py-2 flex justify-center items-center'>
+              <Oval
+                height={20}
+                width={20}
+                color="blue"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel='oval-loading'
+                secondaryColor=""
+                strokeWidth={2}
+                strokeWidthSecondary={2}
+
+              />
+            </button>
+          ) :(
+            <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Registrarse</Button>
+
+          )
+        }
         <div>
           <span>
             ¿Ya tienes cuenta?{' '}
