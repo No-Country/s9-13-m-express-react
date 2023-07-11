@@ -36,7 +36,7 @@ const validatorSignUp = [
       return receivedFields.every((field) => allowedFields.includes(field));
     })
     .withMessage('Invalid Fields'),
-  
+
   body('username')
     .trim()
     .notEmpty()
