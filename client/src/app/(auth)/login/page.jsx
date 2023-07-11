@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import { useSelector } from 'react-redux';
 
 
 export default function LoginFormComponent (){
@@ -18,7 +17,6 @@ export default function LoginFormComponent (){
         email: Yup.string().email('Formato de correo electrónico inválido').required('Campo requerido'),
         password: Yup.string().required('Campo requerido'),
     });
-    
     const formik = useFormik({
         initialValues: {
         email: '',
@@ -30,11 +28,11 @@ export default function LoginFormComponent (){
           console.log(values);
           
           resetForm()
-          
+
         },
     });
-      
-   
+
+
       return(
         <div className='mx-11 2xl:mt-12'>
           <h1 className='text-center text-4xl font-semibold 2xl:mb-12 mt-[3rem] mb-[3rem]'>
@@ -50,9 +48,6 @@ export default function LoginFormComponent (){
               value={formik.values.email}
               error={formik.errors.email}
             />
-    
-            
-    
             <TextField
               name='password'
               id='password'
@@ -63,9 +58,6 @@ export default function LoginFormComponent (){
               value={formik.values.password}
               error={formik.errors.password}
             />
-    
-            
-    
             <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Iniciar Sesión.</Button>
             <div>
               <p className='my-2'>
@@ -79,10 +71,10 @@ export default function LoginFormComponent (){
                   ¡Registrate!
                 </Link>
               </p>
-    
+
             </div>
           </form>
         </div>
-    
+
     );
 }

@@ -1,4 +1,5 @@
-import { body } from 'express-validator';
+import { NextFunction, Request, Response } from 'express';
+import { Result, body, validationResult } from 'express-validator';
 
 const validatorLogin = [
   body()
@@ -26,17 +27,26 @@ const validatorLogin = [
     .withMessage('Password type is not valid')
     .isLength({ min: 8, max: 100 })
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
+
+  (req: Request, res: Response, next: NextFunction) => {
+    const error: Result = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ msg: error.array() });
+    }
+    next();
+  }
+
 ];
 
 const validatorSignUp = [
   body()
-    .custom((_value, { req }) => {
-      const allowedFields = ['email', 'password'];
+    .custom((_values, { req }) => {
+      const allowedFields = ['username', 'email', 'password'];
       const receivedFields = Object.keys(req.body);
-      return receivedFields.every((field) => allowedFields.includes(field));
-    })
-    .withMessage('Invalid Fields'),
-  
+      const hasOnlyAllowedFields = receivedFields.every(field => allowedFields.includes(field));
+      return hasOnlyAllowedFields;
+    }).withMessage('Invalid Fields'),
+
   body('username')
     .trim()
     .notEmpty()
@@ -62,6 +72,15 @@ const validatorSignUp = [
     .withMessage('Password type is not valid')
     .isLength({ min: 8, max: 100 })
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
+
+    (req: Request, res: Response, next: NextFunction) => {
+      const error: Result = validationResult(req);
+      if (!error.isEmpty()) {
+        return res.status(400).json({ msg: error.array() });
+      }
+      next();
+    }
+
 ];
 
 export { validatorLogin, validatorSignUp };

@@ -24,27 +24,6 @@ export default function Navbar() {
             id='search'
             placeholder=' Searching...'
           />
-          {/* <button
-            type='submit'
-            className='inline-flex shadow-lg items-center py-2.5 px-3 ml-1 text-sm font-normal text-purpleSecondary bg-white focus:ring-2 focus:outline-none focus:ring-yellowPrimary rounded'
-          >
-            <svg
-              aria-hidden='true'
-              class='mr-2 -ml-1 w-5 h-5'
-              fill='none'
-              stroke='currentColor'
-              viewBox='0 0 24 24'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                stroke-width='2'
-                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-              ></path>
-            </svg>
-
-          </button> */}
         </div>
         <div className='hidden md:flex items-center justify-between space-x-4 '>
           <Link href={'/login'}>

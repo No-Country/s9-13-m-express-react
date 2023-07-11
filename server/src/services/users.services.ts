@@ -6,17 +6,23 @@ import { TokenPayload } from '../interfaces/tokenPayload.interface';
 
 const findUserByEmail = async (email: string) => {
   try {
-    if (email) return User.findOne({ email });
+    if (email) {
+      return User.findOne({ email });
+    }
   } catch (error) {
-    throw new Error(`User not found! - ${error}`);
+    console.error(`Error finding user by email: ${error}`);
+    return null;
   }
 };
 
 const fetchLogin = async (password: string, email: string) => {
   const user = await findUserByEmail(email);
-  if (!user) throw new Error('User not found!');
+  if (!user) throw new Error('Conflict: User not found!');
+
   const comparedPassword = await comparePassword(user.password, password);
-  if (!comparedPassword) throw new Error('invalid email or password');
+  if (!comparedPassword) throw new Error('Conflict: invalid email or password');
+
+  const expiresIn = process.env.JWT_EXPIRES_IN;
 
   const expiresIn = process.env.JWT_EXPIRES_IN;
   const payload: TokenPayload = {
@@ -37,17 +43,26 @@ const fetchLogin = async (password: string, email: string) => {
 };
 
 const fetchSignUp = async (username: string, email: string, password: string) => {
-  const user = await findUserByEmail(email);
-  if (user) throw new Error('Email already exists!');
-  const hash = await bcrypt.hash(password, 10);
-  const data = await User.create({ username, email, password: hash });
-  // NOTA: devolvemos solo estos campos?
-  const response = {
-    id: data.id,
-    email: data.email,
-    username: data.username,
-  };
-  return response;
+  try {
+    const user = await findUserByEmail(email);
+    console.log(user);
+
+    if (user) {
+      throw new Error("Conflict: Email already exists!");
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+    const data = await User.create({ username, email, password: hash });
+    const response = {
+      id: data.id,
+      username: data.username,
+      email: data.email,
+    };
+    return response;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
 };
+
 
 export { fetchLogin, fetchSignUp };
