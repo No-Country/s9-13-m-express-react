@@ -9,6 +9,6 @@ router.get('/health', (_, res: Response) => {
 });
 
 router.use('/auth', userRouter);
-router.use('/', recoveryPassword);
+router.use('/', recoveryPassword)
 
 export default router;
