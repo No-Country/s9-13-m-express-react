@@ -28,6 +28,7 @@ const validatorLogin = [
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
 ];
 
+
 const validatorSignUp = [
   body()
     .custom((_value, { req }) => {

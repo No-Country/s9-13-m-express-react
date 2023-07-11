@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 /* Core */
 
 /* Instruments */
+
 import { persistor, store } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
 

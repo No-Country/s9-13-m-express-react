@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+
 import { TokenPayload } from '../interfaces/tokenPayload.interface';
 
 class JWTUtils {

@@ -19,10 +19,12 @@ const fetchLogin = async (password: string, email: string) => {
   if (!comparedPassword) throw new Error('invalid email or password');
 
   const expiresIn = process.env.JWT_EXPIRES_IN;
+  
   const payload: TokenPayload = {
     userId: user.id,
     role: user.role,
   };
+
   const token = jwtUtils.generateAccessToken(payload, expiresIn);
 
   const response = {
@@ -51,3 +53,4 @@ const fetchSignUp = async (username: string, email: string, password: string) =>
 };
 
 export { fetchLogin, fetchSignUp };
+

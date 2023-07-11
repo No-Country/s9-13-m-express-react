@@ -23,3 +23,4 @@ const signupUser = async (req: Request, resp: Response) => {
 };
 
 export { loginUser, signupUser };
+
