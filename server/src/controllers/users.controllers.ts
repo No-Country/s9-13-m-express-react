@@ -5,20 +5,20 @@ const loginUser = async (req: Request, resp: Response) => {
   try {
     const { email, password } = req.body;
     const data = await fetchLogin(password, email);
-    resp.status(201).json({ msg: 'User login succesfull', data });
-  } catch (error) {
-    // Crear validacion personalizada
-    throw new Error('Error while login user');
+    resp.status(201).json({ msg: 'User login successful', data });
+  } catch (error:any) {
+    resp.status(400).json({ error:error.message });
   }
 };
+
 
 const signupUser = async (req: Request, resp: Response) => {
   try {
     const { username, email, password } = req.body;
     const data = await fetchSignUp(username, email, password);
-    resp.status(201).json({ msg: 'User sign-up succesfull', data });
-  } catch (error) {
-    throw new Error('Error while sign-up user');
+    resp.status(201).json({ msg: 'User sign-up successful', data });
+  } catch (error: any) {
+    resp.status(400).json({ error: error.message });
   }
 };
 
