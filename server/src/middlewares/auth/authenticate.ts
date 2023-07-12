@@ -1,15 +1,9 @@
-import { Request, Response, NextFunction } from 'express';
+import { Response, NextFunction } from 'express';
 import { jwtUtils } from './../../utils/jwtUtils';
 import User from '../../models/users.models';
-import { IUser } from '../../interfaces/users.interface';
+import { CustomRequest, IUser } from '../../interfaces/users.interface';
 
-declare module 'express' {
-  interface Request {
-    user?: IUser;
-  }
-}
-
-export const authenticate = async (req: Request, res: Response, next: NextFunction) => {
+export const authenticate = async (req: CustomRequest, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) {
     return res.status(401).json({ error: 'Token not provided' });

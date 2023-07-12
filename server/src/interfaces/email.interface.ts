@@ -5,5 +5,5 @@ export interface MailInterface {
     bcc?: string | string[];
     subject: string;
     text?: string;
-    html: string;
+    html?: string;
 }

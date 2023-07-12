@@ -11,7 +11,7 @@ import arts from '../../public/images/plastic-arts.png';
 import technology from '../../public/images/technology.png';
 import weave from '../../public/images/weave.png';
 import yoga from '../../public/images/yoga.png';
-import CustomButton from '@/components/CustomButton';
+import Button from '@/components/Button';
 
 export default function LandingPage() {
   const carouselLanding = [
@@ -39,7 +39,7 @@ export default function LandingPage() {
     <>
       <main className='min-h-screen bg-customPurple flex flex-col justify-around'>
         <div className='-z-50 absolute w-full h-screen'>
-          <Image src={img} alt='landing' layout='fill' objectFit='cover' />
+          <Image src={img} alt='landing' className='object-cover' />
         </div>
         <div className='bg-yellowTitle ml-8 px-4 py-4 w-52 text-center'>
           LOGO
@@ -75,12 +75,13 @@ export default function LandingPage() {
         </div>
 
         <div className='self-end mr-[5%] p-4'>
-          <CustomButton
+          <Button
             customClassNames={
               'text-purplePrimary bg-yellowPrimary rounded-full font-semibold'
             }
-            children='COMENZAR &rarr;'
-          />
+          >
+            Comenzar
+          </Button>
         </div>
       </section>
     </>
