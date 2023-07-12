@@ -1,0 +1,118 @@
+components:
+  schemas:
+    MemberResponse:
+      type: object
+      properties:
+        msg:
+          type: string
+        members:
+          type: object
+          properties:
+            name:
+              type: string
+            last_name:
+              type: string
+            country:
+              type: string
+            preferences:
+              type: array
+              items:
+                type: object
+                properties:
+                  description:
+                    type: string
+                  _id:
+                    type: string
+            avatar:
+              type: string
+            skills:
+              type: array
+              items:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  category:
+                    type: string
+                  description:
+                    type: string
+                  level:
+                    type: string
+                  _id:
+                    type: string
+            user:
+              type: string
+            id:
+              type: string
+
+    MemberCreate:
+      type: object
+      properties:
+        name:
+          type: string
+        last_name:
+          type: string
+        country:
+          type: string
+        preferences:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+        avatar:
+          type: string
+        skills:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              category:
+                type: string
+              description:
+                type: string
+              level:
+                type: string
+        user:
+          type: string
+
+    MemberUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        last_name:
+          type: string
+        country:
+          type: string
+        preferences:
+          type: array
+          items:
+            type: object
+            properties:
+              description:
+                type: string
+        avatar:
+          type: string
+        skills:
+          type: array
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+              category:
+                type: string
+              description:
+                type: string
+              level:
+                type: string
+
+  securitySchemes:
+    token:
+      type: apiKey
+      name: Barear token
+      in: header
