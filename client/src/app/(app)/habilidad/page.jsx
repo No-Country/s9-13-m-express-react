@@ -38,7 +38,7 @@ export default function Habilidades() {
               <label className='text-lg' htmlFor='nivel'>
                 Nivel
               </label>
-              <select className='px-5 py-4' name='nivel' id='nivel'>
+              <select className='px-5 py-3.5 bg-white' name='nivel' id='nivel'>
                 <option value='principiante'>Principiante</option>
                 <option value='intermedio'>Intermedio</option>
                 <option value='avanzado'>Avanzado</option>
