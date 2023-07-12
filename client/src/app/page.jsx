@@ -39,7 +39,7 @@ export default function LandingPage() {
     <>
       <main className='min-h-screen bg-customPurple flex flex-col justify-around'>
         <div className='-z-50 absolute w-full h-screen'>
-          <Image src={img} alt='landing' layout='fill' objectFit='cover' />
+          <Image src={img} alt='landing' className='object-cover' />
         </div>
         <div className='bg-yellowTitle ml-8 px-4 py-4 w-52 text-center'>
           LOGO
