@@ -3,18 +3,18 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
+
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import CreateUser from '../../../services/auth/createUser';
-import { useDispatch, useSelector } from 'react-redux';
+import CreateUser from '../../../services/auth/register.service';
 import {
   onCheckingRegister,
   onDeleteRegister,
   onRegister,
 } from '@/store/slices/authSlice';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { Oval } from 'react-loader-spinner';
 
