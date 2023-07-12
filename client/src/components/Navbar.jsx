@@ -8,7 +8,7 @@ export default function Navbar() {
 
   return (
     <nav className='bg-purpleSecondary shadow sticky top-0'>
-      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto px-2 sm:px-4 xl:px-6 py-2'>
+      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto py-2'>
         <div>
           <Link href={'/'}>
             <span className='text-2xl font-bold text-yellowPrimary hover:font-bold'>
@@ -125,3 +125,4 @@ export default function Navbar() {
     </nav>
   );
 }
+
