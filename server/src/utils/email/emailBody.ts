@@ -1,8 +1,8 @@
-import { User_T } from "../../interfaces/users.interface"
-import {config} from "../../config/config"
+import { User_T } from '../../interfaces/users.interface';
+import { config } from '../../config/config';
 
 export const generateHtmlBody = (url: string, user: User_T) => {
-    return `
+  return `
     <div style="">
      <main style="">
       <div style="">
@@ -20,5 +20,5 @@ export const generateHtmlBody = (url: string, user: User_T) => {
       <p style="">${url}</p>
       <p style=""><small>This URL will expire in ${config.JWT.JWT_RECOVERY_PASSWORD_EXPIRES}</small>
      </footer>
-    `
-} 
+    `;
+};

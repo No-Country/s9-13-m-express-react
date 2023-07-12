@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { forgotPassword, 
-    recoveryPassword,
-    recoveryPasswordUI } from '../controllers/recoryPassword.controllers'
+import {
+  forgotPassword,
+  recoveryPassword,
+  recoveryPasswordUI,
+} from '../controllers/recoryPassword.controllers';
 
 const router = Router();
 
 router.post('/forgot_password', forgotPassword);
 
-router.route('/recovery_password/:token')
-    .get(recoveryPasswordUI)
-    .put(recoveryPassword);
+router.route('/recovery_password/:token').get(recoveryPasswordUI).put(recoveryPassword);
 
 export default router;
 

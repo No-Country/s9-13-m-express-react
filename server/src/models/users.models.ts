@@ -23,7 +23,7 @@ const userSchema = new Schema<IUser>({
     default: [rolType.trainee],
   },
   token: {
-    type: String
+    type: String,
   },
 });
 
