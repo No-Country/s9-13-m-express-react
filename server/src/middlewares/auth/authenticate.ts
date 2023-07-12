@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { jwtUtils } from './../../utils/jwtUtils';
-import User from 'models/users.models';
-import { IUser } from 'interfaces/users.interface';
+import User from '../../models/users.models';
+import { IUser } from '../../interfaces/users.interface';
 
 declare module 'express' {
   interface Request {

@@ -44,7 +44,7 @@ const fetchGetOneMember = async (id: string) => {
 };
 
 export const updateService = async (data: any, id: string) => {
-  const res = Member.findOneAndUpdate({ id: id }, { ...data });
+  const res = Member.findOneAndUpdate({ user: id }, { ...data });
 
   if (!res) throw new Error('Member not found');
 

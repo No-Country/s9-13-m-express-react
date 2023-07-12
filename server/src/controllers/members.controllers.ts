@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { fetchCreateMembers, fetchGetMembers, fetchGetOneMember } from '../services/members.services';
 import { IMember } from 'interfaces/members.interface';
+import { updateService } from '../services/members.services';
 
 const createMembers = async (req: Request, res: Response) => {
   try {
@@ -40,19 +41,18 @@ const getOneMember = async (req: Request, res: Response) => {
   }
 };
 
-import { updateService } from '../services/members.services';
-
 export const updateController = async (req: any, res: Response) => {
   try {
-    // name, last_name, country, preferences, avatar, skills, email, password
+    // name, last_name, country, preferences, avatar, skills
+    // pendiente: email, password y mas data de user
     const data = req.body;
-    const { id } = req.user;
+    const { _id } = req.user;
 
-    await updateService(data, id);
+    await updateService(data, _id);
 
     res.status(200).json({ message: 'Ok' });
-  } catch (error) {
-    res.status(500).json({ message: error });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
   }
 };
 
