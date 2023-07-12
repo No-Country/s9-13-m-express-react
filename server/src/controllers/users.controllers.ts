@@ -6,11 +6,10 @@ const loginUser = async (req: Request, resp: Response) => {
     const { email, password } = req.body;
     const data = await fetchLogin(password, email);
     resp.status(201).json({ msg: 'User login successful', data });
-  } catch (error:any) {
-    resp.status(400).json({ error:error.message });
+  } catch (error: any) {
+    resp.status(400).json({ error: error.message });
   }
 };
-
 
 const signupUser = async (req: Request, resp: Response) => {
   try {

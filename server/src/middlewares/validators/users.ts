@@ -34,8 +34,7 @@ const validatorLogin = [
       return res.status(400).json({ msg: error.array() });
     }
     next();
-  }
-
+  },
 ];
 
 const validatorSignUp = [
@@ -43,9 +42,10 @@ const validatorSignUp = [
     .custom((_values, { req }) => {
       const allowedFields = ['username', 'email', 'password'];
       const receivedFields = Object.keys(req.body);
-      const hasOnlyAllowedFields = receivedFields.every(field => allowedFields.includes(field));
+      const hasOnlyAllowedFields = receivedFields.every((field) => allowedFields.includes(field));
       return hasOnlyAllowedFields;
-    }).withMessage('Invalid Fields'),
+    })
+    .withMessage('Invalid Fields'),
 
   body('username')
     .trim()
@@ -73,14 +73,13 @@ const validatorSignUp = [
     .isLength({ min: 8, max: 100 })
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
 
-    (req: Request, res: Response, next: NextFunction) => {
-      const error: Result = validationResult(req);
-      if (!error.isEmpty()) {
-        return res.status(400).json({ msg: error.array() });
-      }
-      next();
+  (req: Request, res: Response, next: NextFunction) => {
+    const error: Result = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ msg: error.array() });
     }
-
+    next();
+  },
 ];
 
 export { validatorLogin, validatorSignUp };

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import colors from '@colors/colors';
-import { config } from './config'
+import { config } from './config';
 
 const DB_URI = <string>config.DB.DB_URI_DEV;
 
