@@ -10,6 +10,7 @@ import dbConnect from './config/database';
 
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swaggerSpec';
+
 class Server {
   app: Application;
   port: number = Number(process.env.PORT) || 3001;

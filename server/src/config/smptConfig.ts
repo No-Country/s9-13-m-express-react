@@ -1,12 +1,13 @@
 import nodemailer from 'nodemailer';
+import {config} from './config'
 
 //CREATE CONNECTION FOR LIVE
 export const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
+    host: config.SMTP.SMTP_HOST,
+    port: config.SMTP.SMTP_PORT,
     auth: {
-        user: process.env.SMTP_USERNAME,
-        pass: process.env.SMTP_PASSWORD,
+        user: config.SMTP.SMTP_USERNAME,
+        pass: config.SMTP.SMTP_PASSWORD,
     },
 });
 
