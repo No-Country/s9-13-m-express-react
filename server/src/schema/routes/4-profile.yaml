@@ -17,44 +17,7 @@ paths:
                   members:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        last_name:
-                          type: string
-                        country:
-                          type: string
-                        preferences:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              description:
-                                type: string
-                              _id:
-                                type: string
-                        avatar:
-                          type: string
-                        skills:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              title:
-                                type: string
-                              category:
-                                type: string
-                              description:
-                                type: string
-                              level:
-                                type: string
-                              _id:
-                                type: string
-                        user:
-                          type: string
-                        id:
-                          type: string
+                      $ref: '#/components/schemas/MemberResponse'
 
   /api/v1/members/:id:
     get:
@@ -74,93 +37,22 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
-                  members:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      last_name:
-                        type: string
-                      country:
-                        type: string
-                      preferences:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            description:
-                              type: string
-                            _id:
-                              type: string
-                      avatar:
-                        type: string
-                      skills:
-                        type: array
-                        items:
-                          type: object
-                          properties:
-                            title:
-                              type: string
-                            category:
-                              type: string
-                            description:
-                              type: string
-                            level:
-                              type: string
-                            _id:
-                              type: string
-                      user:
-                        type: string
-                      id:
-                        type: string
+                $ref: '#/components/schemas/MemberResponse'
 
   /api/v1/members/create:
     post:
       tags:
         - Profile
       summary: The user create his member profile
+      security:
+        - token: []
       requestBody:
         required: true
         description: The user submits required data to create his member profile
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                last_name:
-                  type: string
-                country:
-                  type: string
-                preferences:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      description:
-                        type: string
-                avatar:
-                  type: string
-                skills:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-                      category:
-                        type: string
-                      description:
-                        type: string
-                      level:
-                        type: string
-                user:
-                  type: string
+              $ref: '#/components/schemas/MemberCreate'
       responses:
         '201':
           description: Returns an object with message
@@ -183,36 +75,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                last_name:
-                  type: string
-                country:
-                  type: string
-                preferences:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      description:
-                        type: string
-                avatar:
-                  type: string
-                skills:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      title:
-                        type: string
-                      category:
-                        type: string
-                      description:
-                        type: string
-                      level:
-                        type: string
+              $ref: '#/components/schemas/MemberUpdate'
       responses:
         '201':
           description: Returns an object with message
