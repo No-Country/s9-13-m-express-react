@@ -40,7 +40,7 @@ const validationMember = [
     .isLength({ min: 4, max: 25 })
     .withMessage('Country must have more than 4 characters and less than 25 characters'),
 
-  body('preferences.*.description')
+  body('preferences.*.descripcion')
     .trim()
     .notEmpty()
     .withMessage('Description is required')
@@ -60,17 +60,45 @@ const validationMember = [
     .isLength({ min: 8, max: 100 })
     .withMessage('Avatar must have more than 8 characters and less than 100 characters'),
 
-  ['title', 'category', 'description', 'level'].forEach((field: string) => {
-    body('skills.*.' + field)
-      .trim()
-      .notEmpty()
-      .withMessage(field + ' required')
-      .bail()
-      .isString()
-      .withMessage(field + ' type is not valid')
-      .isLength({ min: 5, max: 50 })
-      .withMessage(field + ' must have more than 5 characters and less than 50 characters');
-  }),
+  body('skills.*.title')
+    .trim()
+    .notEmpty()
+    .withMessage('Title required')
+    .bail()
+    .isString()
+    .withMessage('Title type is not valid')
+    .isLength({ min: 5, max: 50 })
+    .withMessage('Title must have more than 5 characters and less than 50 characters'),
+
+  body('skills.*.category')
+    .trim()
+    .notEmpty()
+    .withMessage('Category required')
+    .bail()
+    .isString()
+    .withMessage('Category type is not valid')
+    .isLength({ min: 5, max: 50 })
+    .withMessage('Category must have more than 5 characters and less than 50 characters'),
+
+  body('skills.*.description')
+    .trim()
+    .notEmpty()
+    .withMessage('Description required')
+    .bail()
+    .isString()
+    .withMessage('Description type is not valid')
+    .isLength({ min: 5, max: 50 })
+    .withMessage('Description must have more than 5 characters and less than 50 characters'),
+
+  body('skills.*.level')
+    .trim()
+    .notEmpty()
+    .withMessage('Level required')
+    .custom((vale) => {
+      const allowedLevels = ['basico', 'intermedio', 'avanzado'];
+      return allowedLevels.includes(vale);
+    })
+    .withMessage(`Level must be one of the following values: basico, intermedio, avanzado`),
 
   (req: Request, res: Response, next: NextFunction) => {
     const error: Result = validationResult(req);
@@ -88,9 +116,7 @@ const validationCreateMember = [
     .withMessage('User required')
     .bail()
     .isString()
-    .withMessage('User type is not valid')
-    .isLength({ min: 8, max: 100 })
-    .withMessage('User must have more than 8 characters and less than 100 characters'),
+    .withMessage('User type is not valid'),
 
   (req: Request, res: Response, next: NextFunction) => {
     const error: Result = validationResult(req);
