@@ -5,6 +5,7 @@ import { FaBell, FaUser } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className='bg-purpleSecondary shadow sticky top-0'>

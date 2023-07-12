@@ -43,6 +43,31 @@ const updateUserToken = async (id: string, token: string) => {
   }
 }
 
+const findUserByToken = async (token: string) => {
+  try {
+    return User.findOne({ token });
+  } catch (error) {
+    throw new Error(`User not found! - ${error}`);
+  }
+}
+
+const updateUserPassword = async (id: string, newPassword: string) => {
+  try {
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    return User.findByIdAndUpdate(id, { password: hashedPassword })
+  } catch (error) {
+    throw new Error(`Something went wrong when tried to update user password! - ${error}`);
+  }
+}
+
+const updateUserToken = async (id: string, token: string) => {
+  try {
+    return User.findByIdAndUpdate(id, { token })
+  } catch (error) {
+    throw new Error(`Something went wrong when tried to update user token! - ${error}`);
+  }
+}
+
 const fetchLogin = async (password: string, email: string) => {
   const user = await findUserByEmail(email);
   if (!user) throw new Error('Conflict: User not found!');
