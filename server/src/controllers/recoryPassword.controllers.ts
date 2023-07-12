@@ -1,14 +1,13 @@
 import { Request, Response } from 'express';
+import { jwtUtils } from '../utils/jwtUtils'
 import {
     findUserByEmail,
     findUserByToken,
-    updateUserPassword,
-    updateUserToken
-} from '../services/users.services';
-import { jwtUtils } from '../utils/jwtUtils'
-import { sendEmail } from '../utils/email/sendEmail';
+    updateUserToken,
+    updateUserPassword
+} from 'services/users.services';
 import { config } from '../config/config';
-
+import { sendEmail } from 'utils/email/sendEmail';
 
 
 
@@ -91,8 +90,4 @@ const recoveryPassword = async (req: Request, res: Response) => {
 }
 
 
-export {
-    forgotPassword,
-    recoveryPassword,
-    recoveryPasswordUI,
-}
+export { forgotPassword, recoveryPassword, recoveryPasswordUI }

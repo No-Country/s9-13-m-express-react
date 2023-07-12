@@ -3,6 +3,9 @@ import User from '../models/users.models';
 import { comparePassword } from '../utils/handdlePassword';
 import { jwtUtils } from '../utils/jwtUtils';
 import { TokenPayload } from '../interfaces/tokenPayload.interface';
+import { config } from '../config/config';
+
+
 
 const findUserByEmail = async (email: string) => {
   try {
@@ -24,18 +27,18 @@ const findUserByToken = async (token: string) => {
 }
 
 const updateUserPassword = async (id: string, newPassword: string) => {
-  try{
+  try {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
-    return User.findByIdAndUpdate(id, {password: hashedPassword})
-  }catch (error){
+    return User.findByIdAndUpdate(id, { password: hashedPassword })
+  } catch (error) {
     throw new Error(`Something went wrong when tried to update user password! - ${error}`);
   }
 }
 
 const updateUserToken = async (id: string, token: string) => {
-  try{
-    return User.findByIdAndUpdate(id, {token})
-  }catch (error){
+  try {
+    return User.findByIdAndUpdate(id, { token })
+  } catch (error) {
     throw new Error(`Something went wrong when tried to update user token! - ${error}`);
   }
 }
@@ -47,8 +50,7 @@ const fetchLogin = async (password: string, email: string) => {
   const comparedPassword = await comparePassword(user.password, password);
   if (!comparedPassword) throw new Error('Conflict: invalid email or password');
 
-  const expiresIn = process.env.JWT_EXPIRES_IN;
-
+  const expiresIn = config.JWT.JWT_EXPIRES_IN;
   const payload: TokenPayload = {
     userId: user.id,
     role: user.role,
@@ -89,4 +91,11 @@ const fetchSignUp = async (username: string, email: string, password: string) =>
 };
 
 
-export { fetchLogin, fetchSignUp, findUserByEmail, findUserByToken, updateUserPassword, updateUserToken };
+export {
+  fetchLogin,
+  fetchSignUp,
+  findUserByEmail,
+  findUserByToken,
+  updateUserPassword,
+  updateUserToken
+};
