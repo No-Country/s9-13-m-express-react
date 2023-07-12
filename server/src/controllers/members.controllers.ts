@@ -1,5 +1,17 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
-export const updateMember = (req: Request, res: Response) => {
-  res.status(200).json({ msg: 'ok' });
+import { updateService } from '../services/members.services';
+
+export const updateController = async (req: any, res: Response) => {
+  try {
+    // name, last_name, country, preferences, avatar, skills, email, password
+    const data = req.body;
+    const { id } = req.user;
+
+    await updateService(data, id);
+
+    res.status(200).json({ message: 'Ok' });
+  } catch (error) {
+    res.status(500).json({ message: error });
+  }
 };

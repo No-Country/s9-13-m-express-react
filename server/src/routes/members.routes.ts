@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
-import { updateMember } from '../controllers/members.controllers';
+import { updateController } from '../controllers/members.controllers';
 
 const router = Router();
 
-router.post('/update', updateMember);
+router.post('/update', updateController);
 
 export default router;
