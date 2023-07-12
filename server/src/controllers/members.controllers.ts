@@ -10,6 +10,7 @@ const createMembers = async (req: Request, res: Response) => {
     // const { user } = req.body
     // los del fronten necesitan el id xq sino lo obtenemos del token
 
+    // name, last_name, country, preferences, avatar, skills
     const { ...memberData } = req.body;
     const data = await fetchCreateMembers({ ...memberData });
     res.status(201).json(data);
