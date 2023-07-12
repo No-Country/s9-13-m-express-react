@@ -4,19 +4,19 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { Oval } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   onChecking,
   onLogin,
   onLoginError,
   onLogout,
 } from '@/store/slices/authSlice';
-import loginUser from '@/services/auth/login.service';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
-import { Oval } from 'react-loader-spinner';
 
 export default function LoginFormComponent() {
   const currentUser = useSelector((state) => state.user);
@@ -35,14 +35,22 @@ export default function LoginFormComponent() {
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { resetForm }) => {
-      // Lógica para enviar el formulario
+    onSubmit: async ({ email, password }, { resetForm }) => {
       dispatch(onChecking());
 
-      try {
-        let response = await loginUser(values);
-        if (!response.ok) throw new Error(response);
+      const request = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
+      const response = await request.json();
+
+      console.log(request);
+
+      if (request.status === 201) {
         toast.success(`Login Succesfully`, {
           position: 'top-center',
           autoClose: 5000,
@@ -54,12 +62,12 @@ export default function LoginFormComponent() {
           theme: 'light',
         });
 
-        dispatch(onLogin(response));
+        dispatch(onLogin(response.data));
         resetForm();
         router.push('/home');
-      } catch (error) {
-        console.log(error);
-        toast.error('Login failed', {
+      } else {
+        console.log(response);
+        toast.error(response.error, {
           position: 'top-center',
           autoClose: 5000,
           hideProgressBar: false,
@@ -69,8 +77,7 @@ export default function LoginFormComponent() {
           progress: undefined,
           theme: 'light',
         });
-        dispatch(onLoginError(error));
-        resetForm();
+        dispatch(onLoginError(response.error));
       }
     },
   });

@@ -1,6 +1,6 @@
 'use client';
 
-import classNames from 'classnames';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Navbar() {
@@ -11,7 +11,9 @@ export default function Navbar() {
       <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto px-2 sm:px-4 xl:px-6 py-2'>
         <div>
           <Link href={'/'}>
-            <span className='text-2xl font-bold text-purpleSecondary hover:text-yellowPrimary hover:font-'>SKILL SWAP</span>
+            <span className='text-2xl font-bold text-purpleSecondary hover:text-yellowPrimary hover:font-'>
+              SKILL SWAP
+            </span>
           </Link>
         </div>
         <div className='flex flex-row'>
@@ -46,7 +48,9 @@ export default function Navbar() {
         </div>
         <div className='hidden md:block space-x-4 hover:font-semibold'>
           <Link href={'/login'}>🔔</Link>
-          <Link href={'/login'} className='text-purplePrimary'>PERFIL</Link>
+          <Link href={'/login'} className='text-purplePrimary'>
+            PERFIL
+          </Link>
           {/* <Link href={'/login'}>
             <button className='inline-flex shadow-lg items-center py-2.5 px-3 ml-1 text-sm font-normal text-yellowPrimary bg-purpleSecondary  hover:bg-purplePrimary hover:font-bold focus:ring-2 focus:outline-none focus:ring-yellowPrimary rounded'>LOGIN</button>
           </Link> */}
@@ -96,12 +100,15 @@ export default function Navbar() {
       {isOpen && (
         <div className='md:hidden flex flex-col' id='mobile-menu'>
           <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center hover:font-semibold'>
-            <Link href={'/login'} className='text-purplePrimary'>🔔</Link>
-            <Link href={'/login'} className='text-purplePrimary'>PERFIL</Link>
+            <Link href={'/login'} className='text-purplePrimary'>
+              🔔
+            </Link>
+            <Link href={'/login'} className='text-purplePrimary'>
+              PERFIL
+            </Link>
           </div>
         </div>
       )}
     </nav>
   );
 }
-
