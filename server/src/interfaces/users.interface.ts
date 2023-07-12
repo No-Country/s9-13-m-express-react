@@ -18,5 +18,4 @@ export interface CustomRequest extends Request {
   user?: IUser;
 }
 
-
-export type User_T = {userId?:string} & Partial<IUser> | null
+export type User_T = ({ userId?: string } & Partial<IUser>) | null;
