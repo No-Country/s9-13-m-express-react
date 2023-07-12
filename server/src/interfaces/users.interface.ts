@@ -1,4 +1,5 @@
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { Request } from 'express';
 
 export enum rolType {
   instructor = 'instructor',
@@ -10,4 +11,12 @@ export interface IUser extends Document {
   email: string;
   password: string;
   role?: rolType[];
+  token?: string;
 }
+
+export interface CustomRequest extends Request {
+  user?: IUser;
+}
+
+
+export type User_T = {userId?:string} & Partial<IUser> | null
