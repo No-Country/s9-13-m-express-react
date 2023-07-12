@@ -159,6 +159,8 @@ paths:
                         type: string
                       level:
                         type: string
+                user:
+                  type: string
       responses:
         '201':
           description: Returns an object with message

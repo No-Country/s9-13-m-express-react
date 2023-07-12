@@ -11,7 +11,7 @@ const router = Router();
 
 router.get('/', getMembers);
 router.get('/:id', getOneMember);
-router.post('/create', createMembers);
+router.post('/create', authenticate, createMembers);
 router.put('/update', authenticate, updateController);
 
 export default router;

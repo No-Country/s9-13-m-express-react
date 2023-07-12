@@ -1,5 +1,4 @@
 import { Document, Schema } from 'mongoose';
-import { IUser } from '../interfaces/users.interface';
 
 export interface IMember extends Document {
   name: string;
@@ -13,5 +12,5 @@ export interface IMember extends Document {
     description: string;
     level: 'basic' | 'intermedio' | 'avanzado';
   }[];
-  user: Schema.Types.ObjectId | IUser;
+  user: Schema.Types.ObjectId;
 }
