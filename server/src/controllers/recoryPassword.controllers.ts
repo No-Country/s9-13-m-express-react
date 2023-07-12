@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { jwtUtils } from '../utils/jwtUtils'
 import {
     findUserByEmail,
@@ -8,9 +9,6 @@ import {
 } from '../services/users.services';
 import { config } from '../config/config';
 import { sendEmail } from '../utils/email/sendEmail';
-
-
-
 
 const forgotPassword = async (req: Request, res: Response) => {
     const { email } = req.body

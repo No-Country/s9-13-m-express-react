@@ -3,17 +3,13 @@ import { forgotPassword,
     recoveryPassword,
     recoveryPasswordUI } from '../controllers/recoryPassword.controllers'
 
-
-const router = Router()
-
+const router = Router();
 
 router.post('/forgot_password', forgotPassword);
 
 router.route('/recovery_password/:token')
     .get(recoveryPasswordUI)
     .put(recoveryPassword);
-
-
 
 export default router;
 
