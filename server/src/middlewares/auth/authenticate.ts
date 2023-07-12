@@ -11,9 +11,10 @@ export const authenticate = async (req: CustomRequest, res: Response, next: Next
 
   try {
     const decoded = jwtUtils.verifyToken(token);
+    const { userId } = decoded;
 
-    const user = await User.findById(decoded.userId);
-    req.user = user as IUser;
+    const user = await User.findById(userId).exec();
+    if (user) req.user = user;
 
     next();
   } catch (error: any) {
