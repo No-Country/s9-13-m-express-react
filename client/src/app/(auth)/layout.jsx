@@ -1,13 +1,24 @@
 'use client';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-export default function layoutAuth({ children }) {
+export default function LayoutAuth({ children }) {
+  const currentUser = useSelector((state) => state.user);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (currentUser.status === 'authenticated') {
+      router.push('/home');
+    }
+  }, [router, currentUser]);
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const router = usePathname();
+  const pathname = usePathname();
   let sectionText;
-  let imageUrl = router == '/login' ? '/auth/man.png' : '/auth/woman.png';
+  let imageUrl = pathname == '/login' ? '/auth/man.png' : '/auth/woman.png';
 
-  switch (router) {
+  switch (pathname) {
     case '/login':
       sectionText = '¡Conectate para comenzar a aprender y compartir!';
       break;
@@ -26,10 +37,11 @@ export default function layoutAuth({ children }) {
           {sectionText}
         </h2>
         <div class='bg-gradient-to-t from-purpleSecondary to-yellowButtonDisable  rounded-tr-3xl rounded-br-3xl w-full h-full'>
-          <div
-            className='w-full flex items-end h-full rounded-tr-3xl rounded-br-3xl mix-blend-overlay'
-          >
-            <img src={imageUrl} className='w-full h-full object-cover rounded-tr-3xl rounded-br-3xl' />
+          <div className='w-full flex items-end h-full rounded-tr-3xl rounded-br-3xl mix-blend-overlay'>
+            <img
+              src={imageUrl}
+              className='w-full h-full object-cover rounded-tr-3xl rounded-br-3xl'
+            />
           </div>
         </div>
       </div>

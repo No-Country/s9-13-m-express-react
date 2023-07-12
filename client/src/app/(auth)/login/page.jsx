@@ -48,7 +48,9 @@ export default function LoginFormComponent() {
 
       const response = await request.json();
 
-      if (request.status === 200) {
+      console.log(request);
+
+      if (request.status === 201) {
         toast.success(`Login Succesfully`, {
           position: 'top-center',
           autoClose: 5000,
@@ -60,7 +62,7 @@ export default function LoginFormComponent() {
           theme: 'light',
         });
 
-        dispatch(onLogin(response));
+        dispatch(onLogin(response.data));
         resetForm();
         router.push('/home');
       } else {
