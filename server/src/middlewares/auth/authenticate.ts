@@ -20,10 +20,8 @@ export const authenticate = async (req: Request, res: Response, next: NextFuncti
     const { userId } = decoded;
 
     const user = await User.findById(userId).exec();
+    if (user) req.user = user;
 
-    if (user) {
-      req.user = user;
-    }
     next();
   } catch (error: any) {
     return res.status(401).json({ message: 'Invalid authentication token or unauthorized user', error });

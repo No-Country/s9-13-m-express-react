@@ -1,7 +1,7 @@
 import { Router, Response } from 'express';
 import userRouter from './users.routes';
 import recoveryPassword from './recoveryPassword.routes';
-import members from './members.routes';
+import memberRouter from './members.routes';
 
 const router = Router();
 
@@ -11,6 +11,6 @@ router.get('/health', (_, res: Response) => {
 
 router.use('/auth', userRouter);
 router.use('/', recoveryPassword);
-router.use('/members', members);
+router.use('/members', memberRouter);
 
 export default router;
