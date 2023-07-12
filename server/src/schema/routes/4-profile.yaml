@@ -59,10 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+                $ref: '#/components/schemas/MemberResponse'
 
   /api/v1/members/update:
     put:
