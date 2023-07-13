@@ -6,12 +6,13 @@ import {
   updateController,
 } from '../controllers/members.controllers';
 import { authenticate } from '../middlewares/auth/authenticate';
+import { validationMember, validationCreateMember } from '../middlewares/validators/members';
 
 const router = Router();
 
 router.get('/', getMembers);
 router.get('/:id', getOneMember);
-router.post('/create', authenticate, createMembers);
-router.put('/update', authenticate, updateController);
+router.post('/create', authenticate, validationMember, validationCreateMember, createMembers);
+router.put('/update', authenticate, validationMember, updateController);
 
 export default router;

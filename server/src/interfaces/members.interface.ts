@@ -10,7 +10,7 @@ export interface IMember extends Document {
     title: string;
     category: string;
     description: string;
-    level: 'basic' | 'intermedio' | 'avanzado';
+    level: 'basico' | 'intermedio' | 'avanzado';
   }[];
   user: Schema.Types.ObjectId;
 }

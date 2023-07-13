@@ -1,4 +1,4 @@
-import { Document, Types } from 'mongoose';
+import { Document } from 'mongoose';
 import { Request } from 'express';
 
 export enum rolType {
@@ -18,5 +18,4 @@ export interface CustomRequest extends Request {
   user?: IUser;
 }
 
-
-export type User_T = {userId?:string} & Partial<IUser> | null
+export type User_T = ({ userId?: string } & Partial<IUser>) | null;

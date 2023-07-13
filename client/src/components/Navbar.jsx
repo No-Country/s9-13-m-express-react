@@ -1,4 +1,5 @@
 'use client';
+
 import { React, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
@@ -40,7 +41,6 @@ export default function Navbar() {
             <FaSearch />
           </button>
         </div>
-
         <div className='hidden md:flex items-center justify-between space-x-4 '>
           <Link href={'/login'}>
             {' '}

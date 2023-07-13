@@ -3,20 +3,20 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Oval } from 'react-loader-spinner';
+import { useRouter } from 'next/navigation';
+
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import CreateUser from '../../../services/auth/createUser';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   onCheckingRegister,
   onDeleteRegister,
   onRegister,
+  onRegisterError,
 } from '@/store/slices/authSlice';
-import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
-import { Oval } from 'react-loader-spinner';
 
 export default function RegisterFormComponent() {
   const dispatch = useDispatch();
@@ -44,26 +44,46 @@ export default function RegisterFormComponent() {
       confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async ({ username, email, password }, { resetForm }) => {
       dispatch(onCheckingRegister());
 
-      let response = await CreateUser(values);
-      toast.success(`Register Succesfully`, {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'light',
+      let request = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
       });
-      dispatch(onRegister(response));
-      console.log(response);
-      resetForm();
 
-      // todo: redireccionar a habilidades
-      router.push('/login');
+      const response = await request.json();
+      if (request.status == 201) {
+        toast.success(`Register Succesfully`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        dispatch(onRegister(response.data));
+        resetForm();
+        router.push('/habilidad');
+      } else {
+        console.log(response);
+        toast.error(response.message, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        dispatch(onRegisterError(response.error));
+      }
     },
   });
 

@@ -4,31 +4,81 @@ import React from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { Oval } from 'react-loader-spinner';
+import { useDispatch, useSelector } from 'react-redux';
+
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
-import { useSelector } from 'react-redux';
+
+import {
+  onChecking,
+  onLogin,
+  onLoginError,
+  onLogout,
+} from '@/store/slices/authSlice';
 
 
-export default function LoginFormComponent (){
 
-    const auth = useSelector(state => state.user)
-    console.log(auth)
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email('Formato de correo electrónico inválido')
+      .required('Campo requerido'),
+    password: Yup.string().required('Campo requerido'),
+  });
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: validationSchema,
+    onSubmit: async ({ email, password }, { resetForm }) => {
+      dispatch(onChecking());
 
-    const validationSchema = Yup.object({
-        email: Yup.string().email('Formato de correo electrónico inválido').required('Campo requerido'),
-        password: Yup.string().required('Campo requerido'),
-    });
-    const formik = useFormik({
-        initialValues: {
-        email: '',
-        password: '',
+      const request = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-        validationSchema: validationSchema,
-        onSubmit: (values, {resetForm}) => {
-          // Lógica para enviar el formulario
-          console.log(values);
+        body: JSON.stringify({ email, password }),
+      });
 
-          resetForm()
+      const response = await request.json();
+
+      console.log(request);
+
+      if (request.status === 201) {
+        toast.success(`Login Succesfully`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+
+        dispatch(onLogin(response.data));
+        resetForm();
+        router.push('/home');
+      } else {
+        console.log(response);
+        toast.error(response.error, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        dispatch(onLoginError(response.error));
+      }
+    },
+  });
 
         },
     });
