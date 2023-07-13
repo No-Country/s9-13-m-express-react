@@ -1,15 +1,23 @@
 'use client';
 import { React, useState } from 'react';
 import Link from 'next/link';
-import { FaBell, FaUser } from 'react-icons/fa';
+import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSearch = () => {
+    console.log(`Realizando busqueda: ${searchTerm}`);
+  };
 
   return (
-    <nav className='bg-purpleSecondary shadow sticky top-0'>
-      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto py-2'>
+    <nav className='bg-purpleSecondary shadow sticky top-0 z-10'>
+      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto py-4 px-4'>
         <div>
           <Link href={'/'}>
             <span className='text-2xl font-bold text-yellowPrimary hover:font-bold'>
@@ -17,7 +25,7 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
-        <div className='hidden md:flex'>
+        {/* <div className='hidden md:flex'>
           <input
             className='rounded-md shadow-lg bg-gray-100 border border-gray-300 text-purpleSecondary text-sm focus:ring-yellowPrimary block w-full pl-10 p-2.5 placeholder-purpleSecondary'
             type='search'
@@ -25,7 +33,23 @@ export default function Navbar() {
             id='search'
             placeholder=' Searching...'
           />
+        </div> */}
+        <div className='hidden md:flex items-center'>
+          <input
+            type='text'
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder='Search...'
+            className='py-2 px-4 rounded-l-md focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-purpleSecondary w-full'
+          />
+          <button
+            onClick={handleSearch}
+            className='bg-white text-black py-2 px-4 rounded-r-md h-10'
+          >
+            <FaSearch />
+          </button>
         </div>
+
         <div className='hidden md:flex items-center justify-between space-x-4 '>
           <Link href={'/login'}>
             {' '}
@@ -39,7 +63,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type='button'
-            className='bg-purplePrimary inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-purpleSecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
+            className='bg-yellowPrimary inline-flex items-center justify-center p-2 rounded-md text-purpleSecondary hover:text-white focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-yellowPrimary'
             aria-controls='mobile-menu'
             aria-expanded={isOpen}
           >
@@ -82,7 +106,7 @@ export default function Navbar() {
           className='md:hidden flex flex-col items-center justify-center gap-5'
           id='mobile-menu'
         >
-          <div className='w-full flex flex-row justify-center'>
+          {/* <div className='w-full flex flex-row justify-center'>
             <input
               className='rounded-md shadow-lg bg-gray-100 border border-gray-300 text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
               type='search'
@@ -111,7 +135,22 @@ export default function Navbar() {
               </svg>
               Search
             </button>
-          </div>
+          </div> */}
+          <div className='w-full flex flex-row justify-center'>
+          <input
+            type='text'
+            value={searchTerm}
+            onChange={handleInputChange}
+            placeholder='Search...'
+            className='py-2 px-4 rounded-l-md focus:outline-none shadow-lg bg-white text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
+          />
+          <button
+            onClick={handleSearch}
+            className='bg-white text-black py-2 px-4 rounded-r-md h-10'
+          >
+            <FaSearch />
+          </button>
+        </div>
           <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center gap-2'>
             <Link href={'/login'} className='text-purplePrimary'>
               {' '}
@@ -126,4 +165,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
