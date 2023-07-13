@@ -1,5 +1,4 @@
 import Schedule from '../models/schedules.models';
-import { Types } from 'mongoose';
 import { UpdateSchedule } from 'interfaces/updateSchedules.interface';
 
 const getAllSchedulesService = async () => {
@@ -8,13 +7,12 @@ const getAllSchedulesService = async () => {
 };
 
 const getScheduleService = async (id: string) => {
-
   const scheduleFound = await Schedule.find();
 
-  if(scheduleFound){
-    const scheduleUser = scheduleFound.filter(shedule => shedule.user.toString() == id);
+  if (scheduleFound) {
+    const scheduleUser = scheduleFound.filter((shedule) => shedule.user.toString() == id);
 
-    if(scheduleUser.length) return scheduleUser;
+    if (scheduleUser.length) return scheduleUser;
     return null;
   }
 
