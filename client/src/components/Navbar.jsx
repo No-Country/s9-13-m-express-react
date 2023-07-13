@@ -25,15 +25,6 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
-        {/* <div className='hidden md:flex'>
-          <input
-            className='rounded-md shadow-lg bg-gray-100 border border-gray-300 text-purpleSecondary text-sm focus:ring-yellowPrimary block w-full pl-10 p-2.5 placeholder-purpleSecondary'
-            type='search'
-            name='search'
-            id='search'
-            placeholder=' Searching...'
-          />
-        </div> */}
         <div className='hidden md:flex items-center'>
           <input
             type='text'
@@ -106,51 +97,21 @@ export default function Navbar() {
           className='md:hidden flex flex-col items-center justify-center gap-5'
           id='mobile-menu'
         >
-          {/* <div className='w-full flex flex-row justify-center'>
+          <div className='w-full flex flex-row justify-center'>
             <input
-              className='rounded-md shadow-lg bg-gray-100 border border-gray-300 text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
-              type='search'
-              name='search'
-              id='search'
-              placeholder=' Searching...'
+              type='text'
+              value={searchTerm}
+              onChange={handleInputChange}
+              placeholder='Search...'
+              className='py-2 px-4 rounded-l-md focus:outline-none shadow-lg bg-white text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
             />
             <button
-              type='submit'
-              className='inline-flex shadow-lg items-center py-2.5 px-3 ml-1 text-sm font-normal text-yellowPrimary bg-purpleSecondary  hover:bg-purplePrimary hover:font-bold focus:ring-2 focus:outline-none focus:ring-yellowPrimary rounded'
+              onClick={handleSearch}
+              className='bg-white text-black py-2 px-4 rounded-r-md h-10'
             >
-              <svg
-                aria-hidden='true'
-                class='mr-2 -ml-1 w-5 h-5'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  stroke-width='2'
-                  d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
-                ></path>
-              </svg>
-              Search
+              <FaSearch />
             </button>
-          </div> */}
-          <div className='w-full flex flex-row justify-center'>
-          <input
-            type='text'
-            value={searchTerm}
-            onChange={handleInputChange}
-            placeholder='Search...'
-            className='py-2 px-4 rounded-l-md focus:outline-none shadow-lg bg-white text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
-          />
-          <button
-            onClick={handleSearch}
-            className='bg-white text-black py-2 px-4 rounded-r-md h-10'
-          >
-            <FaSearch />
-          </button>
-        </div>
+          </div>
           <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center gap-2'>
             <Link href={'/login'} className='text-purplePrimary'>
               {' '}
