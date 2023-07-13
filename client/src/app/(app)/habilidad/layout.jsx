@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Register',
+  title: 'Habilidades',
 };
 export default function layoutHabilidades({ children }) {
   return (
