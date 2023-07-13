@@ -120,9 +120,3 @@ components:
                   - basico
                   - intermedio
                   - avanzado
-
-  securitySchemes:
-    token:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
