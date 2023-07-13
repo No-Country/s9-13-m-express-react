@@ -1,4 +1,5 @@
 'use client';
+
 import { React, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
@@ -34,19 +35,33 @@ export default function Navbar() {
             className='py-2 px-4 rounded-l-md focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-purpleSecondary w-full'
           />
           <button
-            onClick={handleSearch}
-            className='bg-white text-black py-2 px-4 rounded-r-md h-10'
+            type='submit'
+            className='inline-flex shadow-lg items-center py-2.5 px-3 ml-1 text-sm font-normal text-yellowPrimary bg-purpleSecondary  hover:bg-purplePrimary hover:font-bold focus:ring-2 focus:outline-none focus:ring-yellowPrimary rounded'
           >
-            <FaSearch />
+            <svg
+              aria-hidden='true'
+              class='mr-2 -ml-1 w-5 h-5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path
+                stroke-linecap='round'
+                stroke-linejoin='round'
+                stroke-width='2'
+                d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z'
+              ></path>
+            </svg>
+            Search
           </button>
         </div>
-
         <div className='hidden md:flex items-center justify-between space-x-4 '>
           <Link href={'/login'}>
             {' '}
             <FaBell className='text-yellowPrimary' />{' '}
           </Link>
-          <Link href={'/register'}>
+          <Link href={'/login'}>
             <FaUser className='text-yellowPrimary' />
           </Link>
         </div>
@@ -54,7 +69,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             type='button'
-            className='bg-yellowPrimary inline-flex items-center justify-center p-2 rounded-md text-purpleSecondary hover:text-white focus:outline-none focus:ring-1 focus:ring-offset-1 focus:ring-offset-gray-800 focus:ring-yellowPrimary'
+            className='bg-purplePrimary inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-purpleSecondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white'
             aria-controls='mobile-menu'
             aria-expanded={isOpen}
           >
@@ -93,32 +108,13 @@ export default function Navbar() {
         </div>
       </div>
       {isOpen && (
-        <div
-          className='md:hidden flex flex-col items-center justify-center gap-5'
-          id='mobile-menu'
-        >
-          <div className='w-full flex flex-row justify-center'>
-            <input
-              type='text'
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder='Search...'
-              className='py-2 px-4 rounded-l-md focus:outline-none shadow-lg bg-white text-purpleSecondary text-sm focus:ring-yellowPrimary  pl-10 p-2.5 placeholder-purpleSecondary'
-            />
-            <button
-              onClick={handleSearch}
-              className='bg-white text-black py-2 px-4 rounded-r-md h-10'
-            >
-              <FaSearch />
-            </button>
-          </div>
-          <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center gap-2'>
+        <div className='md:hidden flex flex-col' id='mobile-menu'>
+          <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center hover:font-semibold'>
             <Link href={'/login'} className='text-purplePrimary'>
-              {' '}
-              <FaBell className='text-yellowPrimary' />{' '}
+              🔔
             </Link>
-            <Link href={'/login'} className='text-yellowPrimary'>
-              <FaUser />
+            <Link href={'/login'} className='text-purplePrimary'>
+              PERFIL
             </Link>
           </div>
         </div>
