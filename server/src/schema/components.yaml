@@ -19,7 +19,7 @@ components:
               items:
                 type: object
                 properties:
-                  description:
+                  descripcion:
                     type: string
                   _id:
                     type: string
@@ -59,7 +59,7 @@ components:
           items:
             type: object
             properties:
-              description:
+              descripcion:
                 type: string
         avatar:
           type: string
@@ -76,6 +76,11 @@ components:
                 type: string
               level:
                 type: string
+                example: basico | intermedio | avanzado
+                enum:
+                  - basico
+                  - intermedio
+                  - avanzado
         user:
           type: string
 
@@ -93,7 +98,7 @@ components:
           items:
             type: object
             properties:
-              description:
+              descripcion:
                 type: string
         avatar:
           type: string
@@ -110,9 +115,14 @@ components:
                 type: string
               level:
                 type: string
+                example: basico | intermedio | avanzado
+                enum:
+                  - basico
+                  - intermedio
+                  - avanzado
 
   securitySchemes:
     token:
-      type: apiKey
-      name: Barear token
-      in: header
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

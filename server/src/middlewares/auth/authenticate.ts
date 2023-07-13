@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express';
 import { jwtUtils } from './../../utils/jwtUtils';
 import User from '../../models/users.models';
-import { CustomRequest, IUser } from '../../interfaces/users.interface';
+import { CustomRequest } from '../../interfaces/users.interface';
 
 export const authenticate = async (req: CustomRequest, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];
