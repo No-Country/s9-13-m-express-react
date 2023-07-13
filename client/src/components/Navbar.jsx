@@ -1,5 +1,4 @@
 'use client';
-
 import { React, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
@@ -31,8 +30,8 @@ export default function Navbar() {
             type='text'
             value={searchTerm}
             onChange={handleInputChange}
-            placeholder='Search...'
-            className='py-2 px-4 rounded-l-md focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-purpleSecondary w-full'
+            placeholder='¿Que buscas aprender?...'
+            className='py-2 px-4 rounded-l-md focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-gray-100 w-full'
           />
           <button
             onClick={handleSearch}
@@ -41,6 +40,7 @@ export default function Navbar() {
             <FaSearch />
           </button>
         </div>
+
         <div className='hidden md:flex items-center justify-between space-x-4 '>
           <Link href={'/login'}>
             {' '}
