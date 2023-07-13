@@ -9,7 +9,7 @@ import {
   updateSchedule,
   deleteSchedule,
 } from '../controllers/schedule.controllers';
-import { validatorSchedule, validatorUpdateSchedule} from '../middlewares/validators/schedule';
+import { validatorSchedule, validatorUpdateSchedule } from '../middlewares/validators/schedule';
 
 const router = Router();
 

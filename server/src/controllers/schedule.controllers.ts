@@ -7,8 +7,6 @@ import {
   deleteScheduleService,
 } from '../services/schedule.services';
 
-
-
 const getAllSchedules = async (req: Request, res: Response) => {
   try {
     const schedules = await getAllSchedulesService();
