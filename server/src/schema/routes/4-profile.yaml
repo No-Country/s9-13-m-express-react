@@ -19,7 +19,7 @@ paths:
                     items:
                       $ref: '#/components/schemas/MemberResponse'
 
-  /api/v1/members/:id:
+  /api/v1/members/{id}:
     get:
       tags:
         - Profile
@@ -59,16 +59,15 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  msg:
-                    type: string
+                $ref: '#/components/schemas/MemberResponse'
 
   /api/v1/members/update:
     put:
       tags:
         - Profile
       summary: The user update his member profile
+      security:
+        - token: []
       requestBody:
         required: true
         description: The user submits all his member and user profile information fields to update
