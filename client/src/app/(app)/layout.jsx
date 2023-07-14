@@ -12,7 +12,7 @@ export default function AppLayout({ children }) {
     currentUser.status === 'checking'
   ) {
 
-    
+    router.push("/login");
   }
 
   return <>{children}</>;
