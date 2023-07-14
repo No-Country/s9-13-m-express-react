@@ -144,7 +144,14 @@ export default function LoginFormComponent() {
         )}
 
         <div>
-          <p className='my-2'>¿Olvidaste tu contraseña? </p>
+          <p className='my-2'>
+          <Link
+              className='text-purple-950 underline mx-2'
+              href='/restablecer'
+            >
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </p>
           <p className='my-2'>
             <span>Aun no tienes Cuenta?</span>
             <Link

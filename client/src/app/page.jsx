@@ -12,6 +12,7 @@ import technology from '../../public/images/technology.png';
 import weave from '../../public/images/weave.png';
 import yoga from '../../public/images/yoga.png';
 import Button from '@/components/Button';
+import Link from 'next/link';
 
 export default function LandingPage() {
   const carouselLanding = [
@@ -79,8 +80,11 @@ export default function LandingPage() {
             customClassNames={
               'text-purplePrimary bg-yellowPrimary rounded-full font-semibold'
             }
-          >
-            Comenzar
+          > 
+            <Link href={"/login"}>
+              Comenzar
+            </Link>
+            
           </Button>
         </div>
       </section>
