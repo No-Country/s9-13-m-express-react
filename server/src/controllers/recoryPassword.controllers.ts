@@ -6,7 +6,7 @@ import {
   findUserByToken,
   updateUserToken,
   updateUserPassword,
-} from '../services/users.services';
+} from '../services/auth.services';
 import { config } from '../config/config';
 import { sendEmail } from '../utils/email/sendEmail';
 
