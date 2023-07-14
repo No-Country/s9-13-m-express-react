@@ -7,7 +7,7 @@ class SendEmail {
   constructor() {}
 
   public sendRecoveryPassword = (subject: string, user: User_T): void => {
-    const url = `${config.HOST_DEPLOY}:${config.PORT}/api/v1/recovery_password/${user?.token}`;
+    const url = `${config.BACKEND_URL_BASE}:${config.PORT}/api/v1/recovery_password/${user?.token}`;
     const htmlBody = generateHtmlBody(url, user);
     const mail = transporter.sendMail({
       from: `"SKILL SWAP" ${config.SMTP.SMTP_SENDER}`,

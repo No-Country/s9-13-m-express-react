@@ -16,7 +16,7 @@ const memberSchema = new Schema<IMember>({
   },
   preferences: [
     {
-      descripcion: {
+      description: {
         type: String,
         required: true,
       },
