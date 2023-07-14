@@ -4,6 +4,8 @@
 import Button from '@/components/Button';
 import { useSelector } from 'react-redux';
 import { TbPointFilled } from 'react-icons/tb';
+import TextField from '@/components/TextField';
+import Link from 'next/link';
 
 
 const OthersSkills = ()=>{

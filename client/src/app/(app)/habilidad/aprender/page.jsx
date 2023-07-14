@@ -8,6 +8,8 @@ import Link from 'next/link';
 
 const LernSkils = ()=>{
 
+  let skills = ["Idiomas" , "tecnología", "Artes", "Cocina", "Yoga", "Otros"]
+
     const currentUser = useSelector(state => state.user);
     console.log(currentUser)
 
@@ -27,12 +29,9 @@ const LernSkils = ()=>{
           skills.map((button, key)=>{
             return (
             <div key={key} className='col-span-1'>
-              <Button
-              onClick={()=>{console.log(button)}}
-              custo="w-full rounded border-indigo-500"
-              >
-              {button}
-              </Button>
+              <button className='w-full py-3 rounded bg-white border-purplePrimary border-2 text-purpleSecondary' type='button' onClick={()=>console.log(button)}>
+                {button}
+              </button>
             </div>
             )
           })

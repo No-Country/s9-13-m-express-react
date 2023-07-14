@@ -11,6 +11,7 @@ const TeachSkills =()=>{
 
     const currentUser = useSelector(state => state.user);
     console.log(currentUser)
+    let skills = ["Idiomas" , "tecnología", "Artes", "Cocina", "Yoga", "Otros"];
 
     return(
         <div className='h-full'>
@@ -25,19 +26,16 @@ const TeachSkills =()=>{
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
           {
-            skills.map((button, key)=>{
-              return (
-              <div key={key} className='col-span-1'>
-                <Button
-                onClick={()=>{console.log(button)}}
-                custo="w-full rounded border-indigo-500"
-                >
+          skills.map((button, key)=>{
+            return (
+            <div key={key} className='col-span-1'>
+              <button className='w-full py-3 rounded bg-white border-purplePrimary border-2 text-purpleSecondary' type='button' onClick={()=>console.log(button)}>
                 {button}
-                </Button>
-              </div>
-              )
-            })
-          }
+              </button>
+            </div>
+            )
+          })
+        }
         </div>
           <div className='flex justify-center items-center'>
           <span  className='cursor-pointer'>
@@ -45,7 +43,7 @@ const TeachSkills =()=>{
                   <TbPointFilled/>
               </Link>
           </span>
-  
+
           <span className='cursor-pointer'>
               <Link href={"/habilidad/aprender"} >
                   <TbPointFilled/>
@@ -64,3 +62,5 @@ const TeachSkills =()=>{
 
     
   }
+
+export default TeachSkills;
