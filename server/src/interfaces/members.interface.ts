@@ -4,7 +4,7 @@ export interface IMember extends Document {
   name: string;
   last_name: string;
   country: string;
-  preferences: { descripcion: string }[];
+  preferences: { description: string }[];
   avatar: string;
   skills: {
     title: string;

@@ -40,7 +40,7 @@ const validationMember = [
     .isLength({ min: 4, max: 25 })
     .withMessage('Country must have more than 4 characters and less than 25 characters'),
 
-  body('preferences.*.descripcion')
+  body('preferences.*.description')
     .trim()
     .notEmpty()
     .withMessage('Description is required')

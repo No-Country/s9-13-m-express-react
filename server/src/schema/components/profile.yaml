@@ -19,7 +19,7 @@ components:
               items:
                 type: object
                 properties:
-                  descripcion:
+                  description:
                     type: string
                   _id:
                     type: string
@@ -59,7 +59,7 @@ components:
           items:
             type: object
             properties:
-              descripcion:
+              description:
                 type: string
         avatar:
           type: string
@@ -98,7 +98,7 @@ components:
           items:
             type: object
             properties:
-              descripcion:
+              description:
                 type: string
         avatar:
           type: string

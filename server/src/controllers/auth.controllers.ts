@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { fetchLogin, fetchSignUp } from '../services/users.services';
+import { fetchLogin, fetchSignUp } from '../services/auth.services';
 
 const loginUser = async (req: Request, resp: Response) => {
   try {
