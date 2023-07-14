@@ -1,9 +1,17 @@
-'use client';
+"use client"
 
-import TextField from '@/components/TextField';
 
-export default function Habilidades() {
-  return (
+import Button from '@/components/Button';
+import { useSelector } from 'react-redux';
+import { TbPointFilled } from 'react-icons/tb';
+
+
+const OthersSkills = ()=>{
+
+    const currentUser = useSelector(state => state.user);
+    console.log(currentUser)
+
+    return(
     <div className='h-full'>
       <h1 className='text-4xl text-center mt-5'>
         ¡Nombre, bienvenida a SkillSwap!
@@ -47,6 +55,30 @@ export default function Habilidades() {
           </form>
         </div>
       </div>
+      
+        <div className='flex justify-center items-center'>
+        <span  className='cursor-pointer'>
+            <Link href={"/habilidad/ensenar"} >
+                <TbPointFilled/>
+            </Link>
+        </span>
+
+        <span className='cursor-pointer'>
+            <Link href={"/habilidad/aprender"} >
+                <TbPointFilled/>
+            </Link>
+        </span>
+
+        <span  className='cursor-pointer'>
+            <Link href={"/habilidad/otros"} >
+                <TbPointFilled/>
+            </Link>
+        </span>
+        
+        </div>
+
     </div>
-  );
+    )
 }
+
+export default OthersSkills;
