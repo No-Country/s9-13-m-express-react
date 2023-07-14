@@ -11,7 +11,8 @@ export default function AppLayout({ children }) {
     currentUser.status === 'not-authenticated' ||
     currentUser.status === 'checking'
   ) {
-    router.push('/login');
+
+    router.push("/login");
   }
 
   return <>{children}</>;
