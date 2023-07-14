@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { ISchedule } from '../interfaces/schedules.interface';
+import { Days } from '../interfaces/schedules.interface';
 
 const scheduleSchema = new Schema<ISchedule>({
   day_of_week: {

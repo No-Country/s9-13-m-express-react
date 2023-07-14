@@ -41,31 +41,6 @@ const updateUserToken = async (id: string, token: string) => {
   }
 };
 
-const findUserByToken = async (token: string) => {
-  try {
-    return User.findOne({ token });
-  } catch (error) {
-    throw new Error(`User not found! - ${error}`);
-  }
-}
-
-const updateUserPassword = async (id: string, newPassword: string) => {
-  try {
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    return User.findByIdAndUpdate(id, { password: hashedPassword })
-  } catch (error) {
-    throw new Error(`Something went wrong when tried to update user password! - ${error}`);
-  }
-}
-
-const updateUserToken = async (id: string, token: string) => {
-  try {
-    return User.findByIdAndUpdate(id, { token })
-  } catch (error) {
-    throw new Error(`Something went wrong when tried to update user token! - ${error}`);
-  }
-}
-
 const fetchLogin = async (password: string, email: string) => {
   const user = await findUserByEmail(email);
   if (!user) throw new Error('Conflict: User not found!');
@@ -73,13 +48,7 @@ const fetchLogin = async (password: string, email: string) => {
   const comparedPassword = await comparePassword(user.password, password);
   if (!comparedPassword) throw new Error('Conflict: invalid email or password');
 
-<<<<<<< HEAD
-  const expiresIn = process.env.JWT_EXPIRES_IN;
-
-  const expiresIn = process.env.JWT_EXPIRES_IN;
-=======
   const expiresIn = config.JWT.JWT_EXPIRES_IN;
->>>>>>> b7424209878d209b631dea44e59509e381d49c28
   const payload: TokenPayload = {
     userId: user.id,
     role: user.role,

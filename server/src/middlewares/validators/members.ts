@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { Result, body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
+import { errorHandler } from '../../utils/errorHandler';
 
 const validationMember = [
   body()
@@ -99,14 +99,7 @@ const validationMember = [
       return allowedLevels.includes(vale);
     })
     .withMessage(`Level must be one of the following values: basico, intermedio, avanzado`),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  },
+  errorHandler,
 ];
 
 const validationCreateMember = [
@@ -117,14 +110,7 @@ const validationCreateMember = [
     .bail()
     .isString()
     .withMessage('User type is not valid'),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  },
+  errorHandler,
 ];
 
 export { validationMember, validationCreateMember };
