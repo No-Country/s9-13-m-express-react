@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { Result, body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
+import { errorHandler } from '../../utils/errorHandler';
 
 const validatorLogin = [
   body()
@@ -27,14 +27,7 @@ const validatorLogin = [
     .withMessage('Password type is not valid')
     .isLength({ min: 8, max: 100 })
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  },
+  errorHandler,
 ];
 
 const validatorSignUp = [
@@ -72,14 +65,7 @@ const validatorSignUp = [
     .withMessage('Password type is not valid')
     .isLength({ min: 8, max: 100 })
     .withMessage('Password must have more than 8 characters and less than 100 characters  '),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  },
+  errorHandler
 ];
 
 export { validatorLogin, validatorSignUp };

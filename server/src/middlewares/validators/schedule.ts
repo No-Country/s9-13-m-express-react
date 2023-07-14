@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { Result, body, validationResult } from 'express-validator';
+import { body } from 'express-validator';
+import { errorHandler } from '../../utils/errorHandler';
 
 const validatorSchedule = [
   body()
@@ -14,7 +14,9 @@ const validatorSchedule = [
     .trim()
     .notEmpty()
     .isString()
-    .withMessage('day_of_week required'),
+    .withMessage('day_of_week required')
+    .isIn(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
+    .withMessage('day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'),
   body('start_time')
     .trim()
     .notEmpty()
@@ -33,19 +35,8 @@ const validatorSchedule = [
     .withMessage('User id required')
     .isString()
     .withMessage('User id  type is not valid'),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  }
-
-
+  errorHandler,
 ];
-
-
 
 const validatorUpdateSchedule = [
   body()
@@ -61,7 +52,9 @@ const validatorUpdateSchedule = [
     .optional()
     .notEmpty()
     .isString()
-    .withMessage('day_of_week required'),
+    .withMessage('day_of_week required')
+    .isIn(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
+    .withMessage('day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'),
   body('start_time')
     .trim()
     .optional()
@@ -76,16 +69,7 @@ const validatorUpdateSchedule = [
     .withMessage('end_time required')
     .isString()
     .withMessage('end_time  type is not valid'),
-
-  (req: Request, res: Response, next: NextFunction) => {
-    const error: Result = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ msg: error.array() });
-    }
-    next();
-  }
-
-
+  errorHandler,
 ];
 
 export { validatorSchedule, validatorUpdateSchedule};
