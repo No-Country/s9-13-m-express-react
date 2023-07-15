@@ -1,14 +1,14 @@
 'use client';
 
-import { onLogin } from '@/store/slices/authSlice';
+// import { onLogin } from '@/store/slices/authSlice';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function AppLayout({ children }) {
   const currentUser = useSelector((state) => state.user);
   const router = useRouter();
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   if (
     currentUser.status === 'not-authenticated' ||
