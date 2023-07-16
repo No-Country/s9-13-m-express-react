@@ -7,13 +7,17 @@ export default function AppLayout({ children }) {
   const currentUser = useSelector((state) => state.user);
   const router = useRouter();
 
-  if (
-    currentUser.status === 'not-authenticated' ||
-    currentUser.status === 'checking'
-  ) {
+  if(currentUser.statusRegister === "registered"){
 
-    router.push("/login")
+    router.push("/habilidad/ensenar")
+  } else {
+    if (
+      currentUser.status === 'not-authenticated' ||
+      currentUser.status === 'checking'
+    ) {
+      router.push("/login")
+    }
   }
-
+  
   return <>{children}</>;
 }

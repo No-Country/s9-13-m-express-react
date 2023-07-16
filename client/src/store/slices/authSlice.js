@@ -7,6 +7,7 @@ export const authSlice = createSlice({
     initialState: {
         status: "not-authenticated", // 'authenticated, checking'
         user: {},
+        userRegistered:{},
         token: null,
         errorMessage: undefined,
         statusRegister: "not-registered", // 'registered' , 'checking'
@@ -47,6 +48,7 @@ export const authSlice = createSlice({
             console.log(payload, "payload de register")
             state.statusRegister = "registered"
             state.registerMessage = undefined
+            state.userRegistered = payload;
         },
         onRegisterError: (state, {error}) => {
             console.log(error, "error")

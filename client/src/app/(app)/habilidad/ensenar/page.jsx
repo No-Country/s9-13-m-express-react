@@ -1,10 +1,10 @@
 "use client"
 
-
-import Button from '@/components/Button';
 import { useSelector } from 'react-redux';
 import { TbPointFilled } from 'react-icons/tb';
 import Link from 'next/link';
+import ListButtonSkills from '@/components/Skills/ListButtonSkills';
+
 
 
 const TeachSkills =()=>{
@@ -12,11 +12,12 @@ const TeachSkills =()=>{
     const currentUser = useSelector(state => state.user);
     console.log(currentUser)
     let skills = ["Idiomas" , "tecnología", "Artes", "Cocina", "Yoga", "Otros"];
+    let path = "ensenar";
 
     return(
         <div className='h-full'>
         <h1 className='text-4xl text-center mt-5'>
-          ¡{currentUser.user.username}, bienvenid@ a SkillSwap
+          ¡{currentUser.userRegistered.username}, bienvenid@ a SkillSwap
         </h1>
         <p>
           Antes de continuar cuentanos...
@@ -25,14 +26,12 @@ const TeachSkills =()=>{
           ¿Cual es tu area de enseñar?
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4">
-          {
+        {
           skills.map((button, key)=>{
-            return (
-            <div key={key} className='col-span-1'>
-              <button className='w-full py-3 rounded bg-white border-purplePrimary border-2 text-purpleSecondary' type='button' onClick={()=>console.log(button)}>
-                {button}
-              </button>
-            </div>
+            return(
+              <div>
+                <ListButtonSkills option={button} key={key} pathname={path} />
+              </div>
             )
           })
         }
