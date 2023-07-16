@@ -18,6 +18,8 @@ export default function AppLayout({ children }) {
       router.push("/login")
     }
   }
+
   
+
   return <>{children}</>;
 }
