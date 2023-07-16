@@ -24,7 +24,7 @@ export default function AppLayout({ children }) {
       //dispatch(onLogin(response));
     }
     getUserData();
-  });
+  }, []);
 
   return <>{children}</>;
 }
