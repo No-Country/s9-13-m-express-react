@@ -1,6 +1,7 @@
 export const config = {
   PORT: process.env.PORT,
-  HOST_DEPLOY: process.env.HOST_DEPLOY,
+  BACKEND_URL_BASE: process.env.BACKEND_URL_BASE,
+  FRONTEND_URL_BASE: process.env.FRONTEND_URL_BASE,
   DB: {
     BD_URI_PROD: process.env.BD_URI_PROD,
     DB_URI_DEV: process.env.DB_URI_DEV,

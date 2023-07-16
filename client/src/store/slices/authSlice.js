@@ -1,6 +1,6 @@
-"use client"
+'use client';
 
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -60,10 +60,17 @@ export const authSlice = createSlice({
             state.registerMessage = undefined
         }
     }
+
 });
 
-
 export const {
-    onChecking, onLogin, onLogout, onLoginError, onCheckingRegister, onRegister, onRegisterError, onDeleteRegister
+  onChecking,
+  onLogin,
+  onLogout,
+  onLoginError,
+  onCheckingRegister,
+  onRegister,
+  onRegisterError,
+  onDeleteRegister,
 } = authSlice.actions;
 export default authSlice.reducer;
