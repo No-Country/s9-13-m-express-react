@@ -1,4 +1,5 @@
 "use client"
+import { onDeleteRegister } from "@/store/slices/authSlice";
 import { addToLearn, addToTeach } from "@/store/slices/skillsSlice";
 import Link from "next/link"
 import { useRouter } from "next/navigation";
@@ -14,6 +15,8 @@ const ListButtonSkills = ({option, key, pathname}) => {
     const addSkill = (option, pathname) =>{
         if(pathname === "aprender"){
             dispatch(addToLearn(option))
+            //aqui deberia ir el consumo del endpoint
+            dispatch(onDeleteRegister());
             router.push("/login");
         }else if(pathname === "ensenar"){
             dispatch(addToTeach(option))

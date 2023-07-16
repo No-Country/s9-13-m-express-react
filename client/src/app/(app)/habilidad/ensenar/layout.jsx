@@ -1,7 +1,7 @@
 export const metadata = {
-    title: 'Aprender Habilidades',
+    title: 'Enseñar Habilidades',
   };
-  
+
   export default function layoutEnseñar({ children }) {
       return (
         <>
