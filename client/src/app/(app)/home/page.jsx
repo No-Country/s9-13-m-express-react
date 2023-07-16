@@ -1,12 +1,10 @@
 'use client';
 
 import SkillRibbon from '@/components/HomePage/SkillRibbon';
-// import SkillCard from '@/components/Skills/SkillCard';
-import Link from 'next/link';
-import { FaGlasses, FaUser, FaChalkboardTeacher } from 'react-icons/fa';
 import { skillsData } from '@/components/HomePage/SkillRibbonData';
 import { userProfile } from '@/components/HomePage/UserProfileData';
 import ProfileCard from '@/components/HomePage/ProfileCard';
+import SideBar from '@/components/HomePage/SideBar';
 // import { useSelector } from 'react-redux';
 
 export default function HomePage() {
@@ -15,32 +13,7 @@ export default function HomePage() {
   return (
     <main className='min-h-screen flex flex-row  bg-white font-semibold'>
       <div className='bg-purpleThirty mx-auto flex-shrink-0 w-64 pt-40 shadow-xl'>
-        <div className='flex flex-col items-start justify-center ml-4'>
-          <div className='flex flex-row justify-start mb-6'>
-            <Link href={'/#'}>
-              <div className='flex items-center justify-start gap-4'>
-                <FaUser />
-                <p className='text-sm'>Mi perfil</p>
-              </div>
-            </Link>
-          </div>
-          <div className='flex flex-row justify-center mb-6'>
-            <Link href={'/#'}>
-              <div className='flex items-center gap-4'>
-                <FaGlasses />
-                <p className='text-sm'>Solicitudes de aprendizaje</p>
-              </div>
-            </Link>
-          </div>
-          <div className='flex flex-row justify-center mb-6'>
-            <Link href={'/#'}>
-              <div className='flex items-center gap-4'>
-                <FaChalkboardTeacher />
-                <p className='text-sm'>Solicitudes de enseñanza</p>
-              </div>
-            </Link>
-          </div>
-        </div>
+        <SideBar show={'home'} />
       </div>
 
       <div className='mx-auto flex-grow pt-40 pl-40'>
