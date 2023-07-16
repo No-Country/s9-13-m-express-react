@@ -1,19 +1,15 @@
-"use client"
+'use client';
 
-
-import Button from '@/components/Button';
 import { useSelector } from 'react-redux';
 import { TbPointFilled } from 'react-icons/tb';
 import TextField from '@/components/TextField';
 import Link from 'next/link';
 
+const OthersSkills = () => {
+  const currentUser = useSelector((state) => state.user);
+  console.log(currentUser);
 
-const OthersSkills = ()=>{
-
-    const currentUser = useSelector(state => state.user);
-    console.log(currentUser)
-
-    return(
+  return (
     <div className='h-full'>
       <h1 className='text-4xl text-center mt-5'>
         ¡Nombre, bienvenida a SkillSwap!
@@ -57,30 +53,28 @@ const OthersSkills = ()=>{
           </form>
         </div>
       </div>
-      
-        <div className='flex justify-center items-center'>
-        <span  className='cursor-pointer'>
-            <Link href={"/habilidad/ensenar"} >
-                <TbPointFilled/>
-            </Link>
+
+      <div className='flex justify-center items-center'>
+        <span className='cursor-pointer'>
+          <Link href={'/habilidad/ensenar'}>
+            <TbPointFilled />
+          </Link>
         </span>
 
         <span className='cursor-pointer'>
-            <Link href={"/habilidad/aprender"} >
-                <TbPointFilled/>
-            </Link>
+          <Link href={'/habilidad/aprender'}>
+            <TbPointFilled />
+          </Link>
         </span>
 
-        <span  className='cursor-pointer'>
-            <Link href={"/habilidad/otros"} >
-                <TbPointFilled/>
-            </Link>
+        <span className='cursor-pointer'>
+          <Link href={'/habilidad/otros'}>
+            <TbPointFilled />
+          </Link>
         </span>
-        
-        </div>
-
+      </div>
     </div>
-    )
-}
+  );
+};
 
 export default OthersSkills;
