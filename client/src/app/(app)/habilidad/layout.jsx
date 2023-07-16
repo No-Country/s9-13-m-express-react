@@ -1,6 +1,7 @@
 export const metadata = {
   title: 'Habilidades',
 };
+
 export default function layoutHabilidades({ children }) {
   return (
     <div className='h-screen flex justify-center items-center bg-purpleSecondary p-2'>
