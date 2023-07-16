@@ -69,7 +69,7 @@ export default function RegisterFormComponent() {
         });
         dispatch(onRegister(response.data));
         resetForm();
-        router.push('/habilidad');
+        router.push('/habilidad/ensenar');
       } else {
         console.log(response);
         toast.error(response.message, {

@@ -4,10 +4,12 @@ import storage from 'redux-persist/lib/storage'
 import persistStore from 'redux-persist/es/persistStore';
 //slices to use
 import authSlice from './slices/authSlice';
+import skillsSlice from "./slices/skillsSlice"
 //aqui se añade los slices que se necesiten en el proyecto.
 export const rootReducer = combineReducers({
   //reducer
   user: authSlice,
+  skills:skillsSlice,
   
 });
 
