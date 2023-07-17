@@ -22,7 +22,7 @@ export default function HomePage() {
             <h3 className='text-lg mb-6'>
               Ya que buscas aprender te sugerimos a:
             </h3>
-            <ProfileCard profileData={userProfile} />
+            <ProfileCard profileData={userProfile} isSingle={true} />
           </div>
           <div className='w-full mt-20'>
             <h3 className='text-lg mb-6'>Explora por area:</h3>

@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { React, useState } from 'react';
 import { FaChalkboardTeacher, FaGlasses, FaUser } from 'react-icons/fa';
@@ -6,15 +7,15 @@ export default function SideBar({ show }) {
   const [nivel, setNivel] = useState('');
   const [valoracion, setValoracion] = useState('');
 
-  const handleNivelChange= (e)=> {
-    setNivel(e.target.value)
-    console.log(nivel)
-  }
+  const handleNivelChange = (e) => {
+    setNivel(e.target.value);
+    console.log(nivel);
+  };
 
-  const handleValoracionChange= (e)=> {
-    setValoracion(e.target.value)
-    console.log(valoracion)
-  }
+  const handleValoracionChange = (e) => {
+    setValoracion(e.target.value);
+    console.log(valoracion);
+  };
 
   if (show === 'home') {
     return (
@@ -70,6 +71,12 @@ export default function SideBar({ show }) {
             <option value='baja'>Valoración más baja</option>
           </select>
         </div>
+        <button
+          className='underline opacity-50 hover:opacity-100 mt-10'
+          onClick={() => console.log('limpiando...')}
+        >
+          Limpiar filtros
+        </button>
       </div>
     </div>
   );

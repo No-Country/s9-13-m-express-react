@@ -1,9 +1,25 @@
 export const userProfile =
-{
-    name: 'Sheyla',
-    lastName: 'Donovan',
-    skill: 'Java Script',
-    level: 'Advanced',
-    img: 'https://cdn.pixabay.com/photo/2016/11/29/13/14/attractive-1869761_640.jpg'
-}
+    [
+        {
+            name: 'Sheyla',
+            lastName: 'Donovan',
+            skill: 'Java Script',
+            level: 'Advanced',
+            img: '/images/users/user01.png'
+        },
+        {
+            name: 'Jhon',
+            lastName: 'Doe',
+            skill: 'Java Script',
+            level: 'Advanced',
+            img: '/images/users/user02.png'
+        },
+        {
+            name: 'Sheyla',
+            lastName: 'Donovan',
+            skill: 'Java Script',
+            level: 'Advanced',
+            img: '/images/users/user04.png'
+        }
+    ]
 
