@@ -13,6 +13,7 @@ import weave from '../../public/images/weave.png';
 import yoga from '../../public/images/yoga.png';
 import Button from '@/components/Button';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 export default function LandingPage() {
   const carouselLanding = [
@@ -38,12 +39,10 @@ export default function LandingPage() {
 
   return (
     <>
+      <Navbar />
       <main className='min-h-screen bg-customPurple flex flex-col justify-around'>
         <div className='-z-50 absolute w-full h-screen'>
           <Image src={img} alt='landing' className='object-cover' />
-        </div>
-        <div className='bg-yellowTitle ml-8 px-4 py-4 w-52 text-center'>
-          LOGO
         </div>
         <div className='flex flex-col pl-8'>
           <h1 className={`${koulen.className} text-yellowTitle text-9xl`}>
@@ -80,11 +79,8 @@ export default function LandingPage() {
             customClassNames={
               'text-purplePrimary bg-yellowPrimary rounded-full font-semibold'
             }
-          > 
-            <Link href={"/login"}>
-              Comenzar
-            </Link>
-            
+          >
+            <Link href={'/login'}>Comenzar</Link>
           </Button>
         </div>
       </section>
