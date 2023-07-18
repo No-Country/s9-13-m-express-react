@@ -29,7 +29,7 @@ const updateUserPassword = async (id: string, newPassword: string) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     return User.findByIdAndUpdate(id, { password: hashedPassword });
   } catch (error) {
-    throw new Error(`Something went wrong when tried to update user password! - ${error}`);
+    throw new Error(`Something went wrong while tried to update user password! - ${error}`);
   }
 };
 

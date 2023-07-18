@@ -8,7 +8,7 @@ const validationMember = [
       const receivedFields = Object.keys(req.body);
       return receivedFields.every((field) => allowedFields.includes(field));
     })
-    .withMessage('Invalid Fields'),
+    .withMessage('Missing Fields: {"name", "last_name", "country", "preferences", "avatar", "skills", "user"}'),
 
   body('name')
     .trim()
