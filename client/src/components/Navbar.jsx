@@ -1,28 +1,10 @@
 'use client';
-import { React, useEffect, useRef, useState } from 'react';
+import { React, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-
-function useOutside(ref, fn) {
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        fn();
-      }
-    }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [ref, fn]);
-}
+import useClickOutside from '@/hooks/useClickOutside';
 
 export default function Navbar() {
   const currentUser = useSelector((state) => state.user);
@@ -37,7 +19,7 @@ export default function Navbar() {
     setDropdownIsOpen(!dropdownIsOpen);
   };
 
-  useOutside(dropdownRef, handleDropDownClick);
+  useClickOutside(dropdownRef, handleDropDownClick);
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -83,8 +65,7 @@ export default function Navbar() {
           <>
             <div className='hidden md:flex items-center justify-between space-x-4 '>
               <Link href={'#'}>
-                {' '}
-                <FaBell className='text-yellowPrimary' />{' '}
+                <FaBell className='text-yellowPrimary' />
               </Link>
               <button onClick={handleDropDownClick}>
                 <FaUser className='text-yellowPrimary' />
@@ -93,7 +74,7 @@ export default function Navbar() {
                 <div
                   ref={dropdownRef}
                   id='dropdown'
-                  class='z-10 fixed right-36 top-14 bg-purple-50 divide-y text-black divide-gray-700 rounded-lg shadow w-44'
+                  class='z-10 fixed right-0 md:right-36 top-14 bg-purple-50 divide-y text-black divide-gray-700 rounded-lg shadow w-44'
                 >
                   <div class='px-4 py-3 text-sm'>
                     <p class='truncate'>{user?.first_name}</p>
@@ -193,13 +174,15 @@ export default function Navbar() {
             </button>
           </div>
           <div className='px-2 pt-2 pb-3 space-y-2 sm:px-3 flex flex-col items-center gap-2'>
-            <Link href={'/login'} className='text-purplePrimary'>
-              {' '}
-              <FaBell className='text-yellowPrimary' />{' '}
+            <Link href={'#'} className='text-purplePrimary'>
+              <FaBell className='text-yellowPrimary' />
             </Link>
-            <Link href={'/login'} className='text-yellowPrimary'>
+            <button
+              onClick={handleDropDownClick}
+              className='text-yellowPrimary'
+            >
               <FaUser />
-            </Link>
+            </button>
           </div>
         </div>
       )}
