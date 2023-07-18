@@ -145,7 +145,7 @@ export default function LoginFormComponent() {
 
         <div>
           <p className='my-2'>
-          <Link
+            <Link
               className='text-purple-950 underline mx-2'
               href='/restablecer'
             >
@@ -155,7 +155,7 @@ export default function LoginFormComponent() {
           <p className='my-2'>
             <span>Aun no tienes Cuenta?</span>
             <Link
-              className='text-purple-950  text-xs  underline mx-2'
+              className='text-purpleSecondary  text-xs  underline mx-2'
               href='/register'
             >
               ¡Registrate!
