@@ -2,41 +2,11 @@ import React from 'react';
 import { koulen, gothicSc, gothic } from './styles/fonts';
 import Image from 'next/image';
 import img from '../../public/images/landing.png';
-import Carousel from '@/components/Carousel';
-import gardening from '../../public/images/gardening.png';
-import kitchen from '../../public/images/kitchen.png';
-import languages from '../../public/images/languages.png';
-import music from '../../public/images/music.png';
-import arts from '../../public/images/plastic-arts.png';
-import technology from '../../public/images/technology.png';
-import weave from '../../public/images/weave.png';
-import yoga from '../../public/images/yoga.png';
 import Button from '@/components/Button';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 
 export default function LandingPage() {
-  const carouselLanding = [
-    languages,
-    technology,
-    kitchen,
-    yoga,
-    music,
-    arts,
-    gardening,
-    weave,
-  ];
-  const title = [
-    'IDIOMAS',
-    'TECNOLOGIA',
-    'COCINA',
-    'YOGA',
-    'MÚSICA',
-    'ARTES PLASTICAS',
-    'JARDINERIA',
-    'Y MÁS...',
-  ];
-
   return (
     <>
       <Navbar />
@@ -63,24 +33,130 @@ export default function LandingPage() {
           conocimientos, fomentando <br /> así el beneficio mutuo.
         </p>
       </main>
-      <section className='flex flex-col justify-around space-y-6 bg-purpleThirty h-full'>
+      <section className='flex flex-col justify-around bg-purpleThirty h-full'>
         <br />
         <h3
           className={`${koulen.className} text-purplePrimary text-center text-4xl p-4`}
         >
           ¡Intercambia conocimientos!
         </h3>
-        <div className='flex justify-center'>
-          <Carousel images={carouselLanding} title={title} />
+        <div className='flex justify-center flex-wrap'>
+          <div className='relative h-96'>
+            <h3 className='-left-8 top-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Idioma
+            </h3>
+            <Image
+              src='/images/learn.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-left-8 top-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Tecnología
+            </h3>
+            <Image
+              src='/images/tech.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-left-8 top-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Cocina
+            </h3>
+            <Image
+              src='/images/eat.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-left-8 top-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Yoga
+            </h3>
+            <Image
+              src='/images/yoga.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+        </div>
+
+        <div className='flex justify-center flex-wrap'>
+          <div className='relative h-96'>
+            <h3 className='-right-8 z-10 bottom-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Música
+            </h3>
+            <Image
+              src='/images/music.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-right-8 z-10 bottom-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Artes
+            </h3>
+            <Image
+              src='/images/pain.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-right-8 z-10 bottom-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Jardinería
+            </h3>
+            <Image
+              src='/images/garden.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
+
+          <div className='relative h-96'>
+            <h3 className='-right-8 z-10 bottom-5 absolute py-3 px-20 w-full text-3xl text-white bg-purplePrimary/75'>
+              Y más...
+            </h3>
+            <Image
+              src='/images/line.png'
+              alt='skills'
+              className='h-full'
+              height={500}
+              width={300}
+            />
+          </div>
         </div>
 
         <div className='self-end mr-[5%] p-4'>
           <Button
             customClassNames={
-              'text-purplePrimary bg-yellowPrimary rounded-full font-semibold'
+              'text-purplePrimary bg-yellowPrimary rounded-full px-16 font-semibold'
             }
           >
-            <Link href={'/login'}>Comenzar</Link>
+            <Link className='text-purplePrimary font-semibold' href={'/signup'}>
+              Comenzar
+            </Link>
           </Button>
         </div>
       </section>
