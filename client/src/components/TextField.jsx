@@ -16,7 +16,7 @@ export default function TextField({
 }) {
   const className = classNames(
     customClassNames,
-    'bg-white py-2.5 border-b-2 !border-purpleSecondary w-full placeholder-zinc-700 text-base px-4',
+    'bg-white py-2.5 border-b-2 rounded-t-md !border-purpleSecondary w-full placeholder-zinc-700 text-base px-4',
     {
       'bg-gray-100': error,
       'border-red-500': error,
