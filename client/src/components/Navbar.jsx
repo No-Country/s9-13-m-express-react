@@ -1,15 +1,43 @@
 'use client';
-import { React, useState } from 'react';
+import { React, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 
+function useOutside(ref, fn) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        fn();
+      }
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [ref, fn]);
+}
+
 export default function Navbar() {
   const currentUser = useSelector((state) => state.user);
+  const user = currentUser.user;
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+
+  const handleDropDownClick = () => {
+    setDropdownIsOpen(!dropdownIsOpen);
+  };
+
+  useOutside(dropdownRef, handleDropDownClick);
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -54,13 +82,36 @@ export default function Navbar() {
         {currentUser.status === 'authenticated' ? (
           <>
             <div className='hidden md:flex items-center justify-between space-x-4 '>
-              <Link href={'/home'}>
+              <Link href={'#'}>
                 {' '}
                 <FaBell className='text-yellowPrimary' />{' '}
               </Link>
-              <Link href={'/home'}>
+              <button onClick={handleDropDownClick}>
                 <FaUser className='text-yellowPrimary' />
-              </Link>
+              </button>
+              {dropdownIsOpen && (
+                <div
+                  ref={dropdownRef}
+                  id='dropdown'
+                  class='z-10 fixed right-36 top-14 bg-purple-50 divide-y text-black divide-gray-700 rounded-lg shadow w-44'
+                >
+                  <div class='px-4 py-3 text-sm'>
+                    <p class='truncate'>{user?.first_name}</p>
+                    <p title={user?.email} class='font-medium truncate'>
+                      {user?.email}
+                    </p>
+                  </div>
+
+                  <div class='py-1'>
+                    <a
+                      href='/logout'
+                      class='block px-4 py-2 text-sm hover:bg-purple-100'
+                    >
+                      Sign out
+                    </a>
+                  </div>
+                </div>
+              )}
             </div>
             <div className='-mr-2 flex md:hidden'>
               <button
