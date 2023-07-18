@@ -3,6 +3,7 @@ import { React, useState } from 'react';
 import Link from 'next/link';
 import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 
 export default function Navbar() {
   const currentUser = useSelector((state) => state.user);
@@ -20,7 +21,13 @@ export default function Navbar() {
   return (
     <nav className='bg-purpleSecondary shadow sticky top-0 z-10'>
       <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto py-4 px-4'>
-        <div>
+        <div className='flex items-center space-x-4'>
+          <Image
+            src='/images/logo.svg'
+            alt='skill swap logo'
+            width={50}
+            height={50}
+          />
           <Link href={'/'}>
             <span className='text-2xl font-bold text-yellowPrimary hover:font-bold'>
               SKILL SWAP
@@ -99,10 +106,16 @@ export default function Navbar() {
           </>
         ) : (
           <div className='space-x-7'>
-            <Link className='text-white' href={'/login'}>
+            <Link
+              className='bg-yellowPrimary py-3 px-10 rounded-3xl text-black'
+              href={'/login'}
+            >
               Login
             </Link>
-            <Link className='text-white' href={'/register'}>
+            <Link
+              className='bg-yellowPrimary py-3 px-10 rounded-3xl text-black'
+              href={'/register'}
+            >
               Registro
             </Link>
           </div>
