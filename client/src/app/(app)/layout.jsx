@@ -1,5 +1,7 @@
 'use client';
 
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
@@ -19,7 +21,17 @@ export default function AppLayout({ children }) {
     }
   }
 
-  
 
-  return <>{children}</>;
+
+  return (
+    <>
+      <div className='flex flex-col min-h-screen'>
+        <Navbar />
+        <main className='flex-grow'>
+          <div className='mx-auto'>{children}</div>
+        </main>
+        <Footer />
+      </div>
+    </>
+  );
 }

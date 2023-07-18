@@ -1,9 +1,7 @@
 export const metadata = {
+  title: 'home',
+};
 
-    title:"home",
-}
-
-export default function layoutPage({children}){
-
-    return <>{children}</>
+export default function layoutHome({ children }) {
+  return <>{children}</>;
 }
