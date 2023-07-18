@@ -11,7 +11,13 @@ export default function ProfileCard({ profileData, isSingle }) {
       '
         >
           <div className='flex-shrink-0 '>
-            <Image src={ profileData.img } alt='fotoPerfil' width={80} height={80} className='rounded-1/2' />
+            <Image
+              src={profileData[0].img}
+              alt='fotoPerfil'
+              width={80}
+              height={80}
+              className='rounded-full'
+            />
           </div>
           <div className='flex-grow'>
             <div className='flex flex-col gap-4'>
@@ -51,7 +57,13 @@ export default function ProfileCard({ profileData, isSingle }) {
     <div className='bg-purpleThirty w-fit rounded-xl'>
       <div className='flex flex-row px-8 py-6 items-start justify-center gap-10'>
         <div className='flex-shrink-0 w-fit'>
-          <Image src={ profileData.img } alt='fotoPerfil' width={80} height={60} className='rounded-full object-fill' />
+          <Image
+            src={profileData.img}
+            alt='fotoPerfil'
+            width={80}
+            height={60}
+            className='rounded-full object-fill'
+          />
         </div>
         <div className='flex-grow'>
           <div className='flex flex-col gap-4'>
