@@ -23,8 +23,8 @@ const memberSchema = new Schema<IMember>({
     },
   ],
   avatar: {
-    type: String,
-    required: true,
+    public_id: String,
+    secure_url: String
   },
   skills: [
     {

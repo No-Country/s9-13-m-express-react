@@ -69,7 +69,6 @@ const fetchLogin = async (password: string, email: string) => {
 const fetchSignUp = async (username: string, email: string, password: string) => {
   try {
     const user = await findUserByEmail(email);
-    console.log(user);
 
     if (user) {
       throw new Error('Conflict: Email already exists!');
@@ -80,7 +79,7 @@ const fetchSignUp = async (username: string, email: string, password: string) =>
     const response = {
       id: data.id,
       username: data.username,
-      email: data.email,
+      email: data.email
     };
     return response;
   } catch (error) {

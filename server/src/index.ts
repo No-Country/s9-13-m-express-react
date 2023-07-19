@@ -12,13 +12,10 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swaggerSpec';
 import { config } from './config/config';
 
-
-
-
 class Server {
   app: Application;
   port: number = Number(process.env.PORT) || 3001;
-  corsOptions = {}
+  corsOptions = {};
 
   constructor() {
     this.app = express();
@@ -29,8 +26,8 @@ class Server {
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'multipart/form-data'],
       credentials: true,
-      preflightContinue: true
-  };
+      preflightContinue: true,
+    };
   }
 
   config(): void {
