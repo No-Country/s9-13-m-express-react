@@ -70,29 +70,31 @@ export default function Navbar() {
               <button onClick={handleDropDownClick}>
                 <FaUser className='text-yellowPrimary' />
               </button>
-              {dropdownIsOpen && (
-                <div
-                  ref={dropdownRef}
-                  id='dropdown'
-                  class='z-10 fixed right-0 md:right-36 top-14 bg-purple-50 divide-y text-black divide-gray-700 rounded-lg shadow w-44'
-                >
-                  <div class='px-4 py-3 text-sm'>
-                    <p class='truncate'>{user?.first_name}</p>
-                    <p title={user?.email} class='font-medium truncate'>
-                      {user?.email}
-                    </p>
-                  </div>
+              <div className='absolute'>
+                {dropdownIsOpen && (
+                  <div
+                    ref={dropdownRef}
+                    id='dropdown'
+                    class='z-10 top-16 -left-36 relative bg-purple-50 divide-y text-black divide-gray-700 rounded-lg shadow w-44'
+                  >
+                    <div class='px-4 py-3 text-sm'>
+                      <p class='truncate'>{user?.first_name}</p>
+                      <p title={user?.email} class='font-medium truncate'>
+                        {user?.email}
+                      </p>
+                    </div>
 
-                  <div class='py-1'>
-                    <a
-                      href='/logout'
-                      class='block px-4 py-2 text-sm hover:bg-purple-100'
-                    >
-                      Sign out
-                    </a>
+                    <div class='py-1'>
+                      <a
+                        href='/logout'
+                        class='block px-4 py-2 text-sm hover:bg-purple-100'
+                      >
+                        Cerrar sesión
+                      </a>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
             <div className='-mr-2 flex md:hidden'>
               <button
