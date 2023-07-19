@@ -5,6 +5,7 @@ import userRouter from './users.routes'
 import memberRouter from './members.routes';
 import categoriesRouter from './categories.routes';
 import scheduleRouter from './schedule.routes';
+import meetingRouter from './meetings.routes';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/members', memberRouter);
 router.use('/categories', categoriesRouter);
 router.use('/schedule', scheduleRouter);
 router.use('/users', userRouter);
+router.use('/meetings', meetingRouter);
 
 export default router;
