@@ -12,11 +12,11 @@ export default function HomePage() {
 
   return (
     <main className='min-h-screen flex flex-row  bg-white font-semibold'>
-      <div className='bg-purpleThirty mx-auto flex-shrink-0 w-64 pt-40 shadow-xl'>
+      <div className='bg-purpleThirty mx-auto flex-shrink-0 w-64 pt-20 shadow-xl'>
         <SideBar show={'home'} />
       </div>
 
-      <div className='mx-auto flex-grow pt-40 pl-40'>
+      <div className='mx-auto flex-grow pt-20 pl-40'>
         <div className='flex flex-col items-center justify-center gap-16'>
           <div className='w-full'>
             <h3 className='text-lg mb-6'>
