@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <nav className='bg-purpleSecondary shadow sticky top-0 z-10'>
-      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto py-4 px-4'>
+      <div className='max-w-screen-xl flex flex-row flex-wrap items-center justify-between mx-auto pt-4 px-4'>
         <div className='flex items-center space-x-4'>
           <Image
             src='/images/logo.svg'
@@ -44,23 +44,7 @@ export default function Navbar() {
             </span>
           </Link>
         </div>
-        {currentUser.status == 'authenticated' && (
-          <div className={'hidden md:flex items-center'}>
-            <input
-              type='text'
-              value={searchTerm}
-              onChange={handleInputChange}
-              placeholder='¿Que buscas aprender?...'
-              className='py-2 px-4 rounded-l-md focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-gray-100 w-full'
-            />
-            <button
-              onClick={handleSearch}
-              className='bg-white text-black py-2 px-4 rounded-r-md h-10'
-            >
-              <FaSearch />
-            </button>
-          </div>
-        )}
+
         {currentUser.status === 'authenticated' ? (
           <>
             <div className='hidden md:flex items-center justify-between space-x-4 '>
@@ -188,6 +172,40 @@ export default function Navbar() {
           </div>
         </div>
       )}
+      <div className='flex flex-col items-center justify-center bg-purpleSecondary py-6'>
+        {currentUser.status == 'authenticated' && (
+          <div
+            className={
+              'hidden md:flex items-center flex-col w-2/4 xl:max-w-2xl'
+            }
+          >
+            <div className='flex justify-start w-full'>
+              <label
+                htmlFor='search'
+                className='mb-2 text-left text-lg text-yellowPrimary'
+              >
+                ¿Qué buscas aprender?
+              </label>
+            </div>
+            <div className='flex w-full'>
+              <input
+                id='search'
+                type='text'
+                value={searchTerm}
+                onChange={handleInputChange}
+                placeholder='¿Que buscas aprender?...'
+                className='py-2 px-4 rounded-l-full focus:outline-none text-purpleSecondary pl-10 p-2.5 placeholder-gray-100 w-full'
+              />
+              <button
+                onClick={handleSearch}
+                className='bg-white text-black py-2 px-4 rounded-r-full h-10'
+              >
+                <FaSearch />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
