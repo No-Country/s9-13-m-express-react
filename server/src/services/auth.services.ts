@@ -29,7 +29,7 @@ const updateUserPassword = async (id: string, newPassword: string) => {
     const hashedPassword = await bcrypt.hash(newPassword, 10);
     return User.findByIdAndUpdate(id, { password: hashedPassword });
   } catch (error) {
-    throw new Error(`Something went wrong when tried to update user password! - ${error}`);
+    throw new Error(`Something went wrong while tried to update user password! - ${error}`);
   }
 };
 
@@ -69,18 +69,26 @@ const fetchLogin = async (password: string, email: string) => {
 const fetchSignUp = async (username: string, email: string, password: string) => {
   try {
     const user = await findUserByEmail(email);
-    console.log(user);
 
     if (user) {
       throw new Error('Conflict: Email already exists!');
     }
 
+    const expiresIn = config.JWT.JWT_EXPIRES_IN;
     const hash = await bcrypt.hash(password, 10);
     const data = await User.create({ username, email, password: hash });
+
+    const payload: TokenPayload = {
+      userId: data.id,
+      role: data.role,
+    };
+    const token = jwtUtils.generateAccessToken(payload, expiresIn);
+
     const response = {
       id: data.id,
       username: data.username,
       email: data.email,
+      token,
     };
     return response;
   } catch (error) {

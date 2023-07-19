@@ -6,22 +6,20 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux"
 
 
-
 const ListButtonSkills = ({option, key, pathname}) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
-
     const addSkill = (option, pathname) =>{
-        if(pathname === "aprender"){
-            dispatch(addToLearn(option))
-            //aqui deberia ir el consumo del endpoint
-            dispatch(onDeleteRegister());
-            router.push("/login");
-        }else if(pathname === "ensenar"){
-            dispatch(addToTeach(option))
-            router.push("/habilidad/aprender");
-        }
+      if(pathname === "aprender"){
+        dispatch(addToLearn(option))
+        //aqui deberia ir el consumo del endpoint
+        dispatch(onDeleteRegister());
+        router.push("/login");
+      }else if(pathname === "ensenar"){
+        dispatch(addToTeach(option))
+        router.push("/habilidad/aprender");
+      }
     }
     return (
       <>

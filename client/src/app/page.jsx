@@ -154,7 +154,7 @@ export default function LandingPage() {
               'text-purplePrimary bg-yellowPrimary rounded-full px-16 font-semibold'
             }
           >
-            <Link className='text-purplePrimary font-semibold' href={'/signup'}>
+            <Link className='text-purplePrimary font-semibold' href={'/login'}>
               Comenzar
             </Link>
           </Button>
