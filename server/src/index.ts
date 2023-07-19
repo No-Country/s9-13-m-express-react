@@ -2,7 +2,8 @@ import express, { Application } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import 'dotenv/config';
-
+import { Server as webSocketServer } from 'socket.io';
+import http from 'http';
 import colors from '@colors/colors';
 
 import router from './routes';
@@ -42,13 +43,29 @@ class Server {
   }
 
   start(): void {
-    this.app
+    const httpServer = http.createServer(this.app);
+
+    httpServer
       .listen(this.port, () => {
         console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));
       })
       .on('error', (error) => {
         console.log(colors.bgRed.black(`Error Starting Server -- [${error}]`));
       });
+
+    const io = new webSocketServer(httpServer, {
+      cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+      },
+    });
+    io.on('connection', (socket) => {
+      console.log(colors.bgMagenta.black('=> ** Websocket connection **'));
+
+      socket.on('disconnect', () => {
+        console.log(colors.yellow('=> ** Websocket connection finished **'));
+      });
+    });
   }
 }
 
