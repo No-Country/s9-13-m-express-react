@@ -50,16 +50,6 @@ const validationMember = [
     .isLength({ min: 5, max: 50 })
     .withMessage('Description must have more than 5 characters and less than 50 characters'),
 
-  body('avatar')
-    .trim()
-    .notEmpty()
-    .withMessage('Avatar required')
-    .bail()
-    .isString()
-    .withMessage('Avatar type is not valid')
-    .isLength({ min: 8, max: 100 })
-    .withMessage('Avatar must have more than 8 characters and less than 100 characters'),
-
   body('skills.*.title')
     .trim()
     .notEmpty()
