@@ -74,12 +74,21 @@ const fetchSignUp = async (username: string, email: string, password: string) =>
       throw new Error('Conflict: Email already exists!');
     }
 
+    const expiresIn = config.JWT.JWT_EXPIRES_IN;
     const hash = await bcrypt.hash(password, 10);
     const data = await User.create({ username, email, password: hash });
+
+    const payload: TokenPayload = {
+      userId: data.id,
+      role: data.role,
+    };
+    const token = jwtUtils.generateAccessToken(payload, expiresIn);
+
     const response = {
       id: data.id,
       username: data.username,
-      email: data.email
+      email: data.email,
+      token,
     };
     return response;
   } catch (error) {
