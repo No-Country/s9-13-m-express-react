@@ -14,7 +14,7 @@ import Button from '@/components/Button';
 import {
   onCheckingRegister,
   onDeleteRegister,
-  onRegister,
+  onLogin,
   onRegisterError,
 } from '@/store/slices/authSlice';
 
@@ -56,6 +56,9 @@ export default function RegisterFormComponent() {
       });
 
       const response = await request.json();
+
+      console.log(response);
+
       if (request.status == 201) {
         toast.success(`Register Succesfully`, {
           position: 'top-center',
@@ -67,7 +70,7 @@ export default function RegisterFormComponent() {
           progress: undefined,
           theme: 'light',
         });
-        dispatch(onRegister(response.data));
+        dispatch(onLogin(response.data));
         resetForm();
         router.push('/habilidad/ensenar');
       } else {
