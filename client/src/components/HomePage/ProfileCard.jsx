@@ -12,7 +12,7 @@ export default function ProfileCard({ profileData, isSingle }) {
         >
           <div className='flex-shrink-0 '>
             <Image
-              src={profileData[0].img}
+              src={profileData.member?.avatar.secure_url}
               alt='fotoPerfil'
               width={80}
               height={80}
@@ -22,25 +22,25 @@ export default function ProfileCard({ profileData, isSingle }) {
           <div className='flex-grow'>
             <div className='flex flex-col gap-4'>
               <h2 className='text-xl font-bold'>
-                {profileData[0].name} {profileData[0].lastName}
+                {profileData.name} | {profileData.lastName}
               </h2>
               <div className='flex flex-row gap-4'>
                 <h5 className='text-lg'>
                   Area de conocimiento :{' '}
                   <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                    {profileData[0].skill}
+                    {profileData.member?.preferences[0].description || ''}
                   </span>{' '}
                 </h5>
                 <h5 className='text-lg'>
                   Nivel :{' '}
                   <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                    {profileData[0].level}{' '}
+                    {profileData.role[0]}{' '}
                   </span>
                 </h5>
               </div>
               <div className='flex flex-row gap-10 items-center justify-between'>
                 <h5 className='text-lg'>Valoraciones: ⭐⭐⭐⭐⭐</h5>
-                <Link href='/#'>
+                <Link href='#'>
                   <button className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'>
                     Ver perfil
                   </button>
@@ -58,7 +58,7 @@ export default function ProfileCard({ profileData, isSingle }) {
       <div className='flex flex-row px-8 py-6 items-start justify-center gap-10'>
         <div className='flex-shrink-0 w-fit'>
           <Image
-            src={profileData.img}
+            src={profileData.member?.avatar.secure_url}
             alt='fotoPerfil'
             width={80}
             height={60}
@@ -68,25 +68,25 @@ export default function ProfileCard({ profileData, isSingle }) {
         <div className='flex-grow'>
           <div className='flex flex-col gap-4'>
             <h2 className='text-xl font-bold'>
-              {profileData.name} {profileData.lastName}
+              {profileData.username} | {profileData.email}
             </h2>
             <div className='flex flex-row gap-4'>
               <h5 className='text-lg'>
                 Area de conocimiento :{' '}
                 <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                  {profileData.skill}
+                  {profileData.member?.preferences[0].description || ''}
                 </span>{' '}
               </h5>
               <h5 className='text-lg'>
                 Nivel :{' '}
                 <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                  {profileData.level}{' '}
+                  {profileData.role[0]}{' '}
                 </span>
               </h5>
             </div>
             <div className='flex flex-row gap-10 items-center justify-between'>
               <h5 className='text-lg'>Valoraciones: ⭐⭐⭐⭐⭐</h5>
-              <Link href='/#'>
+              <Link href='#'>
                 <button className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'>
                   Ver perfil
                 </button>
