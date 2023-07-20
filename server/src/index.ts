@@ -12,6 +12,7 @@ import dbConnect from './config/database';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swaggerSpec';
 import { config } from './config/config';
+import { roomHandler } from './room/index';
 
 class Server {
   app: Application;
@@ -61,7 +62,7 @@ class Server {
     });
     io.on('connection', (socket) => {
       console.log(colors.bgMagenta.black('=> ** Websocket connection **'));
-
+      roomHandler(socket);
       socket.on('disconnect', () => {
         console.log(colors.yellow('=> ** Websocket connection finished **'));
       });
