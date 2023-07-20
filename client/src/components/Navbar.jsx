@@ -26,7 +26,7 @@ export default function Navbar() {
   };
 
   const handleSearch = () => {
-    router.push('/search');
+    router.push('/home/search');
     console.log(`Realizando busqueda: ${searchTerm}`);
   };
 
