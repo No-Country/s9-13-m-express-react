@@ -25,18 +25,9 @@ export const RoomProvider = ({ children }) => {
     const fn = async () => {
       import('peerjs').then((data) => {
         const peer = new data.Peer(meId, {
-          config: {
-            iceServers: [
-              { urls: 'stun:stun.l.google.com:19302' },
-              {
-                urls: 'turn:0.peerjs.com:3478',
-                username: 'peerjs',
-                credential: 'peerjsp',
-              },
-            ],
-            sdpSemantics: 'unified-plan',
-            iceTransportPolicy: 'relay', // <- it means using only relay server (our free turn server in this case)
-          },
+          host: 'localhost',
+          port: 3001,
+          path: '/peerjs/myapp',
         });
         setMe(peer);
       });
