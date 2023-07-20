@@ -9,11 +9,11 @@ import { FaArrowLeft } from 'react-icons/fa';
 export default function SearchPage() {
   return (
     <main className='min-h-screen flex flex-row  bg-white font-semibold'>
-      <div className='bg-purpleThirty mx-auto flex-shrink-0 w-64 pt-20 shadow-xl'>
+      <div className='bg-purpleThirty mx-auto flex-shrink-0  pt-10 shadow-xl'>
         <SideBar show={'filter'} />
       </div>
 
-      <div className='mx-auto flex-grow pt-20 pl-28'>
+      <div className='mx-auto flex-grow pt-10 px-10 md:px-20 lg:px-28'>
         <div className='flex flex-col items-center justify-center gap-16'>
           <div className='w-full'>
             <div className='flex flex-row items-center justify-start'>
