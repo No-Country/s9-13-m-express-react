@@ -70,9 +70,9 @@ export default function RegisterFormComponent() {
           progress: undefined,
           theme: 'light',
         });
+        router.push('/habilidad/ensenar');
         dispatch(onLogin(response.data));
         resetForm();
-        router.push('/habilidad/ensenar');
       } else {
         console.log(response);
         toast.error(response.message, {
