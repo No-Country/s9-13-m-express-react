@@ -13,6 +13,7 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swaggerSpec';
 import { config } from './config/config';
 import { roomHandler } from './room/index';
+import { ExpressPeerServer } from 'peer';
 
 class Server {
   app: Application;
@@ -45,7 +46,10 @@ class Server {
 
   start(): void {
     const httpServer = http.createServer(this.app);
-
+    const peerServer = ExpressPeerServer(httpServer, {
+      allow_discovery: true,
+    });
+    this.app.use('/peerjs', peerServer);
     httpServer
       .listen(this.port, () => {
         console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));

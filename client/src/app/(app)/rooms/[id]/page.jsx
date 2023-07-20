@@ -3,18 +3,20 @@
 import React, { useContext, useEffect } from 'react';
 import { RoomContext } from '@/context/RoomContext';
 import { useParams } from 'next/navigation';
+import { VideoPlayer } from '@/components/VideoPlayer';
 
 function Room() {
   const { id } = useParams();
-  const { ws, me, participants } = useContext(RoomContext);
+  const { ws, me, participants, stream } = useContext(RoomContext);
 
   useEffect(() => {
     if (me) ws.emit('join-room', { roomId: id, peerId: me._id });
   }, [ws, me, id]);
-  console.log(participants);
+
   return (
     <div>
       <h1>rooms ${id}</h1>
+      <VideoPlayer stream={stream} />
       <ul>
         {participants &&
           participants.map((p, index) => <li key={index}>{p}</li>)}
