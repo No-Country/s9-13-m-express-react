@@ -5,6 +5,7 @@ import { FaBell, FaUser, FaSearch } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import useClickOutside from '@/hooks/useClickOutside';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const currentUser = useSelector((state) => state.user);
@@ -12,7 +13,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-
+  const router = useRouter();
   const dropdownRef = useRef(null);
 
   const handleDropDownClick = () => {
@@ -25,6 +26,7 @@ export default function Navbar() {
   };
 
   const handleSearch = () => {
+    router.push('/search');
     console.log(`Realizando busqueda: ${searchTerm}`);
   };
 

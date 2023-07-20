@@ -1,12 +1,25 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import SideBar from '@/components/HomePage/SideBar';
 // import SkillRibbon from '@/components/HomePage/SkillRibbon';
-import { userProfile } from '@/components/HomePage/UserProfileData';
 import ProfileCard from '@/components/HomePage/ProfileCard';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 
 export default function SearchPage() {
+  const [usersData, setUserData] = useState([]);
+  useEffect(() => {
+    async function getSearchUserData() {
+      const request = await fetch(
+        'https://skillswap.onrender.com/api/v1/users?page=1&limit=15'
+      );
+      const response = await request.json();
+      setUserData(response.users);
+    }
+    getSearchUserData();
+  }, []);
+
   return (
     <main className='min-h-screen flex flex-row  bg-white font-semibold'>
       <div className='bg-purpleThirty mx-auto flex-shrink-0  pt-10 shadow-xl'>
@@ -23,9 +36,15 @@ export default function SearchPage() {
               </Link>
             </div>
             <div className='flex flex-col gap-10 items-start justify-center'>
-              <ProfileCard profileData={userProfile[0]} isSingle={false} />
-              <ProfileCard profileData={userProfile[1]} isSingle={false} />
-              <ProfileCard profileData={userProfile[2]} isSingle={false} />
+              {usersData.map((user) => {
+                return (
+                  <ProfileCard
+                    key={user.id}
+                    profileData={user}
+                    isSingle={false}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
