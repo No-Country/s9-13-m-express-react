@@ -18,13 +18,13 @@ paths:
           required: true
           schema:
             type: integer
-      responses: 
+      responses:
         '200':
           description: return paginated users including their member and schedules
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'  
+                $ref: '#/components/schemas/UserResponse'
         '400':
           description: return an error message
           content:
@@ -37,7 +37,7 @@ paths:
 
   /api/v1/users/{id}:
     get:
-      tags: 
+      tags:
         - User by Id
       summary: Get user by id
       description: return a json with a user
@@ -64,5 +64,3 @@ paths:
                 properties:
                   error:
                     type: string
-
-  

@@ -18,5 +18,5 @@ export interface IMeeting extends Document {
 export enum MeetingStatus {
   Pending = 'pending',
   Rejected = 'rejected',
-  Accepted = 'accepted'
+  Accepted = 'accepted',
 }

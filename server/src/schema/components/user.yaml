@@ -3,7 +3,7 @@ components:
     UserResponse:
       type: object
       properties:
-        msg: 
+        msg:
           type: string
         totalUsers:
           type: integer
@@ -13,7 +13,7 @@ components:
           type: integer
         currentPage:
           type: integer
-        users: 
+        users:
           type: array
           items:
             type: object
@@ -28,7 +28,7 @@ components:
                 type: array
                 items:
                   type: string
-              member: 
+              member:
                 type: object
                 properties:
                   name:
@@ -68,4 +68,4 @@ components:
               schedules:
                 type: array
                 items:
-                 $ref: '#/components/schemas/ScheduleSchema'
+                  $ref: '#/components/schemas/ScheduleSchema'
