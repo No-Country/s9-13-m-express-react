@@ -47,10 +47,11 @@ class Server {
   start(): void {
     const httpServer = http.createServer(this.app);
 
-    const peerServer = ExpressPeerServer(httpServer, {
-      // debug: true,
-      path: '/myapp',
-    });
+    const peerOptions: any = {
+      debug: true,
+    };
+
+    const peerServer = ExpressPeerServer(httpServer, peerOptions);
     this.app.use('/peerjs', peerServer);
 
     httpServer
