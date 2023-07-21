@@ -1,4 +1,5 @@
 'use client';
+
 import { createContext, useEffect, useState } from 'react';
 // import Peer from 'peerjs';
 import { io } from 'socket.io-client';
@@ -12,27 +13,35 @@ export const RoomProvider = ({ children }) => {
   const [participants, setParticipants] = useState();
   const [stream, setStream] = useState();
   const [peers, setPeers] = useState({});
+
   const enterRoom = ({ roomId }) => {
     window.location.href = `/rooms/${roomId}`;
-    console.log(roomId);
   };
+
   const getUsers = ({ participants }) => {
     setParticipants(participants);
-    // console.log(participants);
   };
+
+  const leaveRoom = (peerId) => {
+    // const duplicatePeers = { ...peers };
+    // console.log(duplicatePeers, peerId);
+    // delete duplicatePeers[peerId];
+    // setPeers(duplicatePeers);
+  };
+
   useEffect(() => {
     const meId = uuidV4();
-    const fn = async () => {
+    (async () => {
       import('peerjs').then((data) => {
         const peer = new data.Peer(meId, {
-          host: 'localhost',
-          port: 3001,
-          path: '/peerjs/myapp',
+          path: '/peerjs',
+          host: '/',
+          port: '3001',
         });
         setMe(peer);
       });
-    };
-    fn();
+    })();
+
     try {
       navigator.mediaDevices
         .getUserMedia({ video: true, audio: true })
@@ -43,6 +52,7 @@ export const RoomProvider = ({ children }) => {
       console.log(error);
     }
 
+    ws.on('user-disconnected', leaveRoom);
     ws.on('room-created', enterRoom);
     ws.on('get-users', getUsers);
   }, []);
@@ -53,10 +63,7 @@ export const RoomProvider = ({ children }) => {
     ws.on('user-joined', ({ peerId }) => {
       //aca inicializamos la llamada y pasamos nuestro stream
       const call = me.call(peerId, stream);
-      console.log('call:', call);
-
       call.on('stream', (peerStream) => {
-        console.log('usuario 1, peerStream:', peerStream);
         setPeers((prev) => ({ ...prev, [peerId]: { stream: peerStream } }));
       });
     });
@@ -67,15 +74,15 @@ export const RoomProvider = ({ children }) => {
 
     //Aqui escuchamos una llamada y respondemos con nuestro stream
     me.on('call', (call) => {
-      console.log('usuario 2, call:', call);
-
       call.answer(stream);
-      setPeers((prev) => ({ ...prev, [call.peer]: { stream: peerStream } }));
+      call.on('stream', (peerStream) => {
+        setPeers((prev) => ({ ...prev, [call.peer]: { stream: peerStream } }));
+      });
     });
   }, [me, stream]);
-  // console.log(peers);
+
   return (
-    <RoomContext.Provider value={{ ws, me, participants, stream }}>
+    <RoomContext.Provider value={{ ws, me, stream, peers }}>
       {children}
     </RoomContext.Provider>
   );

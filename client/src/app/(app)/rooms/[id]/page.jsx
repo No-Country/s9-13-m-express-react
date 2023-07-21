@@ -7,7 +7,7 @@ import { VideoPlayer } from '@/components/VideoPlayer';
 
 function Room() {
   const { id } = useParams();
-  const { ws, me, participants, stream } = useContext(RoomContext);
+  const { ws, me, stream, peers } = useContext(RoomContext);
 
   useEffect(() => {
     if (me) ws.emit('join-room', { roomId: id, peerId: me._id });
@@ -15,12 +15,10 @@ function Room() {
 
   return (
     <div>
-      <h1>rooms ${id}</h1>
       <VideoPlayer stream={stream} />
-      <ul>
-        {participants &&
-          participants.map((p, index) => <li key={index}>{p}</li>)}
-      </ul>
+      {Object.values(peers).map((peer) => {
+        return <VideoPlayer stream={peer.stream} />;
+      })}
     </div>
   );
 }
