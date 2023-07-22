@@ -6,10 +6,10 @@ class SearchController {
     try {
       const filters = req.query;
 
-      const search = await searchService.search(filters);
+      const users = await searchService.search(filters);
       return res.status(200).json({
         message: 'OK',
-        data: search,
+        data: users,
       });
     } catch (err: any) {
       res.status(500).json({ message: 'Server error', error: err });

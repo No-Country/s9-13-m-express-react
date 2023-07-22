@@ -2,8 +2,17 @@ import User from '../models/users.models';
 
 class SearchService {
   public async search(filters) {
+    const defaultOption = { $match: { 'profile.skills.name': { $regex: filters.category, $options: 'i' } } };
+    const withLevelOption = {
+      $match: {
+        'profile.skills.name': { $regex: filters.category, $options: 'i' },
+        'profile.skills.level': { $eq: filters.level },
+      },
+    };
+
+    const query = filters.level ? withLevelOption : defaultOption;
     try {
-      const search = await User.aggregate([
+      const users = await User.aggregate([
         {
           $lookup: {
             from: 'members',
@@ -25,9 +34,21 @@ class SearchService {
             token: 0,
           },
         },
-        { $match: { 'profile.skills.name': { $regex: filters.category, $options: 'i' } } },
+        {
+          $unwind: '$profile.skills',
+        },
+        query,
+        {
+          $group: {
+            _id: '$_id',
+            username: { $first: '$username' },
+            email: { $first: '$email' },
+            role: { $first: '$role' },
+            profile: { $push: '$profile' },
+          },
+        },
       ]);
-      return search;
+      return users;
     } catch (err: any) {
       console.log('Error in the Seach Service', err);
     }
