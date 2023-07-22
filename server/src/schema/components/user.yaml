@@ -28,7 +28,7 @@ components:
                 type: array
                 items:
                   type: string
-              member:
+              profile:
                 type: object
                 properties:
                   name:
@@ -42,9 +42,9 @@ components:
                     items:
                       type: object
                       properties:
-                        description:
+                        name:
                           type: string
-                        _id:
+                        categoryId:
                           type: string
                   avatar:
                     type: string
@@ -53,9 +53,9 @@ components:
                     items:
                       type: object
                       properties:
-                        title:
+                        name:
                           type: string
-                        category:
+                        categoryId:
                           type: string
                         description:
                           type: string

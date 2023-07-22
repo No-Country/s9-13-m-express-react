@@ -4,11 +4,17 @@ import { searchService } from '../services/search.services';
 class SearchController {
   public async search(req: Request, res: Response) {
     try {
-      const filters = req.query;
-
-      const users = await searchService.search(filters);
+      let {category, level,} = req.query
+      category = category as string
+      level = level as string
+      const page = parseInt(req.query.page as string, 10) || 1;
+      const limit = parseInt(req.query.limit as string, 10) || 5;
+      const users = await searchService.search({
+        category,
+        level, page, limit,
+      });
+      console.log(req.query)
       return res.status(200).json({
-        message: 'OK',
         data: users,
       });
     } catch (err: any) {

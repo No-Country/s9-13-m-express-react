@@ -9,12 +9,12 @@ const getAllusers = async (page: number, limit: number) => {
           from: 'members',
           localField: '_id',
           foreignField: 'user',
-          as: 'member',
+          as: 'profile',
         },
       },
       {
         $unwind: {
-          path: '$member',
+          path: '$profile',
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -39,7 +39,6 @@ const getAllusers = async (page: number, limit: number) => {
     let currentPage = Math.abs(page);
     let totalUsers = users.length;
     let totalPages = Math.ceil(totalUsers / limit);
-    // if(currentPage>totalPages)  currentPage=totalPages
     users = users.splice((currentPage - 1) * limit, limit);
 
     return {
@@ -67,12 +66,12 @@ const getUserById = async (id: string) => {
           from: 'members',
           localField: '_id',
           foreignField: 'user',
-          as: 'member',
+          as: 'profile',
         },
       },
       {
         $unwind: {
-          path: '$member',
+          path: '$profile',
           preserveNullAndEmptyArrays: true,
         },
       },
@@ -110,12 +109,12 @@ const filterUsers = async (filters: {}, page: number, limit: number) => {
           from: 'members',
           localField: '_id',
           foreignField: 'user',
-          as: 'member',
+          as: 'profile',
         },
       },
       {
         $unwind: {
-          path: '$member',
+          path: '$profile',
           preserveNullAndEmptyArrays: true,
         },
       },
