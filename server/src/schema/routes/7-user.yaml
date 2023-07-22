@@ -18,13 +18,13 @@ paths:
           required: true
           schema:
             type: integer
-      responses: 
+      responses:
         '200':
           description: return paginated users including their member and schedules
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserResponse'  
+                $ref: '#/components/schemas/UserResponse'
         '400':
           description: return an error message
           content:
@@ -34,11 +34,11 @@ paths:
                 properties:
                   error:
                     type: string
-
+                    
   /api/v1/users/{id}:
     get:
-      tags: 
-        - User by Id
+      tags:
+        - User
       summary: Get user by id
       description: return a json with a user
       parameters:
@@ -65,4 +65,50 @@ paths:
                   error:
                     type: string
 
-  
+  /api/v1/users/search:
+    get:
+      tags:
+        - User
+      summary: Search users by skill name and filter skill level
+      description: return a json with user or users
+      parameters:
+        - name: category
+          in: query
+          description: what user do you want to search
+          required: true
+          schema:
+            type: string
+        - name: level
+          in: query
+          description: you can filter the result above by skill level, basico | intermedio | avanzado
+          required: false
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: paginate your query
+          required: false
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: limite users shown on current page
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: return a json with a user by id including their member and schedules
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: return an error message
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

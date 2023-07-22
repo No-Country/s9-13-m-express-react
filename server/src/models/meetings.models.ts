@@ -12,7 +12,7 @@ const meetingSchema = new Schema<IMeeting>({
   status: {
     type: String,
     enum: Object.values(MeetingStatus),
-    default: MeetingStatus.Pending
+    default: MeetingStatus.Pending,
   },
   trainee_id: {
     type: String,

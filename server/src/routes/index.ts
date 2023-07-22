@@ -1,11 +1,12 @@
 import { Router, Response } from 'express';
 import authRouter from './auth.routes';
 import recoveryPassword from './recoveryPassword.routes';
-import userRouter from './users.routes'
+import userRouter from './users.routes';
 import memberRouter from './members.routes';
 import categoriesRouter from './categories.routes';
 import scheduleRouter from './schedule.routes';
 import meetingRouter from './meetings.routes';
+import searchRouter from './search.routes';
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use('/categories', categoriesRouter);
 router.use('/schedule', scheduleRouter);
 router.use('/users', userRouter);
 router.use('/meetings', meetingRouter);
+router.use('/', searchRouter);
 
 export default router;

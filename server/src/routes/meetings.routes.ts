@@ -7,25 +7,11 @@ const router = Router();
 
 router.get('/', authenticate, meetingsController.getMeetings);
 
-router.get(
-  '/:meetingId',
-  authenticate,
-  validator.meetingByIdValidator,
-  meetingsController.getMeetingById
-);
+router.get('/:meetingId', authenticate, validator.meetingByIdValidator, meetingsController.getMeetingById);
 
-router.post('/',
-  authenticate,
-  validator.createMeetingValidator,
-  meetingsController.createMeeting
-);
+router.post('/', authenticate, validator.createMeetingValidator, meetingsController.createMeeting);
 
-router.patch(
-  '/:meetingId',
-  authenticate,
-  validator.updateMeetingValidator,
-  meetingsController.updateMeeting
-);
+router.patch('/:meetingId', authenticate, validator.updateMeetingValidator, meetingsController.updateMeeting);
 
 router.delete(
   '/:meetingId',
