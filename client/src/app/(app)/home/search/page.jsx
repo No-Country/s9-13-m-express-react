@@ -30,7 +30,7 @@ export default function SearchPage() {
         <div className='flex flex-col items-center justify-center gap-16'>
           <div className='w-full'>
             <div className='flex flex-row items-center justify-start'>
-              <Link href={'/'} className='text-lg mb-6'>
+              <Link href={'/home'} className='text-lg mb-6'>
                 <FaArrowLeft className='inline-flex mr-1' />
                 <span>Atras</span>
               </Link>
