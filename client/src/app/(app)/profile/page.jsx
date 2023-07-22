@@ -12,7 +12,7 @@ export default function userProfile() {
       </div>
       <div className='mx-auto flex-grow pt-10 px-10 md:px-12 lg:px-16'>
         <div className='flex flex-row items-center justify-start mb-4'>
-          <Link href={'/'} className='text-lg mb-6'>
+          <Link href={'/home'} className='text-lg mb-6'>
             <FaArrowLeft className='inline-flex mr-1' />
             <span>Atras</span>
           </Link>
