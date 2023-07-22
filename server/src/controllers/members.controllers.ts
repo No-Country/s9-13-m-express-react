@@ -6,25 +6,24 @@ import { updateService } from '../services/members.services';
 
 const createMembers = async (req: any, res: Response) => {
   try {
-    let avatar = {
-      public_id: '',
-      secure_url: ''
-    }
+    // let avatar = {
+    //   public_id: '',
+    //   secure_url: '',
+    // };
 
-    if (req['files']?.avatar) {
-      const result = await uploadImage(req['files']['avatar']['tempFilePath']);
-      avatar.public_id = result.public_id;
-      avatar.secure_url = result.secure_url;
+    // if (req['files']?.avatar) {
+    //   const result = await uploadImage(req['files']['avatar']['tempFilePath']);
+    //   avatar.public_id = result.public_id;
+    //   avatar.secure_url = result.secure_url;
 
-      await fs.unlink(req['files']['avatar']['tempFilePath']);
-    }
-
-    const { _id } = req.user;
+    //   await fs.unlink(req['files']['avatar']['tempFilePath']);
+    // }
 
     const memberData = req.body;
-    const data = await fetchCreateMembers({ ...memberData, avatar, _id });
+    const data = await fetchCreateMembers({ ...memberData,  });
     res.status(201).json(data);
   } catch (error: any) {
+    console.log("aWUI")
     res.status(400).json({ error: error.message });
   }
 };
