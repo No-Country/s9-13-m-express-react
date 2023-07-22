@@ -20,7 +20,7 @@ const createMembers = async (req: any, res: Response) => {
     }
 
     const memberData = req.body;
-    const data = await fetchCreateMembers({ ...memberData, avatar});
+    const data = await fetchCreateMembers({ ...memberData, avatar });
     res.status(201).json(data);
   } catch (error: any) {
     res.status(400).json({ error: error.message });

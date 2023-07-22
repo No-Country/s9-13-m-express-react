@@ -4,9 +4,9 @@ import { searchService } from '../services/search.services';
 class SearchController {
   public async search(req: Request, res: Response) {
     try {
-      const category = req.query.category;
-      console.log("categoria: ", category)
-      const search = await searchService.search(category);
+      const filters = req.query;
+
+      const search = await searchService.search(filters);
       return res.status(200).json({
         message: 'OK',
         data: search,
