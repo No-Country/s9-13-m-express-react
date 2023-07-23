@@ -1,12 +1,11 @@
 'use client';
 
 import { createContext, useEffect, useState } from 'react';
-// import Peer from 'peerjs';
 import { io } from 'socket.io-client';
-import { v4 as uuidV4 } from 'uuid';
 export const RoomContext = createContext(null);
 const WS = 'http://localhost:3001';
 const ws = io(WS);
+import { v4 as uuidV4 } from 'uuid';
 
 export const RoomProvider = ({ children }) => {
   const [me, setMe] = useState();
@@ -81,7 +80,6 @@ export const RoomProvider = ({ children }) => {
       });
     });
   }, [me, stream]);
-
   return (
     <RoomContext.Provider value={{ ws, me, stream, peers }}>
       {children}

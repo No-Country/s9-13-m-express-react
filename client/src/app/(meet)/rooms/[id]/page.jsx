@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useContext, useEffect } from 'react';
-import { RoomContext } from '@/context/RoomContext';
+import { useContext, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { VideoPlayer } from '@/components/VideoPlayer';
+import { MyVideoPlayer } from '@/components/Meet/MyVideoPlayer';
+import { VideoPlayer } from '@/components/Meet/VideoPlayer';
+import { RoomContext } from '@/app/(meet)/RoomContext';
 
 function Room() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ function Room() {
 
   return (
     <div>
-      <VideoPlayer stream={stream} />
+      <MyVideoPlayer stream={stream} />
       {Object.values(peers).map((peer, index) => {
         return <VideoPlayer key={index} stream={peer.stream} />;
       })}

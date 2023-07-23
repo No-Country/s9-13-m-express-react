@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const VideoPlayer = ({ stream }) => {
+export const MyVideoPlayer = ({ stream }) => {
   const videoRef = useRef(null);
   const [enabled, setEnabled] = useState(true);
 
   useEffect(() => {
     if (videoRef.current && stream) videoRef.current.srcObject = stream;
-    if (videoRef.current && stream) handleClick();
   }, [stream]);
 
   const handleClick = () => {
-    // setEnabled(!enabled);
-    stream.getVideoTracks()[0].enabled = false;
-    // stream.getVideoTracks()[0].enabled = !enabled;
+    setEnabled(!enabled);
+    stream.getVideoTracks()[0].enabled = !enabled;
   };
   return (
     <>
