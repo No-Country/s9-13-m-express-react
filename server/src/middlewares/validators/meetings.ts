@@ -28,9 +28,7 @@ const createMeetingValidator = [
     .withMessage('instructor_id is required')
     .isString()
     .withMessage('instructor_id must be a string'),
-  body('meeting_date')
-    .notEmpty()
-    .withMessage('meeting_date is required'),
+  body('meeting_date').notEmpty().withMessage('meeting_date is required'),
   errorHandler,
 ];
 

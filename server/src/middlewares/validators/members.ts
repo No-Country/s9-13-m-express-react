@@ -8,7 +8,9 @@ const validationMember = [
       const receivedFields = Object.keys(req.body);
       return receivedFields.every((field) => allowedFields.includes(field));
     })
-    .withMessage('Missing Fields: {"name", "last_name", "country", "preferences", "avatar", "skills", "user"}'),
+    .withMessage(
+      'Missing Fields: {"name", "last_name", "country", "preferences", "avatar", "skills", "user"}'
+    ),
 
   body('name')
     .trim()
@@ -40,17 +42,17 @@ const validationMember = [
     .isLength({ min: 4, max: 25 })
     .withMessage('Country must have more than 4 characters and less than 25 characters'),
 
-  body('preferences.*.description')
+  body('preferences.*.name')
     .trim()
     .notEmpty()
-    .withMessage('Description is required')
+    .withMessage('Preference name is required')
     .bail()
     .isString()
-    .withMessage('Description type is not valid')
+    .withMessage('Preference name type is not valid')
     .isLength({ min: 5, max: 50 })
-    .withMessage('Description must have more than 5 characters and less than 50 characters'),
+    .withMessage('Preference name must have more than 5 characters and less than 50 characters'),
 
-  body('skills.*.title')
+  body('skills.*.name')
     .trim()
     .notEmpty()
     .withMessage('Title required')
@@ -60,7 +62,7 @@ const validationMember = [
     .isLength({ min: 5, max: 50 })
     .withMessage('Title must have more than 5 characters and less than 50 characters'),
 
-  body('skills.*.category')
+  body('skills.*.categoryId')
     .trim()
     .notEmpty()
     .withMessage('Category required')

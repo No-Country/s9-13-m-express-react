@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
@@ -11,8 +10,11 @@ export default function ProfileCard({ profileData, isSingle }) {
       '
         >
           <div className='flex-shrink-0 '>
-            <Image
-              src={profileData.member?.avatar?.secure_url}
+            <img
+              src={
+                profileData.member?.avatar?.secure_url ||
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+              }
               alt='fotoPerfil'
               width={80}
               height={80}
@@ -22,13 +24,14 @@ export default function ProfileCard({ profileData, isSingle }) {
           <div className='flex-grow'>
             <div className='flex flex-col gap-4'>
               <h2 className='text-xl font-bold'>
-                {profileData?.name} | {profileData?.lastName}
+                {profileData?.name} {profileData?.last_name} |{' '}
+                {profileData?.country}
               </h2>
               <div className='flex flex-row gap-4'>
                 <h5 className='text-lg'>
                   Area de conocimiento :{' '}
                   <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                    {profileData.member?.preferences[0]?.description || ''}
+                    {profileData.preferences?.at(0)?.description || ''}
                   </span>{' '}
                 </h5>
                 <h5 className='text-lg'>
@@ -57,8 +60,11 @@ export default function ProfileCard({ profileData, isSingle }) {
     <div className='bg-purpleThirty w-fit rounded-xl'>
       <div className='flex flex-row px-8 py-6 items-start justify-center gap-10'>
         <div className='flex-shrink-0 w-fit'>
-          <Image
-            src={profileData.member?.avatar.secure_url}
+          <img
+            src={
+              profileData.member?.avatar?.secure_url ||
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+            }
             alt='fotoPerfil'
             width={80}
             height={60}
@@ -74,13 +80,13 @@ export default function ProfileCard({ profileData, isSingle }) {
               <h5 className='text-lg'>
                 Area de conocimiento :{' '}
                 <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                  {profileData.member?.preferences[0].description || ''}
+                  {profileData.member?.preferences?.at(0).description || ''}
                 </span>{' '}
               </h5>
               <h5 className='text-lg'>
                 Nivel :{' '}
                 <span className='bg-purpleSecondary px-4 py-1 text-white rounded-3xl text-sm font-light'>
-                  {profileData?.role[0] || ' '}
+                  {profileData?.role?.at(0) || ' '}
                 </span>
               </h5>
             </div>
