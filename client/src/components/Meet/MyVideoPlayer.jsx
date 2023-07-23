@@ -2,16 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 
 export const MyVideoPlayer = ({ stream }) => {
   const videoRef = useRef(null);
-  const [enabled, setEnabled] = useState(true);
+  const [video, setVideo] = useState(true);
+  const [audio, setAudio] = useState(true);
 
   useEffect(() => {
     if (videoRef.current && stream) videoRef.current.srcObject = stream;
   }, [stream]);
 
-  const handleClick = () => {
-    setEnabled(!enabled);
-    stream.getVideoTracks()[0].enabled = !enabled;
+  const handleVideo = () => {
+    setVideo(!video);
+    stream.getVideoTracks()[0].enabled = !video;
   };
+
+  const handleAudio = () => {
+    setAudio(!audio);
+    stream.getAudioTracks()[0].enabled = !audio;
+  };
+
   return (
     <>
       <video
@@ -21,7 +28,8 @@ export const MyVideoPlayer = ({ stream }) => {
         autoPlay
         muted={true}
       />
-      <button onClick={handleClick}>Boton</button>
+      <button onClick={handleVideo}>Video</button>
+      <button onClick={handleAudio}>Audio</button>
     </>
   );
 };

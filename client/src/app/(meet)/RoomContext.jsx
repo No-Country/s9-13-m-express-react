@@ -80,6 +80,7 @@ export const RoomProvider = ({ children }) => {
       });
     });
   }, [me, stream]);
+
   return (
     <RoomContext.Provider value={{ ws, me, stream, peers }}>
       {children}
