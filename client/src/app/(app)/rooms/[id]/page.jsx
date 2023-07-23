@@ -16,8 +16,8 @@ function Room() {
   return (
     <div>
       <VideoPlayer stream={stream} />
-      {Object.values(peers).map((peer) => {
-        return <VideoPlayer stream={peer.stream} />;
+      {Object.values(peers).map((peer, index) => {
+        return <VideoPlayer key={index} stream={peer.stream} />;
       })}
     </div>
   );

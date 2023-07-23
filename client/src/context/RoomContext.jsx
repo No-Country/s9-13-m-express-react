@@ -23,15 +23,16 @@ export const RoomProvider = ({ children }) => {
   };
 
   const leaveRoom = (peerId) => {
-    // const duplicatePeers = { ...peers };
-    // console.log(duplicatePeers, peerId);
-    // delete duplicatePeers[peerId];
-    // setPeers(duplicatePeers);
+    setPeers((prevPeers) => {
+      const newPeers = { ...prevPeers };
+      delete newPeers[peerId];
+      return newPeers;
+    });
   };
 
   useEffect(() => {
     const meId = uuidV4();
-    (async () => {
+    (() => {
       import('peerjs').then((data) => {
         const peer = new data.Peer(meId, {
           path: '/peerjs',
