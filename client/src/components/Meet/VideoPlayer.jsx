@@ -9,8 +9,8 @@ export const VideoPlayer = ({ stream }) => {
 
   return (
     <video
+      className='w-[90%] md:w-[60%] lg:w-[40%]'
       data-testid='peer-video'
-      //   style={{ width: "100%" }}
       ref={videoRef}
       autoPlay
       muted={true}

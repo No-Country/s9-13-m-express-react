@@ -82,7 +82,7 @@ export const RoomProvider = ({ children }) => {
   }, [me, stream]);
 
   return (
-    <RoomContext.Provider value={{ ws, me, stream, peers }}>
+    <RoomContext.Provider value={{ ws, me, stream, peers, participants }}>
       {children}
     </RoomContext.Provider>
   );
