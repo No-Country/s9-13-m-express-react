@@ -85,7 +85,7 @@ export default function EditModal({ modalState }) {
                 <input
                   type='submit'
                   value='Guardar'
-                  className='bg-yellowPrimary p-2 rounded-full w-full'
+                  className='bg-yellowPrimary p-2 rounded-full w-full cursor-pointer'
                 />
               </div>
             </form>
