@@ -21,6 +21,11 @@ export default function AppLayout({ children }) {
     }
   }
 
+  console.log(currentUser);
+  if (!currentUser?.token) {
+    router.push('/logout');
+  }
+
   return (
     <>
       <div className='flex flex-col min-h-screen'>

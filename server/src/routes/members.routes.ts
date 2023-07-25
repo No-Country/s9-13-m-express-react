@@ -13,12 +13,17 @@ const router = Router();
 
 router.get('/', getMembers);
 router.get('/:id', getOneMember);
-router.post('/', authenticate, 
-                  fileUpload({
-                      useTempFiles : true,
-                      tempFileDir : './uploads'
-                  }),  
-                  validationMember, validationCreateMember, createMembers);
+router.post(
+  '/',
+  authenticate,
+  /*fileUpload({
+    useTempFiles: true,
+    tempFileDir: './uploads',
+  }),*/
+  validationMember,
+  validationCreateMember,
+  createMembers
+);
 router.put('/', authenticate, validationMember, updateController);
 
 export default router;

@@ -48,7 +48,7 @@ export default function LoginFormComponent() {
 
       const response = await request.json();
 
-      console.log(request);
+      console.log(response);
 
       if (request.status === 201) {
         toast.success(`Login Succesfully`, {

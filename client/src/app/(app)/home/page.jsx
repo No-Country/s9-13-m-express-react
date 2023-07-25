@@ -2,27 +2,43 @@
 
 import SkillRibbon from '@/components/HomePage/SkillRibbon';
 import { skillsData } from '@/components/HomePage/SkillRibbonData';
-import { userProfile } from '@/components/HomePage/UserProfileData';
 import ProfileCard from '@/components/HomePage/ProfileCard';
 import SideBar from '@/components/HomePage/SideBar';
+import { useEffect, useState } from 'react';
 // import { useSelector } from 'react-redux';
 
 export default function HomePage() {
-  // const currentUser = useSelector((state) => state.user);
+  const [suggestUser, setSuggestUser] = useState({});
+  useEffect(() => {
+    async function getRamdonUser() {
+      const request = await fetch(
+        'https://skillswap.onrender.com/api/v1/members'
+      );
+      const data = await request.json();
+      // number random of the users
+      console.log(
+        data?.members[Math.floor(Math.random() * data?.members?.length)]
+      );
+      setSuggestUser(
+        data?.members[Math.floor(Math.random() * data?.members?.length)]
+      );
+    }
+    getRamdonUser();
+  }, []);
 
   return (
     <main className='min-h-screen flex flex-row  bg-white font-semibold'>
-      <div className='bg-purpleThirty mx-auto flex-shrink-0 w-64 pt-40 shadow-xl'>
+      <div className='bg-purpleThirty mx-auto flex-shrink-0 pt-10 shadow-xl'>
         <SideBar show={'home'} />
       </div>
 
-      <div className='mx-auto flex-grow pt-40 pl-40'>
+      <div className='mx-auto flex-grow pt-10 pl-20'>
         <div className='flex flex-col items-center justify-center gap-16'>
           <div className='w-full'>
             <h3 className='text-lg mb-6'>
               Ya que buscas aprender te sugerimos a:
             </h3>
-            <ProfileCard profileData={userProfile} isSingle={true} />
+            <ProfileCard profileData={suggestUser} isSingle={true} />
           </div>
           <div className='w-full mt-20'>
             <h3 className='text-lg mb-6'>Explora por area:</h3>

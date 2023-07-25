@@ -16,7 +16,9 @@ const validatorSchedule = [
     .isString()
     .withMessage('day_of_week required')
     .isIn(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
-    .withMessage('day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'),
+    .withMessage(
+      'day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'
+    ),
   body('start_time')
     .trim()
     .notEmpty()
@@ -54,7 +56,9 @@ const validatorUpdateSchedule = [
     .isString()
     .withMessage('day_of_week required')
     .isIn(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'])
-    .withMessage('day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'),
+    .withMessage(
+      'day_of_week must be monday or tuesday or wednesday or thursday or friday or saturday or sunday'
+    ),
   body('start_time')
     .trim()
     .optional()
@@ -72,4 +76,4 @@ const validatorUpdateSchedule = [
   errorHandler,
 ];
 
-export { validatorSchedule, validatorUpdateSchedule};
+export { validatorSchedule, validatorUpdateSchedule };
