@@ -24,12 +24,12 @@ function UserProfileCard() {
           </div>
           <div className='flex flex-col content-between gap-4'>
             <h1 className='text-2xl font-bold'>
-              {currentUser.user.name + ' ' + currentUser.lastName}
+              {currentUser?.user?.name + ' ' + currentUser?.user?.last_name}
             </h1>
             <h4>
               Area de conocimiento:{' '}
               <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                Programacion
+                {currentUser?.skills?.at(0)?.name}
               </span>
             </h4>
             <h4>
