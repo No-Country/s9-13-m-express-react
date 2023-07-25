@@ -6,15 +6,17 @@ export const RoomContext = createContext(null);
 const WS = 'http://localhost:3001';
 const ws = io(WS);
 import { v4 as uuidV4 } from 'uuid';
+import { useRouter } from 'next/navigation';
 
 export const RoomProvider = ({ children }) => {
   const [me, setMe] = useState();
   const [participants, setParticipants] = useState();
   const [stream, setStream] = useState();
   const [peers, setPeers] = useState({});
+  const { push } = useRouter();
 
   const enterRoom = ({ roomId }) => {
-    window.location.href = `/rooms/${roomId}`;
+    push(`/rooms/${roomId}`);
   };
 
   const getUsers = ({ participants }) => {
