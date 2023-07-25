@@ -2,10 +2,11 @@ import React from 'react';
 import Image from 'next/image';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
+import { useSelector } from 'react-redux';
+import { current } from '@reduxjs/toolkit';
 
 function UserProfileCard({ props }) {
-  const prop = props;
-  console.log(prop);
+  const currentUser = useSelector((state) => state.user);
 
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-auto h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
@@ -21,7 +22,9 @@ function UserProfileCard({ props }) {
             />
           </div>
           <div className='flex flex-col content-between gap-4'>
-            <h1 className='text-2xl font-bold'>Billy Sommers</h1>
+            <h1 className='text-2xl font-bold'>
+              {currentUser.user.name + ' ' + currentUser.lastName}
+            </h1>
             <h4>
               Area de conocimiento:{' '}
               <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
