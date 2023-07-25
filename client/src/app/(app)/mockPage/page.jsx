@@ -1,5 +1,6 @@
 // import Navbar from '@/components/Navbar'
-import AvailabilityModal from '@/components/UserProfile/AvailabilityModal'
+// import AvailabilityModal from '@/components/UserProfile/AvailabilityModal'
+import FullProfileCard from '@/components/UserProfile/FullProfileCard'
 // import EditModal from '@/components/UserProfile/EditModal'
 import React from 'react'
 // import InputSearch from '@/components/Skills/InputSearch'
@@ -8,9 +9,10 @@ import React from 'react'
 export default function MockingPage() {
 
     return (
-    <main className='bg-purpleSecondary min-h-screen'>
+    <main className=''>
         {/* <EditModal /> */}
-        <AvailabilityModal />
+        {/* <AvailabilityModal /> */}
+        <FullProfileCard />
     </main>
   )
 }
