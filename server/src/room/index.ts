@@ -6,9 +6,7 @@ interface IRoomParams {
   peerId: string;
 }
 export const roomHandler = (socket: Socket) => {
-  const createRoom = () => {
-    const roomId = uuidV4();
-
+  const createRoom = (roomId: string) => {
     rooms[roomId] = [];
     socket.emit('room-created', { roomId });
     console.log('sala creada');

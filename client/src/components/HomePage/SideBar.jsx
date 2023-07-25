@@ -28,11 +28,11 @@ export default function SideBar({ show }) {
           <FaUser />
           <p className='hidden md:inline'>Mi perfil</p>
         </Link>
-        <Link href='/#' className='flex items-center gap-4 mb-6'>
+        <Link href='/meeting/learn' className='flex items-center gap-4 mb-6'>
           <FaGlasses />
           <p className='hidden md:inline'>Solicitudes de aprendizaje</p>
         </Link>
-        <Link href='/#' className='flex items-center gap-4'>
+        <Link href='/meeting/teach' className='flex items-center gap-4'>
           <FaChalkboardTeacher />
           <p className='hidden md:inline'>Solicitudes de enseñanza</p>
         </Link>
