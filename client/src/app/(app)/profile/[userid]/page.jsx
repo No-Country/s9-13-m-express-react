@@ -11,16 +11,16 @@ export default function Page({ params }) {
 
   const { userid } = params;
   useEffect(() => {
-    async function getUserDAta() {
+    async function getUserData() {
       const request = await fetch(
-        'https://skillswap.onrender.com/api/v1/users/' + userid
+        `https://skillswap.onrender.com/api/v1/users/${userid}`
       );
       const response = await request.json();
-
-      setUser(response?.users?.at(0));
+      console.log(response);
+      setUser(response?.user?.at(0));
     }
 
-    getUserDAta;
+    getUserData();
   }, [userid]);
 
   return (
