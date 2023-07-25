@@ -1,6 +1,6 @@
 'use client';
 
-import { RoomContext } from '@/app/(meet)/RoomContext';
+import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
 import { useContext } from 'react';
 
 export default function Meeting() {

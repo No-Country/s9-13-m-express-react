@@ -2,12 +2,13 @@
 
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 
 export default function AppLayout({ children }) {
   const currentUser = useSelector((state) => state.user);
   const router = useRouter();
+  const pathname = usePathname();
 
   if (currentUser.statusRegister === 'registered') {
     router.push('/habilidad/ensenar');
@@ -23,11 +24,11 @@ export default function AppLayout({ children }) {
   return (
     <>
       <div className='flex flex-col min-h-screen'>
-        <Navbar />
+        {pathname.split('/')[1] !== 'rooms' && <Navbar />}
         <main className='flex-grow'>
           <div className='mx-auto'>{children}</div>
         </main>
-        <Footer />
+        {pathname.split('/')[1] !== 'rooms' && <Footer />}
       </div>
     </>
   );

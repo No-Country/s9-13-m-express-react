@@ -3,7 +3,7 @@
 import { useContext, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { VideoPlayer } from '@/components/Meet/VideoPlayer';
-import { RoomContext } from '@/app/(meet)/RoomContext';
+import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
 import Navbar from '@/components/Meet/Navbar';
 import Controllers from '@/components/Meet/Controller';
 import { BsArrowLeftShort } from 'react-icons/bs';
