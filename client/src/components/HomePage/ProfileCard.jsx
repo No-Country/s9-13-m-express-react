@@ -44,7 +44,11 @@ export default function ProfileCard({ profileData, isSingle }) {
               </div>
               <div className='flex flex-row gap-10 items-center justify-between'>
                 <h5 className='text-lg'>Valoraciones: ⭐⭐⭐⭐⭐</h5>
-                <Link href={`/profile/${profileData.id}`}>
+                <Link
+                  href={`/profile/${
+                    profileData.id || profileData._id || profileData.user
+                  }`}
+                >
                   <button className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'>
                     Ver perfil
                   </button>
