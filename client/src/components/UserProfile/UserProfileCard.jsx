@@ -3,9 +3,8 @@ import Image from 'next/image';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import { useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
 
-function UserProfileCard({ props }) {
+function UserProfileCard() {
   const currentUser = useSelector((state) => state.user);
 
   return (
