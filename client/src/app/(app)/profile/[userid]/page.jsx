@@ -3,15 +3,13 @@
 import SideBar from '@/components/HomePage/SideBar';
 import UserProfileCard from '@/components/UserProfile/UserProfileCard';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 
-export default function Page() {
+export default function Page({ params }) {
   const [user, setUser] = useState({});
 
-  const router = useRouter();
-  const { userid } = router.query;
+  const { userid } = params;
   useEffect(() => {
     async function getUserDAta() {
       const request = await fetch(
