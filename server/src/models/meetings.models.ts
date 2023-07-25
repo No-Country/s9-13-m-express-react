@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 import { IMeeting, MeetingStatus } from '../interfaces/meetings.interface';
+const { v4: uuidv4 } = require('uuid');
 
 const meetingSchema = new Schema<IMeeting>({
   message: {
@@ -12,7 +13,7 @@ const meetingSchema = new Schema<IMeeting>({
   status: {
     type: String,
     enum: Object.values(MeetingStatus),
-    default: MeetingStatus.Pending
+    default: MeetingStatus.Pending,
   },
   trainee_id: {
     type: String,
@@ -43,6 +44,11 @@ const meetingSchema = new Schema<IMeeting>({
   meeting_participants: {
     type: [{}],
     default: [],
+  },
+  room_id: {
+    type: String,
+    default: uuidv4,
+    unique: true,
   },
 });
 

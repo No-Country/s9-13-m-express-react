@@ -13,10 +13,11 @@ export interface IMeeting extends Document {
   duration_meeting: String;
   users_joined: String[];
   meeting_participants: IUser[];
+  room_id?: String;
 }
 
 export enum MeetingStatus {
   Pending = 'pending',
   Rejected = 'rejected',
-  Accepted = 'accepted'
+  Accepted = 'accepted',
 }

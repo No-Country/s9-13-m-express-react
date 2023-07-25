@@ -18,19 +18,12 @@ const createMeetingValidator = [
   body('status')
     .isIn(['pending', 'rejected', 'accepted'])
     .withMessage('status must be pending, rejected or accepted'),
-  body('trainee_id')
-    .notEmpty()
-    .withMessage('trainee_id is required')
-    .isString()
-    .withMessage('trainee_id must be a string'),
   body('instructor_id')
     .notEmpty()
     .withMessage('instructor_id is required')
     .isString()
     .withMessage('instructor_id must be a string'),
-  body('meeting_date')
-    .notEmpty()
-    .withMessage('meeting_date is required'),
+  body('meeting_date').notEmpty().withMessage('meeting_date is required'),
   errorHandler,
 ];
 
