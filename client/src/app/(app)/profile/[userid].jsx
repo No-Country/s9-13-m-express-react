@@ -1,14 +1,27 @@
-'client';
-
 import SideBar from '@/components/HomePage/SideBar';
 import UserProfileCard from '@/components/UserProfile/UserProfileCard';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 
-export default function UserProfile() {
-  const { user } = useSelector((state) => state.user);
+export default function Page() {
+  const [user, setUser] = useState({});
+
+  const router = useRouter();
+  const { userid } = router.query;
+  useEffect(() => {
+    async function getUserDAta() {
+      const request = await fetch(
+        'https://skillswap.onrender.com/api/v1/users/' + userid
+      );
+      const response = await request.json();
+
+      setUser(response?.users?.at(0));
+    }
+
+    getUserDAta;
+  }, [userid]);
 
   return (
     <main className='min-h-screen flex flex-row bg-white font-semibold'>

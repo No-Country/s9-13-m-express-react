@@ -3,11 +3,8 @@
 import React from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
-import { useSelector } from 'react-redux';
 
-function UserProfileCard() {
-  const currentUser = useSelector((state) => state.user);
-
+function UserProfileCard({ user }) {
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-auto h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
       <div className='bg-purpleThirty p-2 sm:p-4 md:p-6 lg:p-8 sm:col-span-3 md:col-span-5 lg:col-span-7 rounded-md'>
@@ -23,12 +20,12 @@ function UserProfileCard() {
           </div>
           <div className='flex flex-col content-between gap-4'>
             <h1 className='text-2xl font-bold'>
-              {currentUser?.user?.name + ' ' + currentUser?.user?.last_name}
+              {user?.name + ' ' + user?.last_name}
             </h1>
             <h4>
               Area de conocimiento:{' '}
               <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                {currentUser?.skills?.at(0)?.name}
+                {user?.skills?.at(0)?.name}
               </span>
             </h4>
             <h4>
