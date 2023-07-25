@@ -1,6 +1,7 @@
 'use client';
 
 import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
+import CardMeet from '@/components/Meet/cardMeet';
 import { useContext } from 'react';
 
 export default function Meeting() {
@@ -10,14 +11,17 @@ export default function Meeting() {
     const id = '1';
     ws.emit('create-room', id);
   };
+
   return (
-    <div className='App flex items-center justify-center w-screen h-screen'>
-      <button
-        onClick={createRoom}
-        className='bg-yellow-400 py-2 px-8 rounded-lg text-xl hover:bg-rose-600 text-white'
-      >
-        Crear llamada
-      </button>
+    <div className='flex items-center flex-col w-screen my-10'>
+      <CardMeet>
+        <button
+          onClick={createRoom}
+          className='bg-yellow-400 w-8/12 py-2 px-8 rounded-full text-xl text-center hover:bg-purpleIconsAndInputs text-white'
+        >
+          Iniciar llamada
+        </button>
+      </CardMeet>
     </div>
   );
 }
