@@ -1,26 +1,26 @@
 export const skillsData = [
   {
     title: 'Idiomas',
-    link: '/search',
+    link: '/home/search',
   },
   {
     title: 'Tecnologia',
-    link: '/search',
+    link: '/home/search',
   },
   {
     title: 'Cocina',
-    link: '/search',
+    link: '/home/search',
   },
   {
     title: 'Artes',
-    link: '/search',
+    link: '/home/search',
   },
   {
     title: 'Yoga',
-    link: '/search',
+    link: '/home/search',
   },
   {
     title: 'Ver Todas',
-    link: '/search',
+    link: '/home/search',
   },
 ];
