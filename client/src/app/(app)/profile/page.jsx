@@ -1,4 +1,4 @@
-'client';
+'use client';
 
 import SideBar from '@/components/HomePage/SideBar';
 import UserProfileCard from '@/components/UserProfile/UserProfileCard';
