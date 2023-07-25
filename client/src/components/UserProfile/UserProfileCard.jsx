@@ -1,20 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import EditModal from './EditModal';
 import Link from 'next/link';
 
-function UserProfileCard() {
+
+function UserProfileCard({ user }) {
   const [openModal, setOpenModal] = useState(false);
 
   const handleModal = () => {
     setOpenModal(!openModal);
   };
 
-
-function UserProfileCard({ user }) {
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-auto h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
       <div className='bg-purpleThirty p-2 sm:p-4 md:p-6 lg:p-8 sm:col-span-3 md:col-span-5 lg:col-span-7 rounded-md'>
