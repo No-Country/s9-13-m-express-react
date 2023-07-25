@@ -20,7 +20,7 @@ function UserProfileCard({ user }) {
           </div>
           <div className='flex flex-col content-between gap-4'>
             <h1 className='text-2xl font-bold'>
-              {user?.name + ' ' + user?.last_name}
+              {user?.name || user?.username + ' ' + user?.last_name || ''}
             </h1>
             <h4>
               Area de conocimiento:{' '}
