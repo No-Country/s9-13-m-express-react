@@ -15,9 +15,9 @@ const createMeetingValidator = [
     .withMessage('The title must be a string')
     .isLength({ min: 3, max: 100 })
     .withMessage('The title must be between 3 and 100 characters'),
-  body('status')
-    .isIn(['pending', 'rejected', 'accepted'])
-    .withMessage('status must be pending, rejected or accepted'),
+  // body('status')
+  //   .isIn(['pending', 'rejected', 'accepted'])
+  //   .withMessage('status must be pending, rejected or accepted'),
   body('instructor_id')
     .notEmpty()
     .withMessage('instructor_id is required')
