@@ -21,20 +21,17 @@ export default function AppLayout({ children }) {
     }
   }
 
-  console.log(currentUser);
   if (!currentUser?.token) {
     router.push('/logout');
   }
 
   return (
-    <>
-      <div className='flex flex-col min-h-screen'>
-        {pathname.split('/')[1] !== 'rooms' && <Navbar />}
-        <main className='flex-grow'>
-          <div className='mx-auto'>{children}</div>
-        </main>
-        {pathname.split('/')[1] !== 'rooms' && <Footer />}
-      </div>
-    </>
+    <div className='flex flex-col min-h-screen'>
+      {pathname.split('/')[1] !== 'rooms' && <Navbar />}
+      <main className='flex-grow'>
+        <div className='mx-auto'>{children}</div>
+      </main>
+      {pathname.split('/')[1] !== 'rooms' && <Footer />}
+    </div>
   );
 }
