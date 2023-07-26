@@ -22,7 +22,7 @@ export default function Meeting() {
   }, []);
 
   return (
-    <div className='flex items-center flex-col w-screen my-10'>
+    <div className='flex items-center flex-col w-screen my-10 gap-5'>
       {!data?.length ? (
         <span>No tenes llamadas</span>
       ) : (

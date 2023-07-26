@@ -27,12 +27,12 @@ export default function Meeting() {
   }, []);
 
   return (
-    <div className='flex items-center flex-col w-screen my-10'>
+    <div className='flex items-center flex-col w-screen my-10 gap-5'>
       {!data?.length ? (
         <span>No tenes llamadas</span>
       ) : (
         data.map((card, index) => (
-          <CardMeet card={card} id={card.instructor_id} key={index}>
+          <CardMeet card={card} id={card.trainee_id} key={index}>
             <button
               onClick={() => createRoom(card.room_id)}
               className='bg-yellow-400 w-8/12 py-2 px-8 rounded-full text-xl text-center hover:bg-purpleIconsAndInputs text-white'
