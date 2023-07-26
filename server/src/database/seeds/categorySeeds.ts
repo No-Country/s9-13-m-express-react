@@ -1,31 +1,6 @@
 import 'dotenv/config';
-import mongoose from 'mongoose';
-import Category from '../../models/categories.models';
-import { config } from '../../config/config';
 
-async function seed() {
-  try {
-    const db = await mongoose.connect(config.DB.DB_URI_DEV!);
-    const categories = await Category.find();
-
-    if (!categories.length) {
-      await Promise.all(
-        getCategories().map((categoryData) => {
-          return Category.create(categoryData);
-        })
-      );
-    }
-    console.log('**** Successfully created categories ****');
-
-    db.disconnect();
-  } catch (error) {
-    console.log('Error in category Seeds: ', error);
-  }
-}
-
-seed();
-
-const getCategories = () => {
+export const getCategories = () => {
   return [
     {
       name: 'idiomas',
