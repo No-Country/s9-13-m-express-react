@@ -22,7 +22,6 @@ export default function Habilidades() {
     onSubmit: async (values) => {
       const request = await resetPassword(values.email);
       const response = await request.json();
-      console.log(response);
       if (request.status === 200) {
         setFieldValue('email', '');
         router.push('/restablecer/exitoso');

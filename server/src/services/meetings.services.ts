@@ -11,9 +11,9 @@ class MeetingsService {
     }
   }
 
-  public async getMeetingById(meetingId: string) {
+  public async getMeetingById(role: { [key: string]: string }) {
     try {
-      const meeting = await Meeting.findById(meetingId);
+      const meeting = await Meeting.find(role);
       if (!meeting) {
         console.log('Meeting not found');
         throw new Error('Meeting not found');

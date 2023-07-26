@@ -12,6 +12,8 @@ import dbConnect from './config/database';
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from './utils/swaggerSpec';
 import { config } from './config/config';
+import { roomHandler } from './room/index';
+import { ExpressPeerServer } from 'peer';
 
 class Server {
   app: Application;
@@ -45,6 +47,13 @@ class Server {
   start(): void {
     const httpServer = http.createServer(this.app);
 
+    const peerOptions: any = {
+      debug: true,
+    };
+
+    const peerServer = ExpressPeerServer(httpServer, peerOptions);
+    this.app.use('/peerjs', peerServer);
+
     httpServer
       .listen(this.port, () => {
         console.log(colors.bgGreen.black(`Server Running on Port ${this.port}`));
@@ -61,7 +70,7 @@ class Server {
     });
     io.on('connection', (socket) => {
       console.log(colors.bgMagenta.black('=> ** Websocket connection **'));
-
+      roomHandler(socket);
       socket.on('disconnect', () => {
         console.log(colors.yellow('=> ** Websocket connection finished **'));
       });
