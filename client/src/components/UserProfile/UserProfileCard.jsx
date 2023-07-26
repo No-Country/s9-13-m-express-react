@@ -1,19 +1,76 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import EditModal from './EditModal';
 import Link from 'next/link';
 
+const daysOfWeek = {
+  lunes: "monday",
+  martes: "tuesday",
+  miercoles: "wednesday",
+  jueves: "thursday",
+  viernes: "friday",
+  sabado: "saturday",
+  domingo: "sunday",
+}
 
 function UserProfileCard({ user }) {
   const [openModal, setOpenModal] = useState(false);
+  const [schedule, setSchedule] = useState({
+    day_of_week: "",
+    selected_day: ""
+  });
+  const currentUser = useSelector((state)=>state.user);
 
   const handleModal = () => {
     setOpenModal(!openModal);
   };
+  const handleSelectDaysChange = (e) => {
+    document.getElementById("selected_day").innerHTML = e.target.value
+    console.log(e.target.value)
+    schedule.day_of_week = daysOfWeek[e.target.value.toLowerCase()]
+    schedule.selected_day = e.target.value
+    setSchedule(schedule)
+    console.log({schedule})
+  };
 
+  const handleMeeting = () => {
+  const date = new Date()
+  const userId = document.getElementById("userId").value 
+  const userName = document.getElementById("userNmae").value
+  const newMeeting ={
+    message: "Prueba de implementación de API REST 2",
+    title: "Reunión de revisión de código 2",
+    status: "pending",
+    instructor_id: currentUser.user.id,
+    meeting_date: "2023-07-31T15:00:00Z",
+    start_meeting: "2023-07-31T15:00:00Z",
+    end_meeting: "2023-07-31T16:00:00Z",
+    duration_meeting: "1 hora",
+  
+  }
+  
+    console.log(newMeeting)
+    fetch("http://localhost:3001/api/v1/meetings",{
+      method: "POST",
+      headers: {
+        Authorization: "BEARER " + currentUser.token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newMeeting)
+    })
+    .then(data=>data.json())
+    .then(result=>{
+      console.log(result)
+    })
+    .catch(error=>console.log(error))
+  };
+    console.log("UserProfileCard");
+    console.log({user});
+    console.log("CurrentUser: ", currentUser);
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-auto h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
       <div className='bg-purpleThirty p-2 sm:p-4 md:p-6 lg:p-8 sm:col-span-3 md:col-span-5 lg:col-span-7 rounded-md'>
@@ -29,14 +86,20 @@ function UserProfileCard({ user }) {
             />
           </div>
           <div className='flex flex-col content-between gap-4'>
-            <h1 className='text-2xl font-bold'>
-              {user?.name || user?.username + ' ' + user?.last_name || ''}
+            <input type="hidden" id="userId" value={user?._id} />
+            <input type="hidden" id="userNmae" value={user?.username} />
+            <h1 className='text-2xl font-bold'>        
+              {/* {user?.member.name || '' + ' ' + user?.member.last_name || ''} */}
             </h1>
             <h4>
               Area de conocimiento:{' '}
+              {/* {
+              user?.member.skills.map(skill=>(
               <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                {user?.skills?.at(0)?.name}
+                {skill.name}
               </span>
+              ))
+              } */}
             </h4>
             <h4>
               Nivel:{' '}
@@ -54,9 +117,9 @@ function UserProfileCard({ user }) {
                 />
               </Link>
             </div>
-            <div className='flex flex-row items-center gap-1'>
+            <div className='flex flex-row items-center gap-1 capitalize'>
               <FaLocationDot className='text-purpleSecondary inline' />
-              <span>California, USA</span>
+              {/* <span>{user?.member.country}</span> */}
             </div>
           </div>
         </div>
@@ -86,18 +149,19 @@ function UserProfileCard({ user }) {
             <select
               id='nivel'
               value='nivel'
-              className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-10'
-              // onChange={handleNivelChange}
+              className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-10 capitalize'
+              onChange={handleSelectDaysChange}
             >
               <option value=''>--</option>
-              <option value='lunes'>Lunes</option>
-              <option value='martes'>Martes</option>
-              <option value='miercoles'>Miercoles</option>
-              <option value='jueves'>Jueves</option>
-              <option value='viernes'>Viernes</option>
-              <option value='sabado'>Sabado</option>
+              {
+                Object.keys(daysOfWeek).map((day)=>
+                  (
+                    <option value={day}>{day}</option>
+                  ))
+              }
             </select>
-
+                <p className='capitalize mt-10' id="selected_day">
+                </p>
             <p>Horario: </p>
             <select
               id='valoracion'
@@ -110,6 +174,11 @@ function UserProfileCard({ user }) {
               <option value='tarde'>Tarde</option>
               <option value='noche'>Noche</option>
             </select>
+            <button id="exchangeBtn" className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'
+              onClick={handleMeeting}
+            >
+                    Hacer intercambio
+            </button>
           </div>
         </div>
       </div>
