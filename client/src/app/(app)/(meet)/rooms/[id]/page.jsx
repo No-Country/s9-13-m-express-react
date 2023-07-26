@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 function Room() {
   const { id } = useParams();
-  const { ws, me, stream, peers, participants } = useContext(RoomContext);
+  const { ws, me, stream, peers } = useContext(RoomContext);
   const [roomExists, setRoomExists] = useState(false);
 
   const { push } = useRouter();

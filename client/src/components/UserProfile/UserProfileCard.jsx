@@ -1,30 +1,30 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import EditModal from './EditModal';
 import Link from 'next/link';
 
-const daysOfWeek = {
-  lunes: 'monday',
-  martes: 'tuesday',
-  miercoles: 'wednesday',
-  jueves: 'thursday',
-  viernes: 'friday',
-  sabado: 'saturday',
-  domingo: 'sunday',
-};
+// const daysOfWeek = {
+//   lunes: 'monday',
+//   martes: 'tuesday',
+//   miercoles: 'wednesday',
+//   jueves: 'thursday',
+//   viernes: 'friday',
+//   sabado: 'saturday',
+//   domingo: 'sunday',
+// };
 
 function UserProfileCard({ user }) {
   console.log('=======>>user', user.member);
   const [openModal, setOpenModal] = useState(false);
 
-  const [schedule, setSchedule] = useState({
-    day_of_week: '',
-    selected_day: '',
-  });
+  // const [schedule, setSchedule] = useState({
+  //   day_of_week: '',
+  //   selected_day: '',
+  // });
   const currentUser = useSelector((state) => state.user);
 
   //     _id: "64c01ffe2ff923aabcc5ffc9",
@@ -100,12 +100,12 @@ function UserProfileCard({ user }) {
   const handleModal = () => {
     setOpenModal(!openModal);
   };
-  const handleSelectDaysChange = (e) => {
-    document.getElementById('selected_day').innerHTML = e.target.value;
-    schedule.day_of_week = daysOfWeek[e.target.value.toLowerCase()];
-    schedule.selected_day = e.target.value;
-    setSchedule(schedule);
-  };
+  // const handleSelectDaysChange = (e) => {
+  //   document.getElementById('selected_day').innerHTML = e.target.value;
+  //   schedule.day_of_week = daysOfWeek[e.target.value.toLowerCase()];
+  //   schedule.selected_day = e.target.value;
+  //   setSchedule(schedule);
+  // };
 
   const handleMeeting = () => {
     // const date = new Date()
@@ -126,7 +126,6 @@ function UserProfileCard({ user }) {
       duration_meeting: '1 hora',
     };
 
-    console.log('New>>>>', newMeeting);
     fetch('http://localhost:3001/api/v1/meetings', {
       method: 'POST',
       headers: {
@@ -164,16 +163,22 @@ function UserProfileCard({ user }) {
             </h1>
             <h4>
               Area de conocimiento:{' '}
-              {user?.member?.skills.map((skill) => (
-                <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+              {user?.member?.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'
+                >
                   {skill?.name}
                 </span>
               ))}
             </h4>
             <h4>
               Nivel:{' '}
-              {user?.member?.skills.map((skill) => (
-                <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+              {user?.member?.skills.map((skill, index) => (
+                <span
+                  key={index}
+                  className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'
+                >
                   {skill?.level}
                 </span>
               ))}
@@ -234,8 +239,9 @@ function UserProfileCard({ user }) {
               <option value='sabado'>Sabado</option>
             </select> */}
 
-            {user?.schedules?.map((schedule) => (
+            {user?.schedules?.map((schedule, index) => (
               <span
+                key={index}
                 onClick={() => handleSelectDay(schedule?.day_of_week)}
                 className={
                   selectDay === schedule?.day_of_week
@@ -272,9 +278,10 @@ function UserProfileCard({ user }) {
 
             </select> */}
 
-            {user?.schedules?.map((schedule) =>
+            {user?.schedules?.map((schedule, index) =>
               selectDay === schedule?.day_of_week ? (
                 <span
+                  key={index}
                   onClick={() =>
                     handleSelectHour({
                       startTime: schedule?.start_time,
