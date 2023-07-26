@@ -7,9 +7,93 @@ import EditModal from './EditModal';
 import Link from 'next/link';
 
 
-function UserProfileCard({ user }) {
+function UserProfileCard({user}) {
   const [openModal, setOpenModal] = useState(false);
+  console.log('==============user', user)
+//   const user = {
 
+//     _id: "64c01ffe2ff923aabcc5ffc9",
+//     username: "marta",
+//     email: "marta@mail.com",
+//     role: [
+//       "trainee"
+//     ],
+//     member: {
+//     _id: "64c01ffe2ff923aabcc5ffc9",
+//     name: "Marta",
+//     last_name: "Jones",
+//     country: "Panama",
+//     preferences: [
+//         {
+//           description: "ingles",
+//           _id: "64c020702ff923aabcc5ffcd"
+//         }
+//       ],
+//       avatar: {
+//         public_id: "",
+//         secure_url: ""
+//       },
+//     skills: [
+//         {
+//         name: "Language",
+//         categor: "idiomas",
+//         descriptio: "un curso de ingles",
+//         leve: "intermedio",
+//         _i: "64c020702ff923aabcc5ffce"
+//         }
+//       ],
+//       user: "64c01ffe2ff923aabcc5ffc9",
+//       __v: 0
+//     },
+//     schedules: [{
+//       day_of_week: "Monday",
+//       start_time: "09:00",
+//       end_time: "11:00",
+//       user: "64a5f5c98811e5e812ba8f03",
+//       id: "64ad889529c433546db2fd75"
+//     },
+
+//     {
+//       day_of_week: "Saturday",
+//       start_time: "12:00",
+//       end_time: "14:00",
+//       user: "64ac96eed7adc47051fc195c",
+//       id: "64ad931b57685ee890cea493"
+//     },
+//     {
+//       day_of_week: "Tuesday",
+//       start_time: "07:00",
+//       end_time: "10:00",
+//       user: "64ac96eed7adc47051fc195c",
+//       id: "64ad931b57685ee890cea493"
+//     },
+
+//   ]
+
+// }
+
+
+
+  const [selectHour, setSelectHour] = useState(null);
+  const [selectDay, setSelectDay] = useState({});
+
+  const handleMeeting = async () => {
+    // const request = await fetch(
+    //   'https://skillswap.onrender.com/api/v1/'
+    // );
+    console.log(selectDay, selectHour)
+
+    // const response = await request.json();
+    alert('Se agendo la meeting!')
+  }
+  const handleSelectHour = (hour) => {
+    setSelectHour(hour);
+  }
+
+
+  const handleSelectDay = (day) => {
+    setSelectDay(day);
+  }
   const handleModal = () => {
     setOpenModal(!openModal);
   };
@@ -20,9 +104,13 @@ function UserProfileCard({ user }) {
         <div className='flex flex-row items-center justify-between'>
           <div>
             <img
-              src={
-                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-              }
+              src=
+                {
+                  user?.member?.avatar?.secure_url ? user?.member?.avatar?.secure_url
+                  : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+                }
+
+
               alt='#'
               className='w-20 sm:w-24 md:w-32 lg:w-40 rounded-full'
               // className='w-full h-full rounded-full'
@@ -30,19 +118,29 @@ function UserProfileCard({ user }) {
           </div>
           <div className='flex flex-col content-between gap-4'>
             <h1 className='text-2xl font-bold'>
-              {user?.name || user?.username + ' ' + user?.last_name || ''}
+              {user?.member?.name + ' ' + user?.member?.last_name}
             </h1>
             <h4>
               Area de conocimiento:{' '}
-              <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                {user?.skills?.at(0)?.name}
-              </span>
+              {
+                user?.member?.skills.map(skill => (
+                  <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+
+                    {skill?.name}
+                  </span>
+                ))
+              }
             </h4>
             <h4>
               Nivel:{' '}
-              <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                Avanzado
-              </span>
+                {
+                  user?.member?.skills.map(skill => (
+                  <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+
+                  {skill?.level}
+                  </span>
+                ))
+                }
             </h4>
           </div>
           <div className='flex flex-col gap-16'>
@@ -56,7 +154,7 @@ function UserProfileCard({ user }) {
             </div>
             <div className='flex flex-row items-center gap-1'>
               <FaLocationDot className='text-purpleSecondary inline' />
-              <span>California, USA</span>
+              <span>{user?.member?.country}</span>
             </div>
           </div>
         </div>
@@ -83,7 +181,7 @@ function UserProfileCard({ user }) {
           </div>
           <div className='flex flex-col gap-4'>
             <p>Dias: </p>
-            <select
+            {/* <select
               id='nivel'
               value='nivel'
               className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-10'
@@ -96,10 +194,30 @@ function UserProfileCard({ user }) {
               <option value='jueves'>Jueves</option>
               <option value='viernes'>Viernes</option>
               <option value='sabado'>Sabado</option>
-            </select>
+            </select> */}
+
+            {
+
+            user?.schedules?.map(schedule => (
+
+
+              <span
+
+                onClick={() => handleSelectDay(schedule?.day_of_week)}
+                className={selectDay ===  schedule?.day_of_week  ? 'w-1/2 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-white bg-purpleSecondary cursor-pointer'
+                :
+                  'w-1/2 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-purpleSecondary bg-white cursor-pointer'}
+
+                >
+                {/* {user?.skills?.at(0)?.name} */}
+                {schedule?.day_of_week}
+              </span>
+            ))
+
+            }
 
             <p>Horario: </p>
-            <select
+            {/* <select
               id='valoracion'
               value='valoracion'
               className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-24'
@@ -109,12 +227,42 @@ function UserProfileCard({ user }) {
               <option value='mañana'>Mañana</option>
               <option value='tarde'>Tarde</option>
               <option value='noche'>Noche</option>
-            </select>
+            </select> */}
+
+            {
+
+            user?.schedules?.map(schedule => (
+
+              selectDay === schedule?.day_of_week ?
+              <span
+
+                onClick={() => handleSelectHour({startTime: schedule?.start_time, endTime: schedule?.end_time})}
+                className={selectHour?.startTime ===  schedule?.start_time  ? 'w-1/1 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-white bg-purpleSecondary cursor-pointer'
+                :
+                  'w-1/1 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-purpleSecondary bg-white cursor-pointer'}
+
+                >
+                {/* {user?.skills?.at(0)?.name} */}
+                {schedule?.start_time + ' - ' + schedule?.end_time}
+              </span>
+
+              : null
+            ))
+
+            }
+
+            <button className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'
+              onClick={handleMeeting}
+            >
+                    Hacer intercambio
+            </button>
           </div>
         </div>
       </div>
       {openModal && <EditModal modalState={handleModal} />}
     </div>
+
+
   );
 }
 

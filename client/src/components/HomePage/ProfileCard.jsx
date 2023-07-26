@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 export default function ProfileCard({ profileData, isSingle }) {
-  console.log(profileData);
+  console.log('Card----->', profileData.member.user);
   if (isSingle) {
     return (
       <div className='bg-purpleThirty w-fit rounded-xl'>
@@ -46,7 +46,7 @@ export default function ProfileCard({ profileData, isSingle }) {
                 <h5 className='text-lg'>Valoraciones: ⭐⭐⭐⭐⭐</h5>
                 <Link
                   href={`/profile/${
-                    profileData.id || profileData._id || profileData.user
+                    profileData?.member?.user
                   }`}
                 >
                   <button className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'>
