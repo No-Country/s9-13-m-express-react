@@ -1,28 +1,38 @@
 'use client';
 
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { VideoPlayer } from '@/components/Meet/VideoPlayer';
 import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
 import Navbar from '@/components/Meet/Navbar';
 import Controllers from '@/components/Meet/Controller';
 import { BsArrowLeftShort } from 'react-icons/bs';
+import Link from 'next/link';
 
 function Room() {
   const { id } = useParams();
   const { ws, me, stream, peers, participants } = useContext(RoomContext);
+  const [roomExists, setRoomExists] = useState(false);
 
   const { push } = useRouter();
 
   useEffect(() => {
+    fetch(`http://localhost:3001/api/v1/rooms/${id}`).then((res) =>
+      res.status === 200 ? setRoomExists(true) : setRoomExists(false)
+    );
     if (me) ws.emit('join-room', { roomId: id, peerId: me._id });
   }, [ws, me, id]);
 
   const handleBack = () => {
-    push('/meeting');
+    push('/home');
   };
 
-  return (
+  return !roomExists ? (
+    <div className='flex flex-col gap-5 w-screen h-screen justify-center items-center'>
+      <span>La sala no existe</span>
+      <Link href={'/home'}>Volver al inicio</Link>
+    </div>
+  ) : (
     <div>
       <Navbar />
       <div className='flex justify-center items-center p-2 bg-purpleSecondary border-t-2 border-[#797180]'>

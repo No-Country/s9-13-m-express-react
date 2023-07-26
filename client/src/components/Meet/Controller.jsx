@@ -22,7 +22,7 @@ export default function Controllers({ stream }) {
   };
 
   const handleLeave = () => {
-    push('/meeting');
+    push('/home');
   };
 
   return (

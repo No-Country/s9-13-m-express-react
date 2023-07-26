@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
-import { v4 as uuidV4 } from 'uuid';
-const rooms: Record<string, string[]> = {};
+
+import { rooms } from '../database/rooms';
 interface IRoomParams {
   roomId: string;
   peerId: string;
