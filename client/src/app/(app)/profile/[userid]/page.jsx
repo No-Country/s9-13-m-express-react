@@ -1,7 +1,7 @@
 'use client';
 
 import SideBar from '@/components/HomePage/SideBar';
-import UserProfileCard from '@/components/UserProfile/UserProfileCard';
+import FullProfileCard from '@/components/UserProfile/FullProfileCard';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -35,7 +35,7 @@ export default function Page({ params }) {
             <span>Atras</span>
           </Link>
         </div>
-        <UserProfileCard user={user} />
+        <FullProfileCard user={user}/>
       </div>
     </main>
   );

@@ -1,33 +1,36 @@
 'use client';
-import { React, useState } from 'react';
-import Image from 'next/image';
+import { React } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 // import Link from 'next/link';
 
-function FullProfileCard() {
-
-
+function FullProfileCard({ user }) {
+  const image = user?.member?.avatar?.secure_url
 
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-full h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
       <div className='bg-purpleThirty p-2 sm:p-4 md:p-6 lg:p-8 sm:col-span-3 md:col-span-5 lg:col-span-7 rounded-md'>
         <div className='flex flex-row items-center justify-between'>
           <div>
-            <Image
-              src={'/images/users/user01.png'}
+            <img
+              src={
+                image || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+              }
               width={120}
               height={120}
               alt='#'
               className='w-20 sm:w-24 md:w-32 lg:w-40 rounded-full'
-              // className='w-full h-full rounded-full'
             />
           </div>
           <div className='flex flex-col content-between gap-4'>
-            <h1 className='text-2xl font-bold'>Billy Sommers</h1>
+            <h1 className='text-2xl font-bold'>
+              {user?.member?.name ||
+                user?.username + ' ' + user?.member?.last_name ||
+                ''}
+            </h1>
             <h4>
               Area de conocimiento:{' '}
               <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
-                Programacion
+                {user?.skills?.at(0).name}
               </span>
             </h4>
             <h4>
@@ -40,7 +43,7 @@ function FullProfileCard() {
           <div className='flex flex-col gap-16'>
             <div className='flex flex-row items-center gap-1'>
               <FaLocationDot className='text-purpleSecondary inline' />
-              <span>California, USA</span>
+              <span>{user?.member?.country || ''}</span>
             </div>
           </div>
         </div>
@@ -49,7 +52,7 @@ function FullProfileCard() {
         <div className='flex flex-col gap-24'>
           <div>
             <h4>Sobre mi experiencia:</h4>
-            <p>Aun sin descripcion.</p>
+            <p>{user?.skills?.description || 'Aun sin informacion.'}</p>
           </div>
           <div>
             <h4>Valoraciones:</h4>
