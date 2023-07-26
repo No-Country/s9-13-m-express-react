@@ -1,12 +1,10 @@
 'use client';
 
-import { useSelector } from 'react-redux';
 import { TbPointFilled } from 'react-icons/tb';
 import Link from 'next/link';
 import ListButtonSkills from '@/components/Skills/ListButtonSkills';
 
 const TeachSkills = () => {
-  const currentUser = useSelector((state) => state.user);
   let skills = ['Idiomas', 'tecnología', 'Artes', 'Cocina', 'Yoga', 'Otros'];
   let path = 'ensenar';
 

@@ -1,10 +1,10 @@
 'use client';
+
 import { React } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
-// import Link from 'next/link';
 
 function FullProfileCard({ user }) {
-  const image = user?.member?.avatar?.secure_url
+  const image = user?.member?.avatar?.secure_url;
 
   return (
     <div className='bg-white grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-7 w-full h-fit max-w-4xl gap-4 overflow-hidden mx-auto'>
@@ -13,7 +13,8 @@ function FullProfileCard({ user }) {
           <div>
             <img
               src={
-                image || 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+                image ||
+                'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
               }
               width={120}
               height={120}

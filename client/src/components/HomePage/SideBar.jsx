@@ -50,7 +50,7 @@ export default function SideBar({ show }) {
           <div className='flex flex-col gap-6 items-center mt-4'>
             <select
               id='nivel'
-              value='nivel'
+              value={nivel}
               className='w-52 h-12 py-2 px-4 rounded-sm'
               onChange={handleNivelChange}
             >
@@ -62,7 +62,7 @@ export default function SideBar({ show }) {
 
             <select
               id='valoracion'
-              value='valoracion'
+              value={valoracion}
               className='w-52 h-12 py-2 px-4 rounded-sm'
               onChange={handleValoracionChange}
             >

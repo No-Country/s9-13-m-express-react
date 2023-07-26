@@ -1,7 +1,7 @@
 'use client';
 
 import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
-import CardMeet from '@/components/Meet/cardMeet';
+import CardMeet from '@/components/Meet/CardMeet';
 import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
