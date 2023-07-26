@@ -48,8 +48,6 @@ export default function LoginFormComponent() {
 
       const response = await request.json();
 
-      console.log(response);
-
       if (request.status === 201) {
         toast.success(`Login Succesfully`, {
           position: 'top-center',
@@ -66,7 +64,6 @@ export default function LoginFormComponent() {
         resetForm();
         router.push('/home');
       } else {
-        console.log(response);
         toast.error(response.error, {
           position: 'top-center',
           autoClose: 5000,

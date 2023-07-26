@@ -16,9 +16,7 @@ export default function HomePage() {
       );
       const data = await request.json();
       // number random of the users
-      console.log(
-        data?.members[Math.floor(Math.random() * data?.members?.length)]
-      );
+
       setSuggestUser(
         data?.members[Math.floor(Math.random() * data?.members?.length)]
       );

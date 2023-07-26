@@ -9,12 +9,10 @@ export default function SideBar({ show }) {
 
   const handleNivelChange = (e) => {
     setNivel(e.target.value);
-    console.log(nivel);
   };
 
   const handleValoracionChange = (e) => {
     setValoracion(e.target.value);
-    console.log(valoracion);
   };
 
   if (show === 'home') {

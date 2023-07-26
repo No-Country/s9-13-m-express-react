@@ -58,6 +58,16 @@ export const RoomProvider = ({ children }) => {
     ws.on('user-disconnected', leaveRoom);
     ws.on('room-created', enterRoom);
     ws.on('get-users', getUsers);
+
+    return () => {
+      ws.off('user-disconnected');
+      ws.off('room-created');
+      ws.off('get-users');
+
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
   }, []);
 
   useEffect(() => {
@@ -82,6 +92,14 @@ export const RoomProvider = ({ children }) => {
         setPeers((prev) => ({ ...prev, [call.peer]: { stream: peerStream } }));
       });
     });
+
+    return () => {
+      ws.off('user-joined');
+
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
   }, [me, stream]);
 
   return (

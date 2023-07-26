@@ -16,7 +16,6 @@ export default function Page({ params }) {
         `https://skillswap.onrender.com/api/v1/users/${userid}`
       );
       const response = await request.json();
-      console.log(response?.user?.at(0));
       setUser(response?.user?.at(0));
     }
 

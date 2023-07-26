@@ -3,17 +3,19 @@
 import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
 import CardMeet from '@/components/Meet/cardMeet';
 import { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function Meeting() {
   const { ws } = useContext(RoomContext);
   const [data, setData] = useState([]);
+  const currentUser = useSelector((state) => state.user);
 
   const createRoom = (roomId) => {
     ws.emit('create-room', roomId);
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('token') ?? false;
+    const token = currentUser.token;
     if (token) {
       fetch('http://localhost:3001/api/v1/meetings/instructor', {
         method: 'GET',
