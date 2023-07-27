@@ -81,16 +81,16 @@ function UserProfileCard({ user, instructor_id }) {
             </h1>
             <h4>
               Area de conocimiento:{' '}
-              {user?.profile?.skills.map((skill) => (
-                <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+              {user?.profile?.skills.map((skill, index) => (
+                <span key={index} className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
                   {skill?.name}
                 </span>
               ))}
             </h4>
             <h4>
               Nivel:{' '}
-              {user?.profile?.skills.map((skill) => (
-                <span className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
+              {user?.profile?.skills.map((skill, index) => (
+                <span key={index} className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'>
                   {skill?.level}
                 </span>
               ))}
@@ -136,8 +136,9 @@ function UserProfileCard({ user, instructor_id }) {
           <div className='flex flex-col gap-4'>
             <p>Dias: </p>
 
-            {user?.schedules?.map((schedule) => (
+            {user?.schedules?.map((schedule, index) => (
               <span
+              key={index}
                 onClick={() => handleSelectDay(schedule?.day_of_week)}
                 className={
                   selectDay === schedule?.day_of_week
@@ -151,9 +152,10 @@ function UserProfileCard({ user, instructor_id }) {
 
             <p>Horario: </p>
 
-            {user?.schedules?.map((schedule) =>
+            {user?.schedules?.map((schedule, index) =>
               selectDay === schedule?.day_of_week ? (
                 <span
+                  key={index}
                   onClick={() =>
                     handleSelectHour({
                       startTime: schedule?.start_time,
