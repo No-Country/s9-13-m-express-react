@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { BACKEND_URL_BASE } from '@/config/index.js';
-import Image from 'next/image';
 
 export default function CardMeet({ children, card, id }) {
   const [data, setData] = useState({});
