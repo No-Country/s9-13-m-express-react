@@ -66,6 +66,7 @@ class MeetingsController {
       const { _id: meetingId } = req.user;
       const meetingData = req.body;
       const data = { trainee_id: meetingId, ...meetingData };
+      console.log(data);
 
       const newMeeting = await meetingsService.createMeeting(data);
       return res.status(201).json({

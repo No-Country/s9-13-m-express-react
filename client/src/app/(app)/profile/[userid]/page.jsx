@@ -34,7 +34,7 @@ export default function Page({ params }) {
             <span>Atras</span>
           </Link>
         </div>
-        <FullProfileCard user={user}/>
+        <FullProfileCard user={user} instructor_id={userid} />
       </div>
     </main>
   );
