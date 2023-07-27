@@ -8,6 +8,7 @@ import Navbar from '@/components/Meet/Navbar';
 import Controllers from '@/components/Meet/Controller';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import Link from 'next/link';
+import { BACKEND_URL_BASE } from '@/config/index.js';
 
 function Room() {
   const { id } = useParams();
@@ -17,7 +18,7 @@ function Room() {
   const { push } = useRouter();
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/v1/rooms/${id}`).then((res) =>
+    fetch(`${BACKEND_URL_BASE}/rooms/${id}`).then((res) =>
       res.status === 200 ? setRoomExists(true) : setRoomExists(false)
     );
     if (me) ws.emit('join-room', { roomId: id, peerId: me._id });

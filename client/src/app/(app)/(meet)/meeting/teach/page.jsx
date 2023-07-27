@@ -4,6 +4,7 @@ import { RoomContext } from '@/app/(app)/(meet)/RoomContext';
 import CardMeet from '@/components/Meet/CardMeet';
 import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { BACKEND_URL_BASE } from '@/config/index.js';
 
 export default function Meeting() {
   const { ws } = useContext(RoomContext);
@@ -17,7 +18,7 @@ export default function Meeting() {
   useEffect(() => {
     const token = currentUser.token;
     if (token) {
-      fetch('http://localhost:3001/api/v1/meetings/instructor', {
+      fetch(`${BACKEND_URL_BASE}/meetings/instructor`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

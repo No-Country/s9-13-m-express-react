@@ -4,6 +4,7 @@ import CardMeet from '@/components/Meet/CardMeet';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { BACKEND_URL_BASE } from '@/config/index.js';
 
 export default function Meeting() {
   const [data, setData] = useState([]);
@@ -12,7 +13,7 @@ export default function Meeting() {
   useEffect(() => {
     const token = currentUser.token;
     if (token) {
-      fetch('http://localhost:3001/api/v1/meetings/trainee', {
+      fetch(`${BACKEND_URL_BASE}/meetings/trainee`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,

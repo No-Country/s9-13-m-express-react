@@ -6,6 +6,7 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import EditModal from './EditModal';
 import Link from 'next/link';
+import { BACKEND_URL_BASE } from '@/config/index.js';
 
 // const daysOfWeek = {
 //   lunes: 'monday',
@@ -126,7 +127,7 @@ function UserProfileCard({ user }) {
       duration_meeting: '1 hora',
     };
 
-    fetch('http://localhost:3001/api/v1/meetings', {
+    fetch(`${BACKEND_URL_BASE}/meetings`, {
       method: 'POST',
       headers: {
         Authorization: 'BEARER ' + currentUser.token,

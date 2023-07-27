@@ -2,9 +2,10 @@
 
 import { createContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import { PEER_HOST, PEER_PORT, WEBSOCKET_URL } from '@/config/index.js';
 
 export const RoomContext = createContext(null);
-const WS = 'http://localhost:3001';
+const WS = WEBSOCKET_URL;
 const ws = io(WS);
 import { v4 as uuidV4 } from 'uuid';
 import { useRouter } from 'next/navigation';
@@ -38,8 +39,8 @@ export const RoomProvider = ({ children }) => {
       import('peerjs').then((data) => {
         const peer = new data.Peer(meId, {
           path: '/peerjs',
-          host: 'https://skillswap.onrender.com/',
-          port: '10000',
+          host: `${PEER_HOST}`,
+          port: PEER_PORT,
         });
         setMe(peer);
       });

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BACKEND_URL_BASE } from '@/config/index.js';
 
 export default function CardMeet({ children, card, id }) {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ export default function CardMeet({ children, card, id }) {
   ];
 
   useEffect(() => {
-    fetch(`http://localhost:3001/api/v1/users/${id}`, {
+    fetch(`${BACKEND_URL_BASE}/users/${id}`, {
       method: 'GET',
     })
       .then((res) => res.json())
