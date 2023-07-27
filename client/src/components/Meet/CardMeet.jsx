@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BACKEND_URL_BASE } from '@/config/index.js';
+import Image from 'next/image';
 
 export default function CardMeet({ children, card, id }) {
-  const [username, setUsername] = useState('');
+  const [data, setData] = useState({});
   const date = new Date(card.start_meeting);
   const hour = date.getHours();
   const day = date.getDay();
@@ -22,7 +23,7 @@ export default function CardMeet({ children, card, id }) {
       method: 'GET',
     })
       .then((res) => res.json())
-      .then((data) => setUsername(data.user[0].username));
+      .then((data) => setData(data.user[0]));
   }, []);
 
   return (
@@ -33,15 +34,18 @@ export default function CardMeet({ children, card, id }) {
       </span>
       {/* primer div */}
       <div className='flex flex-row gap-10 items-center w-full'>
-        <span>con</span>
+        <span className='w-20'>con</span>
         <div className='bg-white rounded-lg flex items-center gap-5 p-4'>
-          <img src='#' className='bg-black w-6 h-6 rounded-full' />
-          <h2>{username}</h2>
+          <img
+            src={data?.profile?.avatar?.secure_url}
+            className='bg-black w-6 h-6 rounded-full object-cover'
+          />
+          <h2>{data.username}</h2>
         </div>
       </div>
       {/* segundo div */}
       <div className='flex flex-row gap-10 items-center w-full'>
-        <span>horario</span>
+        <span className='w-20'>horario</span>
         <div className='bg-white rounded-lg flex flex-row p-4 gap-5 items-center'>
           <span className='bg-purpleIconsAndInputs text-white p-2 rounded-lg'>
             {daysOfWeek[day]}
