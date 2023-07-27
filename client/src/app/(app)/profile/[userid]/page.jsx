@@ -2,6 +2,7 @@
 
 import SideBar from '@/components/HomePage/SideBar';
 import FullProfileCard from '@/components/UserProfile/FullProfileCard';
+import { BACKEND_URL_BASE } from '@/config';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -12,9 +13,7 @@ export default function Page({ params }) {
   const { userid } = params;
   useEffect(() => {
     async function getUserData() {
-      const request = await fetch(
-        `https://skillswap.onrender.com/api/v1/users/${userid}`
-      );
+      const request = await fetch(`${BACKEND_URL_BASE}/users/${userid}`);
       const response = await request.json();
       setUser(response?.user?.at(0));
     }

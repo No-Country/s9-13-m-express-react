@@ -1,145 +1,16 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { FaLocationDot } from 'react-icons/fa6';
 import { MdEdit } from 'react-icons/md';
 import EditModal from './EditModal';
 import Link from 'next/link';
-import { BACKEND_URL_BASE } from '@/config/index.js';
-
-// const daysOfWeek = {
-//   lunes: 'monday',
-//   martes: 'tuesday',
-//   miercoles: 'wednesday',
-//   jueves: 'thursday',
-//   viernes: 'friday',
-//   sabado: 'saturday',
-//   domingo: 'sunday',
-// };
 
 function UserProfileCard({ user }) {
-  console.log('=======>>user', user.member);
   const [openModal, setOpenModal] = useState(false);
 
-  // const [schedule, setSchedule] = useState({
-  //   day_of_week: '',
-  //   selected_day: '',
-  // });
-  const currentUser = useSelector((state) => state.user);
-
-  //     _id: "64c01ffe2ff923aabcc5ffc9",
-  //     username: "marta",
-  //     email: "marta@mail.com",
-  //     role: [
-  //       "trainee"
-  //     ],
-  //     member: {
-  //     _id: "64c01ffe2ff923aabcc5ffc9",
-  //     name: "Marta",
-  //     last_name: "Jones",
-  //     country: "Panama",
-  //     preferences: [
-  //         {
-  //           description: "ingles",
-  //           _id: "64c020702ff923aabcc5ffcd"
-  //         }
-  //       ],
-  //       avatar: {
-  //         public_id: "",
-  //         secure_url: ""
-  //       },
-  //     skills: [
-  //         {
-  //         name: "Language",
-  //         categor: "idiomas",
-  //         descriptio: "un curso de ingles",
-  //         leve: "intermedio",
-  //         _i: "64c020702ff923aabcc5ffce"
-  //         }
-  //       ],
-  //       user: "64c01ffe2ff923aabcc5ffc9",
-  //       __v: 0
-  //     },
-  //     schedules: [{
-  //       day_of_week: "Monday",
-  //       start_time: "09:00",
-  //       end_time: "11:00",
-  //       user: "64a5f5c98811e5e812ba8f03",
-  //       id: "64ad889529c433546db2fd75"
-  //     },
-
-  //     {
-  //       day_of_week: "Saturday",
-  //       start_time: "12:00",
-  //       end_time: "14:00",
-  //       user: "64ac96eed7adc47051fc195c",
-  //       id: "64ad931b57685ee890cea493"
-  //     },
-  //     {
-  //       day_of_week: "Tuesday",
-  //       start_time: "07:00",
-  //       end_time: "10:00",
-  //       user: "64ac96eed7adc47051fc195c",
-  //       id: "64ad931b57685ee890cea493"
-  //     },
-
-  //   ]
-
-  // }
-
-  const [selectHour, setSelectHour] = useState(null);
-  const [selectDay, setSelectDay] = useState({});
-
-  const handleSelectHour = (hour) => {
-    setSelectHour(hour);
-  };
-
-  const handleSelectDay = (day) => {
-    setSelectDay(day);
-  };
   const handleModal = () => {
     setOpenModal(!openModal);
-  };
-  // const handleSelectDaysChange = (e) => {
-  //   document.getElementById('selected_day').innerHTML = e.target.value;
-  //   schedule.day_of_week = daysOfWeek[e.target.value.toLowerCase()];
-  //   schedule.selected_day = e.target.value;
-  //   setSchedule(schedule);
-  // };
-
-  const handleMeeting = () => {
-    // const date = new Date()
-    // const userId = document.getElementById("userId").value
-    // const userName = document.getElementById("userNmae").value
-
-    let hour1 = Number(selectHour.startTime.split(':')[0]);
-
-    let hora = new Date().setUTCHours(hour1);
-    const newMeeting = {
-      message: 'Prueba de implementación de API REST 2',
-      title: 'Reunión de revisión de código 2',
-      status: 'pending',
-      instructor_id: user?.member?.user,
-      meeting_date: '2023-07-31T15:00:00Z',
-      start_meeting: hora,
-      end_meeting: '2023-07-31T15:00:00Z',
-      duration_meeting: '1 hora',
-    };
-
-    fetch(`${BACKEND_URL_BASE}/meetings`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'BEARER ' + currentUser.token,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newMeeting),
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        console.log('result>>>>', result);
-      })
-      .catch((error) => console.log(error));
   };
 
   return (
@@ -149,22 +20,21 @@ function UserProfileCard({ user }) {
           <div>
             <img
               src={
-                user?.member?.avatar?.secure_url
-                  ? user?.member?.avatar?.secure_url
+                user?.profile?.avatar?.secure_url
+                  ? user?.profile?.avatar?.secure_url
                   : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
               }
               alt='#'
               className='w-20 sm:w-24 md:w-32 lg:w-40 rounded-full'
-              // className='w-full h-full rounded-full'
             />
           </div>
           <div className='flex flex-col content-between gap-4'>
             <h1 className='text-2xl font-bold'>
-              {user?.member?.name + ' ' + user?.member?.last_name}
+              {user?.profile?.name + ' ' + user?.profile?.last_name}
             </h1>
             <h4>
               Area de conocimiento:{' '}
-              {user?.member?.skills.map((skill, index) => (
+              {user?.profile?.skills.map((skill, index) => (
                 <span
                   key={index}
                   className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'
@@ -175,7 +45,7 @@ function UserProfileCard({ user }) {
             </h4>
             <h4>
               Nivel:{' '}
-              {user?.member?.skills.map((skill, index) => (
+              {user?.profile?.skills.map((skill, index) => (
                 <span
                   key={index}
                   className='bg-purpleSecondary p-2 rounded-xl text-white text-xs'
@@ -197,7 +67,7 @@ function UserProfileCard({ user }) {
             <div className='flex flex-row items-center gap-1 capitalize'>
               <FaLocationDot className='text-purpleSecondary inline' />
 
-              <span>{user?.member?.country}</span>
+              <span>{user?.profile?.country}</span>
             </div>
           </div>
         </div>
@@ -224,90 +94,8 @@ function UserProfileCard({ user }) {
           </div>
           <div className='flex flex-col gap-4'>
             <p>Dias: </p>
-            {/* <select
-              id='nivel'
-              value='nivel'
-              className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-10 capitalize'
-              onChange={handleSelectDaysChange}
-            >
-              <option value=''>--</option>
-
-              <option value='lunes'>Lunes</option>
-              <option value='martes'>Martes</option>
-              <option value='miercoles'>Miercoles</option>
-              <option value='jueves'>Jueves</option>
-              <option value='viernes'>Viernes</option>
-              <option value='sabado'>Sabado</option>
-            </select> */}
-
-            {user?.schedules?.map((schedule, index) => (
-              <span
-                key={index}
-                onClick={() => handleSelectDay(schedule?.day_of_week)}
-                className={
-                  selectDay === schedule?.day_of_week
-                    ? 'w-1/2 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-white bg-purpleSecondary cursor-pointer'
-                    : 'w-1/2 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-purpleSecondary bg-white cursor-pointer'
-                }
-              >
-                {/* {user?.skills?.at(0)?.name} */}
-                {schedule?.day_of_week}
-              </span>
-            ))}
-
-            {/* {
-                Object.keys(daysOfWeek).map((day)=>
-                  (
-                    <option value={day}>{day}</option>
-                  ))
-              }
-            </select>
-                <p className='capitalize mt-10' id="selected_day">
-                </p> */}
 
             <p>Horario: </p>
-            {/* <select
-              id='valoracion'
-              value='valoracion'
-              className='w-1/2 h-auto py-1 px-4 rounded-md border-2 border-purpleSecondary mb-24'
-              // onChange={handleValoracionChange}
-            >
-              <option value=''>--</option>
-              <option value='mañana'>Mañana</option>
-              <option value='tarde'>Tarde</option>
-              <option value='noche'>Noche</option>
-
-            </select> */}
-
-            {user?.schedules?.map((schedule, index) =>
-              selectDay === schedule?.day_of_week ? (
-                <span
-                  key={index}
-                  onClick={() =>
-                    handleSelectHour({
-                      startTime: schedule?.start_time,
-                      endTime: schedule?.end_time,
-                    })
-                  }
-                  className={
-                    selectHour?.startTime === schedule?.start_time
-                      ? 'w-1/1 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-white bg-purpleSecondary cursor-pointer'
-                      : 'w-1/1 h-auto py-1 px-1 rounded-md border-2 border-purpleSecondary mb-10 text-center text-purpleSecondary bg-white cursor-pointer'
-                  }
-                >
-                  {/* {user?.skills?.at(0)?.name} */}
-                  {schedule?.start_time + ' - ' + schedule?.end_time}
-                </span>
-              ) : null
-            )}
-
-            <button
-              id='exchangeBtn'
-              className='bg-yellowPrimary px-4 py-2 mx-auto text-purplePrimary rounded-3xl w-full'
-              onClick={handleMeeting}
-            >
-              Hacer intercambio
-            </button>
           </div>
         </div>
       </div>
