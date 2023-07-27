@@ -38,8 +38,8 @@ export const RoomProvider = ({ children }) => {
       import('peerjs').then((data) => {
         const peer = new data.Peer(meId, {
           path: '/peerjs',
-          host: '/',
-          port: '3001',
+          host: 'https://skillswap.onrender.com/',
+          port: '10000',
         });
         setMe(peer);
       });
