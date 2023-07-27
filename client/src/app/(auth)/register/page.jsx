@@ -57,8 +57,6 @@ export default function RegisterFormComponent() {
 
       const response = await request.json();
 
-      console.log(response);
-
       if (request.status == 201) {
         toast.success(`Register Succesfully`, {
           position: 'top-center',
@@ -74,7 +72,6 @@ export default function RegisterFormComponent() {
         dispatch(onLogin(response.data));
         resetForm();
       } else {
-        console.log(response);
         toast.error(response.message, {
           position: 'top-center',
           autoClose: 5000,

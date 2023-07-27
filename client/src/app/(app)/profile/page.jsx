@@ -2,14 +2,23 @@
 
 import SideBar from '@/components/HomePage/SideBar';
 import UserProfileCard from '@/components/UserProfile/UserProfileCard';
+import { BACKEND_URL_BASE } from '@/config';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 
 export default function UserProfile() {
   const { user } = useSelector((state) => state.user);
+  const [data, setData] = useState({});
 
+  useEffect(() => {
+    if (user.id) {
+      fetch(`${BACKEND_URL_BASE}/users/${user.id}`)
+        .then((res) => res.json())
+        .then((response) => setData(response.user[0]));
+    }
+  }, []);
   return (
     <main className='min-h-screen flex flex-row bg-white font-semibold'>
       <div className='bg-purpleThirty mx-auto flex-shrink-0 pt-10 shadow-xl'>
@@ -22,7 +31,7 @@ export default function UserProfile() {
             <span>Atras</span>
           </Link>
         </div>
-        <UserProfileCard user={user} />
+        <UserProfileCard user={data} />
       </div>
     </main>
   );

@@ -7,6 +7,7 @@ import categoriesRouter from './categories.routes';
 import scheduleRouter from './schedule.routes';
 import meetingRouter from './meetings.routes';
 import searchRouter from './search.routes';
+import rooms from './rooms.routes';
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use('/schedule', scheduleRouter);
 router.use('/users', userRouter);
 router.use('/meetings', meetingRouter);
 router.use('/', searchRouter);
+router.use('/rooms', rooms);
 
 export default router;

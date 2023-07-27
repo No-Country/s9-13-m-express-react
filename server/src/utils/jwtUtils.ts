@@ -8,7 +8,7 @@ class JWTUtils {
     this.secret = process.env.JWT_SECRET!;
   }
 
-  public generateAccessToken = (payload: TokenPayload, expiresIn: string = '1h'): string => {
+  public generateAccessToken = (payload: TokenPayload, expiresIn: string = '24h'): string => {
     return jwt.sign(payload, this.secret, { expiresIn });
   };
 

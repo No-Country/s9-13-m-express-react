@@ -7,7 +7,8 @@ const router = Router();
 
 router.get('/', authenticate, meetingsController.getMeetings);
 
-router.get('/:meetingId', authenticate, validator.meetingByIdValidator, meetingsController.getMeetingById);
+router.get('/instructor', authenticate, meetingsController.getMeetingInstructor);
+router.get('/trainee', authenticate, meetingsController.getMeetingTrainee);
 
 router.post('/', authenticate, validator.createMeetingValidator, meetingsController.createMeeting);
 

@@ -9,12 +9,10 @@ export default function SideBar({ show }) {
 
   const handleNivelChange = (e) => {
     setNivel(e.target.value);
-    console.log(nivel);
   };
 
   const handleValoracionChange = (e) => {
     setValoracion(e.target.value);
-    console.log(valoracion);
   };
 
   if (show === 'home') {
@@ -28,11 +26,11 @@ export default function SideBar({ show }) {
           <FaUser />
           <p className='hidden md:inline'>Mi perfil</p>
         </Link>
-        <Link href='/#' className='flex items-center gap-4 mb-6'>
+        <Link href='/meeting/learn' className='flex items-center gap-4 mb-6'>
           <FaGlasses />
           <p className='hidden md:inline'>Solicitudes de aprendizaje</p>
         </Link>
-        <Link href='/#' className='flex items-center gap-4'>
+        <Link href='/meeting/teach' className='flex items-center gap-4'>
           <FaChalkboardTeacher />
           <p className='hidden md:inline'>Solicitudes de enseñanza</p>
         </Link>
@@ -52,7 +50,7 @@ export default function SideBar({ show }) {
           <div className='flex flex-col gap-6 items-center mt-4'>
             <select
               id='nivel'
-              value='nivel'
+              value={nivel}
               className='w-52 h-12 py-2 px-4 rounded-sm'
               onChange={handleNivelChange}
             >
@@ -64,7 +62,7 @@ export default function SideBar({ show }) {
 
             <select
               id='valoracion'
-              value='valoracion'
+              value={valoracion}
               className='w-52 h-12 py-2 px-4 rounded-sm'
               onChange={handleValoracionChange}
             >
