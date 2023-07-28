@@ -7,7 +7,6 @@ import Link from 'next/link';
 
 const OthersSkills = () => {
   const currentUser = useSelector((state) => state.user);
-  console.log(currentUser);
 
   return (
     <div className='h-full'>

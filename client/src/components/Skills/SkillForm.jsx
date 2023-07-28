@@ -22,15 +22,16 @@ export default function SkillForm({ fetchingDataFunction }) {
     },
     validationSchema: formValidation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values)
       fetchingDataFunction();
       resetForm();
     },
   });
 
   return (
-    <form className='space-y-4 bg-purple-200 container p-6 m-4 flex flex-col items-center' onSubmit={formik.handleSubmit}>
-
+    <form
+      className='space-y-4 bg-purple-200 container p-6 m-4 flex flex-col items-center'
+      onSubmit={formik.handleSubmit}
+    >
       <TextField
         name='title'
         id='title'

@@ -12,15 +12,13 @@ export default function HomePage() {
   useEffect(() => {
     async function getRamdonUser() {
       const request = await fetch(
-        'https://skillswap.onrender.com/api/v1/members'
+        'https://skillswap.onrender.com/api/v1/users?page=1&limit=15'
       );
       const data = await request.json();
       // number random of the users
-      console.log(
-        data?.members[Math.floor(Math.random() * data?.members?.length)]
-      );
+
       setSuggestUser(
-        data?.members[Math.floor(Math.random() * data?.members?.length)]
+        data?.users[Math.floor(Math.random() * data?.users?.length)]
       );
     }
     getRamdonUser();

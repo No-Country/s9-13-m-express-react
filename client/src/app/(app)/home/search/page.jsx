@@ -26,7 +26,7 @@ export default function SearchPage() {
         <SideBar show={'filter'} />
       </div>
 
-      <div className='mx-auto flex-grow pt-10 px-10 md:px-20 lg:px-28'>
+      <div className='mx-auto flex-grow pt-10 pb-12 px-10 md:px-20 lg:px-28'>
         <div className='flex flex-col items-center justify-center gap-16'>
           <div className='w-full'>
             <div className='flex flex-row items-center justify-start'>
