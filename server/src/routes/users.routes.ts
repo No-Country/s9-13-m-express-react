@@ -1,18 +1,16 @@
-/**Express router providing user related routes
- * @requires Express
- */
+import { findAllUser, findUserById } from '../controllers/user.controller';
+import { searchController } from '../controllers/search.controllers';
 import { Router } from 'express';
-import { loginUser, signupUser } from '../controllers/users.controllers';
-import { validatorLogin, validatorSignUp } from '../middlewares/validators/users';
 
 const router = Router();
 
-/*ROUTES*/
+/* Get All Users */
+router.get('/', findAllUser);
 
-/*Login*/
-router.post('/login', validatorLogin, loginUser);
+/* Search users */
+router.get('/search', searchController.search)
 
-/*Sign up*/
-router.post('/signup', validatorSignUp, signupUser);
+/* Get User by Id */
+router.get('/:id', findUserById);
 
 export default router;

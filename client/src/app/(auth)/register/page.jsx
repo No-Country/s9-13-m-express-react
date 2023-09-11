@@ -1,14 +1,28 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
 import Link from 'next/link';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import { Oval } from 'react-loader-spinner';
+import { useRouter } from 'next/navigation';
+
 import TextField from '@/components/TextField';
 import Button from '@/components/Button';
+import {
+  onCheckingRegister,
+  onDeleteRegister,
+  onLogin,
+  onRegisterError,
+} from '@/store/slices/authSlice';
 
 export default function RegisterFormComponent() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user);
+  const router = useRouter();
+
   const validationSchema = Yup.object({
     username: Yup.string().required('El nombre de usuario es requerido'),
     email: Yup.string()
@@ -30,12 +44,55 @@ export default function RegisterFormComponent() {
       confirmPassword: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }) => {
-      console.log(values);
-      resetForm();
+    onSubmit: async ({ username, email, password }, { resetForm }) => {
+      dispatch(onCheckingRegister());
+
+      let request = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      const response = await request.json();
+
+      if (request.status == 201) {
+        toast.success(`Register Succesfully`, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        router.push('/habilidad/ensenar');
+        dispatch(onLogin(response.data));
+        resetForm();
+      } else {
+        toast.error(response.message, {
+          position: 'top-center',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        dispatch(onRegisterError(response.error));
+      }
     },
   });
-  
+
+  useEffect(() => {
+    if (currentUser.statusRegister === 'checking') {
+      dispatch(onDeleteRegister());
+    }
+  }, []);
+
   return (
     <div className='mx-11 2xl:mt-12'>
       <h1 className='text-center text-4xl font-semibold mb-5 2xl:mb-12'>
@@ -83,8 +140,34 @@ export default function RegisterFormComponent() {
           value={formik.values.confirmPassword}
           error={formik.errors.confirmPassword}
         />
-
-        <Button customClassNames={"w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold"} type='submit'>Registrarse</Button>
+        {currentUser.statusRegister === 'checking' ? (
+          <button
+            disabled
+            className='w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold px-3 py-2 flex justify-center items-center'
+          >
+            <Oval
+              height={20}
+              width={20}
+              color='blue'
+              wrapperStyle={{}}
+              wrapperClass=''
+              visible={true}
+              ariaLabel='oval-loading'
+              secondaryColor=''
+              strokeWidth={2}
+              strokeWidthSecondary={2}
+            />
+          </button>
+        ) : (
+          <Button
+            customClassNames={
+              'w-full bg-yellowPrimary text-purplePrimary rounded-full text-bold'
+            }
+            type='submit'
+          >
+            Registrarse
+          </Button>
+        )}
         <div>
           <span>
             ¿Ya tienes cuenta?{' '}

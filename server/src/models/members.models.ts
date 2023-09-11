@@ -16,23 +16,27 @@ const memberSchema = new Schema<IMember>({
   },
   preferences: [
     {
-      descripcion: {
+      name: {
+        type: String,
+        required: true,
+      },
+      categoryId: {
         type: String,
         required: true,
       },
     },
   ],
   avatar: {
-    type: String,
-    required: true,
+    public_id: String,
+    secure_url: String,
   },
   skills: [
     {
-      title: {
+      name: {
         type: String,
         required: true,
       },
-      category: {
+      categoryId: {
         type: String,
         required: true,
       },
@@ -42,7 +46,7 @@ const memberSchema = new Schema<IMember>({
       },
       level: {
         type: String,
-        enum: ['basic', 'intermedio', 'avanzado'],
+        enum: ['basico', 'intermedio', 'avanzado'],
         required: true,
       },
     },

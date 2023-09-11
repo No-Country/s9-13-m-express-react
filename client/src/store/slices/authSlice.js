@@ -1,12 +1,13 @@
-"use client"
+'use client';
 
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState: {
         status: "not-authenticated", // 'authenticated, checking'
         user: {},
+        userRegistered:{},
         token: null,
         errorMessage: undefined,
         statusRegister: "not-registered", // 'registered' , 'checking'
@@ -24,7 +25,7 @@ export const authSlice = createSlice({
             state.user = payload.user;
             state.token = payload.token;
             state.errorMessage= undefined;
-            //console.log(payload.user)
+            //console.log(payload)
         },
         onLoginError: (state, {error}) => {
             state.status = "not-authenticated";
@@ -47,6 +48,7 @@ export const authSlice = createSlice({
             console.log(payload, "payload de register")
             state.statusRegister = "registered"
             state.registerMessage = undefined
+            state.userRegistered = payload;
         },
         onRegisterError: (state, {error}) => {
             console.log(error, "error")
@@ -60,8 +62,14 @@ export const authSlice = createSlice({
     }
 });
 
-
 export const {
-    onChecking, onLogin, onLogout, onLoginError, onCheckingRegister, onRegister, onRegisterError, onDeleteRegister
+  onChecking,
+  onLogin,
+  onLogout,
+  onLoginError,
+  onCheckingRegister,
+  onRegister,
+  onRegisterError,
+  onDeleteRegister,
 } = authSlice.actions;
 export default authSlice.reducer;

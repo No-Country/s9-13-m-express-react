@@ -1,23 +1,15 @@
-import { Router, Request, Response, } from 'express';
-import {forgotPassword, recoveryPassword} from '../controllers/recoryPassword.controllers'
+import { Router } from 'express';
+import {
+  forgotPassword,
+  recoveryPassword,
+  recoveryPasswordUI,
+} from '../controllers/recoryPassword.controllers';
 
-
-const router = Router()
-
+const router = Router();
 
 router.post('/forgot_password', forgotPassword);
 
-
-router.route('/recovery_password/:token')
-    //Opcional, sirve si la url esta dirigida o tiene el hostname del backend
-    .get(function (req: Request, res: Response) {
-        const token = req.params.token
-        //Enviar al client con el mismo token
-        res.redirect(`http://localhost/recovery_password/${token}:3000`)
-    })
-    .put(recoveryPassword);
-
-
+router.route('/recovery_password/:token').get(recoveryPasswordUI).put(recoveryPassword);
 
 export default router;
 

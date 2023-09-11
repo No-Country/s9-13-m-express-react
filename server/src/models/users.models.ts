@@ -22,6 +22,9 @@ const userSchema = new Schema<IUser>({
     type: [String],
     default: [rolType.trainee],
   },
+  token: {
+    type: String,
+  },
 });
 
 userSchema.set('toJSON', {
